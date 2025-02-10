@@ -36,7 +36,7 @@
 
 /* 링크 열기 버튼 : btn-tranparent */
 .button_gray {
-  background-color: rgba(246, 248, 250, 0.5);
+  background-color: rgba(179, 183, 186, 0.698);
   color: #404040;
   border: none;
 }
@@ -48,11 +48,10 @@
 
 }
 
+/* btn-outline-icon */
 
-/* 
-.button_ouline-icon {
-  width: 106;
-  height: 20;
+.button_outline_icon {
+
   top: 7px;
   left: 16px;
   gap: 6px;
@@ -60,12 +59,100 @@
   background-color: #FFFFFF;
   color: #262626;
 
+  border-radius: 30.5px;
+
   font-family: Pretendard;
   font-weight: 700;
   font-size: 14px;
   line-height: 16.71px;
   letter-spacing: 0%;
-}
- */
 
-/*chip-card 의 CSS 들 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 132px;
+  height: 33px;
+
+}
+
+/* page btn */
+
+.button_page {
+  width: 40px;
+  height: 40px;
+  padding: 11.5px 16.5px;
+  color: #A3A3A3;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.71px;
+
+  border: 0.5px solid gray;
+
+}
+
+.button_page:active {
+  background-color: #262626;
+  color: #FFC117;
+  border: none
+}
+
+/* btn_right */
+
+.button_rightBig {
+
+  width: 40px;
+  height: 40px;
+
+  background-color: #262626;
+
+  border-radius: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button_rightSmall {
+  width: 24px;
+  height: 24px;
+
+  background-color: #262626;
+
+  border-radius: 24px;
+
+  position: relative;
+}
+
+/* 이거 위치조정 해줄 수 있는 분 */
+.button_rightSmall>svg {
+  position: absolute;
+  bottom: 4px;
+  right: 4.4px;
+
+}
+
+
+
+/* btn_bottom */
+
+.button_bottom {
+
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #D4D4D4;
+
+  border-radius: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button_bottom:active {
+  background-color: #262626;
+}
