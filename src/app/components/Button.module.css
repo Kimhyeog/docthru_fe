@@ -1,0 +1,71 @@
+/*btn 의 CSS 들 */
+
+/* 화이트 버튼 : btn-solid (default) */
+
+.button {
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid black;
+
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  font-style: pretendard;
+
+  cursor: pointer;
+}
+
+/* 블랙 버튼 */
+
+.button_black {
+  background-color: black;
+  color: white;
+}
+
+/* 레드 버튼 */
+
+.button_red {
+  background-color: #FFE7E7;
+  color: #F24744;
+  border: none;
+}
+
+
+/* 링크 열기 버튼 : btn-tranparent */
+.button_gray {
+  background-color: rgba(246, 248, 250, 0.5);
+  color: #404040;
+  border: none;
+}
+
+.button_yellow {
+  background-color: #FFC117;
+  color: #262626;
+  border: 2px solid #262626;
+
+}
+
+
+/* 
+.button_ouline-icon {
+  width: 106;
+  height: 20;
+  top: 7px;
+  left: 16px;
+  gap: 6px;
+
+  background-color: #FFFFFF;
+  color: #262626;
+
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+}
+ */
+
+/*chip-card 의 CSS 들 */
