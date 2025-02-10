@@ -13,7 +13,6 @@ const btnTypeArr = [
   { page: style.button_page },
   { rightBig: style.button_rightBig },
   { rightSmall: style.button_rightSmall },
-  { rightSmall: style.button_rightSmall },
   { bottom: style.button_bottom },
 ];
 
