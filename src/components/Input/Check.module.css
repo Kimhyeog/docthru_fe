@@ -1,0 +1,78 @@
+.label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+
+}
+
+/* 기본 input 숨기기 */
+.checkbox,
+.radio {
+  display: none;
+}
+
+/* 체크박스 스타일 */
+.customCheckbox {
+
+  width: 24px;
+  height: 24px;
+  border: 1px solid #E5E5E5;
+  background-color: #F5F5F5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox:checked+.customCheckbox {
+  background-color: black;
+  border-color: black;
+}
+
+.checkbox:checked+.customCheckbox::after {
+  content: "✔";
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 라디오 버튼 스타일 */
+.customRadio {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #E5E5E5;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.radio:checked+.customRadio {
+  background-color: black;
+  border-color: black;
+}
+
+.radio:checked+.customRadio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.text {
+
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+  color: #333;
+}
