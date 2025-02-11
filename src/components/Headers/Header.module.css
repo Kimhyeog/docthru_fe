@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f0f0f0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10rem;
+}
+.nav {
+  display: flex;
+}
+
+.nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.icons {
+  display: flex;
+  margin-right: 10rem;
+}
+
+.icons img {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
