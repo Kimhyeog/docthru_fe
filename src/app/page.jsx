@@ -1,52 +1,65 @@
 "use client";
 
-import { FaClipboardList, FaAngleRight, FaArrowDown } from "react-icons/fa";
-import Button from "./components/Button";
+import { useState } from "react";
+import PopUpModal from "./modals/PopUpModal";
+import RefusalOrDeleteModal from "./modals/RefusalOrDeleteModal";
 import style from "./page.module.css";
+import Button from "./components/Button";
+import Check from "../components/Input/Check";
 
 export default function Home() {
+  // 가입 완료 모달 창 State 변수
+  const [popUpModalOn, setPopUpModalOn] = useState(false);
+
+  // 거절 사유 모달 창 State 변수
+  const [refusalModalOn, setRefusalModalOn] = useState(false);
+  // 삭제제 사유 모달 창 State 변수
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
+
   return (
     <div className={style.page}>
-      <Button text={"나는 버튼입니다."} onClick={() => {}} />
-      <Button
-        type={"black"}
-        text={"나는 블랙 버튼입니다."}
-        onClick={() => {}}
+      <PopUpModal
+        show={popUpModalOn}
+        onHide={() => {
+          setPopUpModalOn(false);
+        }}
       />
-      <Button type={"red"} text={"나는 레드 버튼입니다."} onClick={() => {}} />
+
       <Button
-        type={"yellow"}
-        text={"나는 노란 버튼입니다."}
-        onClick={() => {}}
+        text={`이 버튼을 누르면 **가입완료** 모달창 열림`}
+        onClick={() => {
+          setPopUpModalOn(true);
+        }}
       />
-      <Button type={"gray"} text={"나는 회색 버튼입니다."} onClick={() => {}} />
-      <Button
-        type={"outline_icon"}
-        text={"outline_icon1"}
-        onClick={() => {}}
-        icon={<FaClipboardList />}
+      <br />
+      <RefusalOrDeleteModal
+        show={refusalModalOn}
+        onHide={() => {
+          setRefusalModalOn(false);
+        }}
+        type={"거절"}
       />
+
       <Button
-        type={"outline_icon"}
-        text={"outline_icon2"}
-        onClick={() => {}}
-        icon={<FaAngleRight />}
+        text={`이 버튼을 누르면 **거절완료** 모달창 열림`}
+        onClick={() => {
+          setRefusalModalOn(true);
+        }}
       />
-      <Button type={"page"} text={"1"} onClick={() => {}} />
-      <Button
-        type={"rightBig"}
-        onClick={() => {}}
-        icon={<FaAngleRight color="white" />}
+      <br />
+      <RefusalOrDeleteModal
+        show={deleteModalOn}
+        onHide={() => {
+          setDeleteModalOn(false);
+        }}
+        type={"삭제"}
       />
+
       <Button
-        type={"rightSmall"}
-        onClick={() => {}}
-        icon={<FaAngleRight size={13} color="white" />}
-      />
-      <Button
-        type={"bottom"}
-        onClick={() => {}}
-        icon={<FaArrowDown color="white" />}
+        text={`이 버튼을 누르면 **삭제완료** 모달창 열림`}
+        onClick={() => {
+          setDeleteModalOn(true);
+        }}
       />
     </div>
   );
