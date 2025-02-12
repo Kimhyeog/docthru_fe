@@ -1,0 +1,15 @@
+.chip_category {
+  background-color: #ffffff;
+  color: #525252;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chip_category:hover {
+  background-color: #c0c0c0;
+}
