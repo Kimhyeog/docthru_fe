@@ -8,6 +8,7 @@
   display: inline-block;
   cursor: pointer;
   transition: background-color 0.2s;
+  border: 1px solid #d4d4d4;
 }
 
 .chip_category:hover {
