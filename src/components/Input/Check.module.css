@@ -13,11 +13,11 @@
 .checkbox,
 .radio {
   display: none;
+  /* 기본 스타일 제거 */
 }
 
 /* 체크박스 스타일 */
 .customCheckbox {
-
   width: 24px;
   height: 24px;
   border: 1px solid #E5E5E5;
@@ -29,17 +29,21 @@
   transition: all 0.2s ease-in-out;
 }
 
+
+
 .checkbox:checked+.customCheckbox {
-  background-color: black;
-  border-color: black;
+  background-color: black !important;
+  border-color: black !important;
 }
 
 .checkbox:checked+.customCheckbox::after {
-  content: "✔";
+  content: "✓";
   color: white;
+  /* '✔'의 색상을 흰색으로 설정 */
   font-size: 16px;
   font-weight: bold;
 }
+
 
 /* 라디오 버튼 스타일 */
 .customRadio {

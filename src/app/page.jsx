@@ -1,52 +1,44 @@
 "use client";
 
-import { FaClipboardList, FaAngleRight, FaArrowDown } from "react-icons/fa";
-import Button from "./components/Button";
+import { useState } from "react";
 import style from "./page.module.css";
+import CheckModal from "./modals/CheckModal";
+import Button from "../components/Button/Button";
+import LoginCheckModal from "./modals/LoginCheckModal";
+import PopUpModal from "./modals/PopUpModal";
 
 export default function Home() {
+  // 삭제제 사유 모달 창 State 변수
+  const [checkModalOn, setCheckModalOn] = useState(false);
+
   return (
     <div className={style.page}>
-      <Button text={"나는 버튼입니다."} onClick={() => {}} />
-      <Button
-        type={"black"}
-        text={"나는 블랙 버튼입니다."}
-        onClick={() => {}}
+      <PopUpModal
+        show={checkModalOn}
+        onHide={() => {
+          setCheckModalOn(false);
+        }}
       />
-      <Button type={"red"} text={"나는 레드 버튼입니다."} onClick={() => {}} />
+
       <Button
-        type={"yellow"}
-        text={"나는 노란 버튼입니다."}
-        onClick={() => {}}
+        text={`이 버튼을 누르면 **삭제완료** 모달창 열림`}
+        onClick={() => {
+          setCheckModalOn(true);
+        }}
       />
-      <Button type={"gray"} text={"나는 회색 버튼입니다."} onClick={() => {}} />
-      <Button
-        type={"outline_icon"}
-        text={"outline_icon1"}
-        onClick={() => {}}
-        icon={<FaClipboardList />}
+
+      <PopUpModal
+        show={checkModalOn}
+        onHide={() => {
+          setCheckModalOn(false);
+        }}
       />
+
       <Button
-        type={"outline_icon"}
-        text={"outline_icon2"}
-        onClick={() => {}}
-        icon={<FaAngleRight />}
-      />
-      <Button type={"page"} text={"1"} onClick={() => {}} />
-      <Button
-        type={"rightBig"}
-        onClick={() => {}}
-        icon={<FaAngleRight color="white" />}
-      />
-      <Button
-        type={"rightSmall"}
-        onClick={() => {}}
-        icon={<FaAngleRight size={13} color="white" />}
-      />
-      <Button
-        type={"bottom"}
-        onClick={() => {}}
-        icon={<FaArrowDown color="white" />}
+        text={`이 버튼을 누르면 **삭제완료** 모달창 열림`}
+        onClick={() => {
+          setCheckModalOn(true);
+        }}
       />
     </div>
   );
