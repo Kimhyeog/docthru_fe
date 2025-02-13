@@ -1,0 +1,20 @@
+.recruit_end,
+.date_end {
+  width: 230px;
+  height: auto;
+  text-align: center;
+}
+
+.recruit_end {
+  color: black;
+  background-color: #E5E5E5;
+  padding: 8px 12px;
+  border-radius: 24px;
+}
+
+.date_end {
+  color: white;
+  background-color: #262626;
+  padding: 8px 12px;
+  border-radius: 24px;
+}
