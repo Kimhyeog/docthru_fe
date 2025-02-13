@@ -1,24 +1,24 @@
 import style from "./FilterModal.module.css";
 import React, { useState } from "react";
-import Check from "@/components/Input/Check"; // Check 컴포넌트 import
-import Button from "../components/Button";
+import Check from "@/components/Input/Check";
+import Button from "@/components/Button/Button"; // Check 컴포넌트 import
 
 const fieldOptions = [
-  { value: "Next.js", text: "Next.js" },
-  { value: "Modern JS", text: "Modern JS" },
+  { value: "NEXTJS", text: "Next.js" },
+  { value: "MODERNJS", text: "Modern JS" },
   { value: "API", text: "API" },
-  { value: "Web", text: "Web" },
-  { value: "Career", text: "Career" },
+  { value: "WEB", text: "Web" },
+  { value: "MODERNJS", text: "Career" },
 ];
 
 const documentTypeOptions = [
-  { value: "official", text: "공식문서" },
-  { value: "blog", text: "블로그" },
+  { value: "OFFICIAL", text: "공식문서" },
+  { value: "BLOG", text: "블로그" },
 ];
 
 const statusOptions = [
-  { value: "progress", text: "진행중" },
-  { value: "completed", text: "마감" },
+  { value: "PROGRESS", text: "진행중" },
+  { value: "COMPLETED", text: "마감" },
 ];
 
 export default function FilterModal() {

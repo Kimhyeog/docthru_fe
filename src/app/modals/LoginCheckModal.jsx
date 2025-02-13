@@ -4,7 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./LoginCheckModal.module.css";
 import { Modal } from "react-bootstrap";
-import Button from "../components/Button";
+import Button from "@/components/Button/Button";
 
 export default function LoginCheckModal({ show, onHide }) {
   return (

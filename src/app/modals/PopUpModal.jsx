@@ -3,7 +3,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./PopUpModal.module.css";
 import { Modal } from "react-bootstrap";
-import Button from "../components/Button";
+import Button from "@/components/Button/Button";
 
 export default function PopUpModal({ show, onHide }) {
   return (

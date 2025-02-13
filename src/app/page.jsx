@@ -1,64 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import PopUpModal from "./modals/PopUpModal";
-import RefusalOrDeleteModal from "./modals/RefusalOrDeleteModal";
 import style from "./page.module.css";
-import Button from "./components/Button";
-import Check from "../components/Input/Check";
+import CheckModal from "./modals/CheckModal";
+import Button from "../components/Button/Button";
+import LoginCheckModal from "./modals/LoginCheckModal";
+import PopUpModal from "./modals/PopUpModal";
 
 export default function Home() {
-  // 가입 완료 모달 창 State 변수
-  const [popUpModalOn, setPopUpModalOn] = useState(false);
-
-  // 거절 사유 모달 창 State 변수
-  const [refusalModalOn, setRefusalModalOn] = useState(false);
   // 삭제제 사유 모달 창 State 변수
-  const [deleteModalOn, setDeleteModalOn] = useState(false);
+  const [checkModalOn, setCheckModalOn] = useState(false);
 
   return (
     <div className={style.page}>
       <PopUpModal
-        show={popUpModalOn}
+        show={checkModalOn}
         onHide={() => {
-          setPopUpModalOn(false);
+          setCheckModalOn(false);
         }}
-      />
-
-      <Button
-        text={`이 버튼을 누르면 **가입완료** 모달창 열림`}
-        onClick={() => {
-          setPopUpModalOn(true);
-        }}
-      />
-      <br />
-      <RefusalOrDeleteModal
-        show={refusalModalOn}
-        onHide={() => {
-          setRefusalModalOn(false);
-        }}
-        type={"거절"}
-      />
-
-      <Button
-        text={`이 버튼을 누르면 **거절완료** 모달창 열림`}
-        onClick={() => {
-          setRefusalModalOn(true);
-        }}
-      />
-      <br />
-      <RefusalOrDeleteModal
-        show={deleteModalOn}
-        onHide={() => {
-          setDeleteModalOn(false);
-        }}
-        type={"삭제"}
       />
 
       <Button
         text={`이 버튼을 누르면 **삭제완료** 모달창 열림`}
         onClick={() => {
-          setDeleteModalOn(true);
+          setCheckModalOn(true);
+        }}
+      />
+
+      <PopUpModal
+        show={checkModalOn}
+        onHide={() => {
+          setCheckModalOn(false);
+        }}
+      />
+
+      <Button
+        text={`이 버튼을 누르면 **삭제완료** 모달창 열림`}
+        onClick={() => {
+          setCheckModalOn(true);
         }}
       />
     </div>

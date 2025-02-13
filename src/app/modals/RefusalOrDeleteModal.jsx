@@ -3,7 +3,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./RefusalOrDeleteModal.module.css";
 import { Modal } from "react-bootstrap";
-import Button from "../components/Button";
+import Button from "@/components/Button/Button";
 
 export default function RefusalOrDeleteModal({ type, show, onHide }) {
   return (
