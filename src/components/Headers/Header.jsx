@@ -9,7 +9,15 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src={Logo} alt="Logo" width={120} height={27} />
+        <Link href="/">
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={120}
+            height={27}
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
         <nav className={styles.nav}>
           <Link href="/challenge/manage" className={styles.link}>
             챌린지 관리
