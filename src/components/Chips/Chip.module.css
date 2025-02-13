@@ -1,0 +1,54 @@
+.chip_nextjs {
+  background-color: #79e16a;
+  color: #525252;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_api {
+  background-color: #ff905e;
+  color: #525252;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_career {
+  background-color: #7eb2ee;
+  color: #525252;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_modernjs {
+  background-color: #f66e6b;
+  color: #525252;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_web {
+  background-color: #f7ea5d;
+  color: #525252;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
