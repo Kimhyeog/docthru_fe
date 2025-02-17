@@ -1,5 +1,5 @@
 "use client";
-import { client } from "@/api";
+import api, { client } from "@/api";
 import { usePathname, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 

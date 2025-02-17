@@ -25,9 +25,30 @@ const logIn = async (dto) => {
   return data;
 };
 
+const getUserMe = async () => {
+  const url = "/users/me";
+  const response = await client.post(url, dto);
+  const data = response.data;
+  return data;
+};
+
+const refreshToken = async (prevRefreshToken) => {
+  const url = "/auth/refreshToken";
+  const response = await client.post(url, {
+    refreshToken: prevRefreshToken,
+  });
+  const data = response.data;
+  const { accessToken, refreshToken: newRefreshToken } = data;
+  client.defaults.headers.Authorization = `Bearer ${accessToken}`;
+  localStorage.setItem("refreshToken", newRefreshToken);
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
+  getUserMe,
+  refreshToken,
 };
 
 export default api;

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import logo from "@/assets/logo.svg";
 import style from "./LogIn.module.css";
-import LogInForm from "./_component/LogInForm";
+import LogInForm from "./_components/LogInForm";
 import Link from "next/link";
 
 function LogInPage() {

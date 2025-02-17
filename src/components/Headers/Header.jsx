@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import Logo from "@/assets/logo.svg";
-import Bell from "@/assets/bell.svg";
-import Keyboard from "@/assets/ic_keyboard.svg";
+import HeaderLogInMenu from "./HeaderLogInMenu";
 
 const Header = () => {
   return (
@@ -27,10 +26,8 @@ const Header = () => {
           </Link>
         </nav>
       </div>
-      <div className={styles.icons}>
-        <Image src={Bell} alt="bell" width={24} height={24} />
-        <Image src={Keyboard} alt="keyboard" width={24} height={24} />
-      </div>
+
+      <HeaderLogInMenu />
     </header>
   );
 };
