@@ -1,0 +1,81 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown button {
+  height: 40px;
+  width: 140px;
+  border-radius: 32px;
+  color: #a3a3a3;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.dropdown button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+.dropdown.open button::after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid black; /* 아이콘 모양 역삼각형 */
+}
+
+.dropdownMenu {
+  background-color: white;
+  height: 301px;
+  width: 139px;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 1;
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.dropdownMenu li {
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3a3a3;
+  font-size: 12px;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropdownMenu li:last-child {
+  border-bottom: none;
+}
+
+.dropdownMenu li:hover {
+  font-weight: 600;
+}
+
+.cancel {
+  position: absolute;
+  height: 43px;
+  width: 139px;
+  top: 105%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
