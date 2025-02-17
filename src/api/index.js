@@ -25,13 +25,6 @@ const logIn = async (dto) => {
   return data;
 };
 
-const getUserMe = async () => {
-  const url = "/users/me";
-  const response = await client.post(url, dto);
-  const data = response.data;
-  return data;
-};
-
 const refreshToken = async (prevRefreshToken) => {
   const url = "/auth/refreshToken";
   const response = await client.post(url, {
@@ -41,6 +34,13 @@ const refreshToken = async (prevRefreshToken) => {
   const { accessToken, refreshToken: newRefreshToken } = data;
   client.defaults.headers.Authorization = `Bearer ${accessToken}`;
   localStorage.setItem("refreshToken", newRefreshToken);
+  return data;
+};
+
+const getUserMe = async () => {
+  const url = "/users/me";
+  const response = await client.get(url);
+  const data = response.data;
   return data;
 };
 
