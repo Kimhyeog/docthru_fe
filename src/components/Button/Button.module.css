@@ -88,7 +88,7 @@
   border: 0.5px solid gray;
 }
 
-.button_page:active {
+.button_page:focus {
   background-color: #262626;
   color: #ffc117;
   border: none;
@@ -121,7 +121,7 @@
 }
 
 /* 이거 위치조정 해줄 수 있는 분 */
-.button_rightSmall > svg {
+.button_rightSmall>svg {
   position: absolute;
   bottom: 4px;
   right: 4.4px;

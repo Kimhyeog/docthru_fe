@@ -1,11 +1,11 @@
 "use client";
 
 import Header from "@/components/Headers/Header";
-import style from "./challenges.module.css";
-import Card from "@/components/Card/Card";
-import Search from "@/components/Search/Search";
+import style from "./my-challenges.module.css";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
+import Search from "@/components/Search/Search";
+import Card from "@/components/Card/Card";
 
 const mockData = [
   {
@@ -38,16 +38,16 @@ const mockData = [
   },
 ];
 
-export default function ChallengesPage() {
+export default function Page() {
   const router = useRouter();
 
   return (
     <>
       <Header />
       <div className={style.container}>
-        <header>
+        <header className={style.header}>
           <div className={style.header_head}>
-            <h2 className={style.header_title}>챌린지 목록</h2>
+            <h2 className={style.header_title}>나의 챌린지</h2>
             <Button
               type={"black"}
               text={"신규 챌린지 신청 +"}
@@ -55,6 +55,11 @@ export default function ChallengesPage() {
                 router.push("/challenges/apply");
               }}
             />
+          </div>
+          <div className={style.header_btns}>
+            <button>참여중인 챌린지</button>
+            <button>완료한 챌린지</button>
+            <button>신청한 챌린지</button>
           </div>
           <div className={style.header_main}>
             {/* 필터 버튼 (필요한 경우 추가) */}

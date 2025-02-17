@@ -12,12 +12,21 @@
   gap: 10px 0px;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0px;
+}
+
+
 .header_head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
 }
+
+
 
 
 .header_title {
@@ -32,6 +41,45 @@
 .header_head button {
   width: auto;
 }
+
+
+.header_btns {
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-left: 10px;
+  gap: 0px 5px;
+}
+
+.header_btns button {
+  width: 162px;
+  height: 53px;
+  background-color: white;
+
+  border: none;
+
+  padding: 15px 12px;
+
+  text-align: center;
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.48px;
+  letter-spacing: 0%;
+
+  cursor: pointer;
+
+}
+
+.header_btns button:focus {
+  border-bottom: 3px solid black;
+  font-weight: 900;
+
+}
+
+
 
 
 
