@@ -1,11 +1,24 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import Logo from "@/assets/logo.svg";
-import Bell from "@/assets/bell.svg";
-import Keyboard from "@/assets/ic_keyboard.svg";
+import HeaderLogInMenu from "./HeaderLogInMenu";
+import HeaderAdminMenu from "./HeaderAdminMenu";
+import { useAuth } from "@/contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/api";
 
 const Header = () => {
+  const { isLoggedIn } = useAuth();
+
+  const { data: userData } = useQuery({
+    queryFn: api.getUserMe,
+    queryKey: ["userData"],
+    initialData: {},
+    enabled: isLoggedIn,
+  });
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -19,18 +32,10 @@ const Header = () => {
           />
         </Link>
         <nav className={styles.nav}>
-          <Link href="/challenge/manage" className={styles.link}>
-            챌린지 관리
-          </Link>
-          <Link href="/challenge/list" className={styles.link}>
-            챌린지 목록
-          </Link>
+          {isLoggedIn && userData.role === "ADMIN" && <HeaderAdminMenu />}
         </nav>
       </div>
-      <div className={styles.icons}>
-        <Image src={Bell} alt="bell" width={24} height={24} />
-        <Image src={Keyboard} alt="keyboard" width={24} height={24} />
-      </div>
+      <HeaderLogInMenu userData={userData} />
     </header>
   );
 };
