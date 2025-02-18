@@ -100,3 +100,7 @@
   align-items: center;
   text-decoration-line: none;
 }
+
+.header p {
+  margin: 0;
+}
