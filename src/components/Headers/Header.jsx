@@ -32,7 +32,7 @@ const Header = () => {
           />
         </Link>
         <nav className={styles.nav}>
-          {userData.role === "ADMIN" && <HeaderAdminMenu />}
+          {isLoggedIn && userData.role === "ADMIN" && <HeaderAdminMenu />}
         </nav>
       </div>
       <HeaderLogInMenu userData={userData} />

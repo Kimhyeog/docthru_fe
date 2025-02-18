@@ -19,8 +19,8 @@ function HeaderDropDown({ userData, logOut }) {
             {userData.role === "ADMIN"
               ? "어드민"
               : userData.grade === "GENERAL"
-              ? "전문가"
-              : "일반"}
+              ? "일반"
+              : "전문가"}
           </p>
         </div>
       </div>
