@@ -1,75 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Headers/Header";
 import style from "./challenges.module.css";
 import Card from "@/components/Card/Card";
 import Search from "@/components/Search/Search";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
-
-const mockData = [
-  {
-    id: 1,
-    date: new Date().toLocaleDateString(),
-    title: "점심 같이먹기",
-    userCount: 3,
-    maxUserCount: 7,
-  },
-  {
-    id: 2,
-    date: new Date().toLocaleDateString(),
-    title: "저녁 같이먹기",
-    userCount: 3,
-    maxUserCount: 7,
-  },
-  {
-    id: 3,
-    date: new Date().toLocaleDateString(),
-    title: "아침 같이먹기",
-    userCount: 3,
-    maxUserCount: 7,
-  },
-  {
-    id: 4,
-    date: new Date().toLocaleDateString(),
-    title: "같이 배부르기",
-    userCount: 3,
-    maxUserCount: 7,
-  },
-  {
-    id: 5,
-    date: new Date().toLocaleDateString(),
-    title: "같이 배만지기",
-    userCount: 2,
-    maxUserCount: 6,
-  },
-  {
-    id: 6,
-    date: new Date().toLocaleDateString(),
-    title: "같이 배고프기",
-    userCount: 4,
-    maxUserCount: 8,
-  },
-  {
-    id: 7,
-    date: new Date().toLocaleDateString(),
-    title: "같이 배태우기",
-    userCount: 5,
-    maxUserCount: 10,
-  },
-];
+import api from "@/api/index";
+import React from "react";
 
 const ITEMS_PER_PAGE = 5;
 
 export default function ChallengesPage() {
   const router = useRouter();
 
+  //불러온 데이터 State 변수
+  const [mockChallenges, setChallenges] = useState([]);
+
+  //Api에서 갖고오는 부분
+  const getChallenges = async () => {
+    try {
+      const response = await api.getChalleges();
+      console.log(response); // 응답 데이터 확인
+      setChallenges(response.challenges); // 배열만 저장
+    } catch (error) {
+      console.error("Failed to fetch challenges:", error);
+    }
+  };
+  //Mount 시에만 작동하기
+  useEffect(() => {
+    getChallenges();
+  }, []);
+
   // 5개씩 카드 출력을 위한 State 와 핸들러 함수 구현부
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(mockData.length / ITEMS_PER_PAGE);
-  const paginatedData = mockData.slice(
+  const totalPages = Math.ceil(mockChallenges.length / ITEMS_PER_PAGE);
+  const paginatedData = mockChallenges.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
