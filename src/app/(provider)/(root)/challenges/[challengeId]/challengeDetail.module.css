@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 890px;
+  margin: auto;
+}
+.headerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}

@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://docthru-be-5u42.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://docthru-be-5u42.onrender.com";
 
 export const client = axios.create({
   baseURL,
@@ -45,11 +45,53 @@ const getUserMe = async () => {
   return data;
 };
 
+const getUserDate = async (userId) => {
+  const url = `/users/${userId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getChallenges = async (page = 1) => {
+  let url = `/challenges?pageSize=${pageSize || 5}`;
+  const response = await client.get(url);
+  return response.data;
+};
+
+const getWork = async (workId) => {
+  const url = `/works/${workId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getWorks = async (challengeId, cursor) => {
+  let url = `/works/${challengeId}/many`;
+  if (cursor) {
+    url += `?cursor=${cursor}`;
+  }
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
   getUserMe,
   refreshToken,
+  getChallenges,
+  getWork,
+  getChallenge,
+  getUserDate,
+  getWorks,
 };
 
 export default api;
