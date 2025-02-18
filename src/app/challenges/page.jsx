@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Header from "@/components/Headers/Header";
 import style from "./challenges.module.css";
 import Card from "@/components/Card/Card";
@@ -36,10 +37,48 @@ const mockData = [
     userCount: 3,
     maxUserCount: 7,
   },
+  {
+    id: 5,
+    date: new Date().toLocaleDateString(),
+    title: "같이 배만지기",
+    userCount: 2,
+    maxUserCount: 6,
+  },
+  {
+    id: 6,
+    date: new Date().toLocaleDateString(),
+    title: "같이 배고프기",
+    userCount: 4,
+    maxUserCount: 8,
+  },
+  {
+    id: 7,
+    date: new Date().toLocaleDateString(),
+    title: "같이 배태우기",
+    userCount: 5,
+    maxUserCount: 10,
+  },
 ];
+
+const ITEMS_PER_PAGE = 5;
 
 export default function ChallengesPage() {
   const router = useRouter();
+
+  // 5개씩 카드 출력을 위한 State 와 핸들러 함수 구현부
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(mockData.length / ITEMS_PER_PAGE);
+  const paginatedData = mockData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <>
@@ -51,33 +90,45 @@ export default function ChallengesPage() {
             <Button
               type={"black"}
               text={"신규 챌린지 신청 +"}
-              onClick={() => {
-                router.push("/challenges/apply");
-              }}
+              onClick={() => router.push("/challenges/apply")}
             />
           </div>
           <div className={style.header_main}>
-            {/* 필터 버튼 (필요한 경우 추가) */}
             <div className={style.searchWrapper}>
               <Search />
             </div>
           </div>
         </header>
         <main className={style.main}>
-          {mockData.map((group) => (
+          {paginatedData.map((group) => (
             <Card key={group.id} {...group} />
           ))}
         </main>
         <footer className={style.footer}>
-          <Button type={"page"} text={"<"} />
+          <Button
+            type={"pageArrow"}
+            text={"<"}
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
           <div className={style.pageNumber}>
-            <Button type={"page"} text={"1"} />
-            <Button type={"page"} text={"2"} />
-            <Button type={"page"} text={"3"} />
-            <Button type={"page"} text={"4"} />
-            <Button type={"page"} text={"5"} />
+            {/* mockData의 Card 데이터 개수에 따라 버튼 개수 출력 구현부 */}
+            {[...Array(totalPages)].map((_, index) => (
+              <Button
+                key={index + 1}
+                type={
+                  "page" +
+                  `${currentPage === Number(index + 1) ? "Active" : ""}`
+                }
+                text={String(index + 1)}
+                onClick={() => handlePageChange(index + 1)}
+              />
+            ))}
           </div>
-          <Button type={"page"} text={">"} />
+          <Button
+            type={"pageArrow"}
+            text={">"}
+            onClick={() => handlePageChange(currentPage + 1)}
+          />
         </footer>
       </div>
     </>

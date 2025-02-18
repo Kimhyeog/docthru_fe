@@ -11,6 +11,8 @@ const btnTypeArr = [
   { yellow: style.button_yellow },
   { outline_icon: style.button_outline_icon },
   { page: style.button_page },
+  { pageActive: style.button_page_active },
+  { pageArrow: style.button_page_arrow },
   { rightBig: style.button_rightBig },
   { rightSmall: style.button_rightSmall },
   { bottom: style.button_bottom },

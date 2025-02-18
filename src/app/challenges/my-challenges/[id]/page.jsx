@@ -6,6 +6,7 @@ import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 import Search from "@/components/Search/Search";
 import Card from "@/components/Card/Card";
+import { useState } from "react";
 
 const mockData = [
   {
@@ -38,8 +39,24 @@ const mockData = [
   },
 ];
 
+const ITEMS_PER_PAGE = 5;
+
 export default function Page() {
   const router = useRouter();
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(mockData.length / ITEMS_PER_PAGE);
+  const paginatedData = mockData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <>
@@ -69,20 +86,35 @@ export default function Page() {
           </div>
         </header>
         <main className={style.main}>
-          {mockData.map((group) => (
+          {paginatedData.map((group) => (
             <Card key={group.id} {...group} />
           ))}
         </main>
         <footer className={style.footer}>
-          <Button type={"page"} text={"<"} />
+          <Button
+            type={"page"}
+            text={"<"}
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
           <div className={style.pageNumber}>
-            <Button type={"page"} text={"1"} />
-            <Button type={"page"} text={"2"} />
-            <Button type={"page"} text={"3"} />
-            <Button type={"page"} text={"4"} />
-            <Button type={"page"} text={"5"} />
+            {/* mockData의 Card 데이터 개수에 따라 버튼 개수 출력 구현부 */}
+            {[...Array(totalPages)].map((_, index) => (
+              <Button
+                key={index + 1}
+                type={
+                  "page" +
+                  `${currentPage === Number(index + 1) ? "Active" : ""}`
+                }
+                text={String(index + 1)}
+                onClick={() => handlePageChange(index + 1)}
+              />
+            ))}
           </div>
-          <Button type={"page"} text={">"} />
+          <Button
+            type={"page"}
+            text={">"}
+            onClick={() => handlePageChange(currentPage + 1)}
+          />
         </footer>
       </div>
     </>
