@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://docthru-be-5u42.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://docthru-be-5u42.onrender.com";
 export const client = axios.create({
   baseURL,
 });
@@ -94,6 +94,20 @@ const deleteLike = async (workId) => {
   return data;
 };
 
+const getFeedbacks = async (workId, pageSize = 3) => {
+  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const createFeedback = async (workId, content) => {
+  const url = `/works/${workId}/feedback`;
+  const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -106,6 +120,8 @@ const api = {
   getWorks,
   createLike,
   deleteLike,
+  getFeedbacks,
+  createFeedback,
 };
 
 export default api;

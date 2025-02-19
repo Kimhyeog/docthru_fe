@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./ParticipateionList.module.css";
 
 const ParticipationList = ({ works, currentPage = 1, totalPages = 1 }) => {
-  console.log(works);
   return (
     <div className={styles.container}>
       <div className={styles.header}>

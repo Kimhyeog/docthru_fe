@@ -11,13 +11,10 @@ async function ChallengeDetailPage({ params }) {
   const challengeId = param.challengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
-  console.log(challenge);
   const userId = challenge?.participate[0].userId;
   const user = await api.getUserDate(userId);
   const worksData = await api.getWorks(challengeId);
-  console.log(worksData);
   const works = worksData.works;
-  console.log(works);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>

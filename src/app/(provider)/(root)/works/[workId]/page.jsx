@@ -4,12 +4,11 @@ import ChipCategory from "@/components/Chips/ChipCategory";
 import React from "react";
 import style from "./work.module.css";
 import dayjs from "dayjs";
-import TextBox from "@/components/TextBox/TextBox";
 import Image from "next/image";
 import keyboard from "@/assets/ic_keyboard.svg";
-import heartIcon from "@/assets/ic_heart.svg";
-import heartEmptyIcon from "@/assets/ic_heart_empty.svg";
 import Favorite from "./_components/Favorite";
+import Feedbacks from "./_components/Feedbacks";
+import CreateFeedback from "./_components/CreateFeedback";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -19,7 +18,7 @@ async function WorkPage({ params }) {
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
   const writerData = await api.getUserDate(work.userId);
-  console.log(work);
+  const feedbacks = await api.getFeedbacks(workId);
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -44,8 +43,8 @@ async function WorkPage({ params }) {
       <div className={style.divider} />
       <div className={style.description}>{work?.description}</div>
       <div className={style.divider} />
-      <TextBox placeholder="피드백을 남겨주세요"></TextBox>
-      <div>피드백들~~</div>
+      <CreateFeedback />
+      <Feedbacks feedbacks={feedbacks} />
     </div>
   );
 }

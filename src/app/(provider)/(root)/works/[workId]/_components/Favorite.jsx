@@ -11,28 +11,20 @@ function Favorite({ work }) {
   const { isLoggedIn } = useAuth();
   const queryClinet = useQueryClient();
   const workId = work.id;
-  // useQuery(); 도 써야하나?
-  console.log(isLoggedIn);
   const { data: queryWork } = useQuery({
     queryFn: () => api.getWork(workId),
     queryKey: ["work", { workId }],
     initialData: work,
   });
-
-  // useMutation(); ->api.workLike , api.workdisLike
   const { mutate: createLike } = useMutation({
     mutationFn: () => api.createLike(workId),
-    onSuccess: queryClinet.invalidateQueries(["work", { workId }]),
+    onSuccess: () => queryClinet.invalidateQueries(["work", { workId }]),
   });
 
   const { mutate: deleteLike } = useMutation({
     mutationFn: () => api.deleteLike(workId),
-    onSuccess: queryClinet.invalidateQueries(["work", { workId }]),
+    onSuccess: () => queryClinet.invalidateQueries(["work", { workId }]),
   });
-
-  //1. 로그인 했는지 확인
-  //2 로그인 했을때만 좋아요 누를수 있게
-
   return (
     <div className={style.favorite}>
       {queryWork.isFavorite ? (
