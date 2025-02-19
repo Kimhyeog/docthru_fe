@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 890px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.meta {
+}
+.divider {
+  margin: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.description {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
