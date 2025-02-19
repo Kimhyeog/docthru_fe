@@ -59,7 +59,7 @@ export default function ChallengesPage() {
             <Button
               type="black"
               text="신규 챌린지 신청 +"
-              onClick={() => router.push("/challenges/apply")}
+              onClick={() => router.push("/create")}
             />
           </div>
           <div className={style.header_main}>

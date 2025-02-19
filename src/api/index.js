@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-const baseURL = "http://localhost:5000";
-// const baseURL = "https://docthru-be-5u42.onrender.com";
+// const baseURL = "http://localhost:5000";
+const baseURL = "https://docthru-be-5u42.onrender.com";
 export const client = axios.create({
   baseURL,
 });
@@ -80,6 +80,20 @@ const getWorks = async (challengeId, cursor) => {
   return data;
 };
 
+const createLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.post(url);
+  const data = response.data;
+  return data;
+};
+
+const deleteLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -90,6 +104,8 @@ const api = {
   getChallenge,
   getUserDate,
   getWorks,
+  createLike,
+  deleteLike,
 };
 
 export default api;

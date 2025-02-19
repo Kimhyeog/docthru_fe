@@ -14,7 +14,10 @@
   font-weight: 600;
   margin-top: 30px;
 }
-.meta {
+.users {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 .divider {
   margin: 10px 0;
@@ -32,4 +35,14 @@
   width: 100%;
   margin-top: 15px;
   margin-bottom: 40px;
+}
+
+.favoriteCount {
+  color: #737373;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.favorite {
+  display: flex;
 }
