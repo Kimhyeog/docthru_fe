@@ -4,7 +4,11 @@ import ChipCategory from "@/components/Chips/ChipCategory";
 import React from "react";
 import style from "./work.module.css";
 import dayjs from "dayjs";
-import TextBox from "@/components/TextBox/TextBox";
+import Image from "next/image";
+import keyboard from "@/assets/ic_keyboard.svg";
+import Favorite from "./_components/Favorite";
+import Feedbacks from "./_components/Feedbacks";
+import CreateFeedback from "./_components/CreateFeedback";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -14,6 +18,7 @@ async function WorkPage({ params }) {
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
   const writerData = await api.getUserDate(work.userId);
+  const feedbacks = await api.getFeedbacks(workId);
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -24,17 +29,22 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
+      {/* 백엔드 수정해해서 하트 색깔 확인하기 */}
       <div className={style.info}>
-        <div>
-          {writerData.nickname} {work?.likeCount}
+        <div className={style.users}>
+          <Image src={keyboard} alt="keyboradIcon" width={24} height={24} />
+          <p>{writerData.nickname}</p>
+          <Favorite work={work} />
         </div>
-        <div>{dayjs(work.lastModifiedAt).format("YY/MM/DD")}</div>
+        <div className={style.favoriteCount}>
+          {dayjs(work.lastModifiedAt).format("YY/MM/DD")}
+        </div>
       </div>
       <div className={style.divider} />
       <div className={style.description}>{work?.description}</div>
       <div className={style.divider} />
-      <TextBox placeholder="피드백을 남겨주세요"></TextBox>
-      <div>피드백들~~</div>
+      <CreateFeedback />
+      <Feedbacks feedbacks={feedbacks} />
     </div>
   );
 }

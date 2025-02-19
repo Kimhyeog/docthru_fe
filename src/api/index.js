@@ -74,6 +74,34 @@ const getWorks = async (challengeId, cursor) => {
   return data;
 };
 
+const createLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.post(url);
+  const data = response.data;
+  return data;
+};
+
+const deleteLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
+const getFeedbacks = async (workId, pageSize = 3) => {
+  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const createFeedback = async (workId, content) => {
+  const url = `/works/${workId}/feedback`;
+  const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
 // 유동적인 GET 요청 함수
 const getChallenges = async ({
   keyword,
@@ -113,6 +141,10 @@ const api = {
   getChallenge,
   getUserDate,
   getWorks,
+  createLike,
+  deleteLike,
+  getFeedbacks,
+  createFeedback,
   getChallenges,
 };
 
