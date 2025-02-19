@@ -1,0 +1,67 @@
+.container {
+  padding-top: 10px;
+
+  width: 996px;
+  height: 100vh;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px 0px;
+}
+
+.header_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header_title {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23.87px;
+  letter-spacing: 0%;
+}
+
+.header_head button {
+  width: auto;
+}
+
+.header_main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* 필요한 경우 간격 조정 */
+  width: 100%;
+}
+
+.searchWrapper {
+  flex: 1;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px 0px;
+}
+
+.footer {
+  padding-top: 20px;
+  margin: 0 auto;
+  width: 60%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
