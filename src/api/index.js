@@ -50,12 +50,6 @@ const getUserDate = async (userId) => {
   return data;
 };
 
-const getChallenges = async (page = 1) => {
-  let url = `/challenges?page=${page}`;
-  const response = await client.get(url);
-  return response.data;
-};
-
 const getWork = async (workId) => {
   const url = `/works/${workId}`;
   const response = await client.get(url);
@@ -108,12 +102,41 @@ const createFeedback = async (workId, content) => {
   return data;
 };
 
+// 유동적인 GET 요청 함수
+const getChallenges = async ({
+  keyword,
+  docType,
+  progress,
+  page = 1,
+  field,
+} = {}) => {
+  const params = {};
+
+  if (keyword) params.keyword = keyword;
+  if (docType) params.docType = docType;
+  if (progress) params.progress = progress;
+  if (field) params.field = field;
+  params.page = page;
+
+  console.log("📌 API 요청 params:", params); // 추가된 로그
+
+  try {
+    const response = await client.get("/challenges", { params });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "🔥 getChallenges API 요청 실패:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 const api = {
   signUp,
   logIn,
   getUserMe,
   refreshToken,
-  getChallenges,
   getWork,
   getChallenge,
   getUserDate,
@@ -122,6 +145,7 @@ const api = {
   deleteLike,
   getFeedbacks,
   createFeedback,
+  getChallenges,
 };
 
 export default api;
