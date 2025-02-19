@@ -1,14 +1,14 @@
 import style from "./FilterModal.module.css";
 import React, { useState } from "react";
 import Check from "@/components/Input/Check";
-import Button from "@/components/Button/Button"; // Check 컴포넌트 import
+import Button from "@/components/Button/Button";
 
 const fieldOptions = [
   { value: "NEXTJS", text: "Next.js" },
   { value: "MODERNJS", text: "Modern JS" },
   { value: "API", text: "API" },
   { value: "WEB", text: "Web" },
-  { value: "MODERNJS", text: "Career" },
+  { value: "CAREER", text: "Career" },
 ];
 
 const documentTypeOptions = [
@@ -21,16 +21,32 @@ const statusOptions = [
   { value: "COMPLETED", text: "마감" },
 ];
 
-export default function FilterModal() {
-  const [selectedFields, setSelectedFields] = useState([]);
+export default function FilterModal({
+  onClose,
+  setFiledType,
+  setProgress,
+  setDocType,
+}) {
+  const [selectedFields, setSelectedFields] = useState("");
   const [documentType, setDocumentType] = useState("");
   const [status, setStatus] = useState("");
 
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
-    setSelectedFields((prev) =>
-      checked ? [...prev, value] : prev.filter((field) => field !== value)
-    );
+    setSelectedFields((prev) => {
+      if (checked) {
+        // 항목을 추가할 때 문자열로 연결
+        return prev ? `${prev},${value}` : value;
+      } else {
+        // 항목을 제거할 때 해당 항목을 제외한 나머지 항목들만 연결
+        return prev
+          .split(",")
+          .filter((field) => field !== value)
+          .join(",");
+      }
+    });
+
+    console.log(selectedFields);
   };
 
   const handleRadioChange = (e) => {
@@ -43,11 +59,17 @@ export default function FilterModal() {
     setStatus(value);
   };
 
+  const handleResetOnClick = () => {
+    setSelectedFields("");
+    setDocumentType("");
+    setStatus("");
+  };
+
   return (
     <div className={style.container}>
       <div className={style.header}>
         <h3>필터</h3>
-        <button>X</button>
+        <button onClick={onClose}>X</button>
       </div>
 
       {/* 분야 체크박스 그룹 */}
@@ -61,7 +83,7 @@ export default function FilterModal() {
               name="field"
               value={option.value}
               text={option.text}
-              checked={selectedFields.includes(option.value)}
+              checked={selectedFields.split(",").includes(option.value)}
               onChange={handleCheckboxChange}
             />
           ))}
@@ -104,8 +126,22 @@ export default function FilterModal() {
         </div>
       </div>
       <div className={style.btnSection}>
-        <Button text={"초기화"} onClick={() => {}} />
-        <Button type={"black"} text={"적용하기"} onClick={() => {}} />
+        <Button
+          text={"초기화"}
+          onClick={() => {
+            handleResetOnClick();
+          }}
+        />
+        <Button
+          type={"black"}
+          text={"적용하기"}
+          onClick={() => {
+            setDocType(documentType);
+            setProgress(status);
+            setFiledType(selectedFields.split(","));
+            onClose();
+          }}
+        />
       </div>
     </div>
   );
