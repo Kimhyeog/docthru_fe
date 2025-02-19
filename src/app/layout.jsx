@@ -1,7 +1,7 @@
 import "./globals.css";
 import "./reset.css";
 
-export default function RootLayout({ children }) {
+export default function HTMLLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>

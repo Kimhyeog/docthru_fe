@@ -5,7 +5,7 @@ import style from "./PopUpModal.module.css";
 import { Modal } from "react-bootstrap";
 import Button from "@/components/Button/Button";
 
-export default function PopUpModal({ show, onHide }) {
+export default function PopUpModal({ show, onHide, children }) {
   return (
     <Modal
       show={show}
@@ -15,7 +15,7 @@ export default function PopUpModal({ show, onHide }) {
       dialogClassName={style["modal-custom"]} // ✅ 모달 가로 크기 조정
       contentClassName={style["modal-content-custom"]} // ✅ 내부 컨텐츠 크기 조정
     >
-      <p>가입이 완료되었습니다.</p>
+      <p>{children}</p>
       <div>
         <Button
           type={"black"}

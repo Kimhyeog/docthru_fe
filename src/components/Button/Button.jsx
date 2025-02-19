@@ -16,7 +16,7 @@ const btnTypeArr = [
   { bottom: style.button_bottom },
 ];
 
-export default function Button({ type, text, onClick, icon }) {
+export default function Button({ type, text, onClick, icon, ...props }) {
   // btnTypeArr에서 type에 해당하는 클래스 찾기
   const buttonClass = btnTypeArr.find((btn) => btn[type]);
 
@@ -24,6 +24,7 @@ export default function Button({ type, text, onClick, icon }) {
     <button
       onClick={onClick}
       className={`${style.button} ${buttonClass ? buttonClass[type] : ""}`}
+      {...props}
     >
       {text}
       {(type === "outline_icon" ||
