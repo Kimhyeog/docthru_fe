@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./Dropdown.module.css";
 
-function Dropdown({ options, onSelect }) {
+function Dropdown({ label, options, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]); // 기본값: 첫 번째 옵션
 
@@ -15,6 +15,7 @@ function Dropdown({ options, onSelect }) {
 
   return (
     <div className={`${styles.dropdown} ${isOpen ? styles.open : ""}`}>
+      <label className={styles.label}>{label}</label>
       <button onClick={() => setIsOpen(!isOpen)}>{selectedOption}</button>
       {isOpen && (
         <ul className={styles["dropdown-menu"]}>
