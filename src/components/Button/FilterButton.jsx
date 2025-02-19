@@ -3,7 +3,7 @@ import { FaFilter } from "react-icons/fa";
 import style from "./FilterButton.module.css";
 import FilterModal from "../modals/FilterModal";
 
-export const FilterButton = () => {
+export const FilterButton = ({ setFiledType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -15,7 +15,9 @@ export const FilterButton = () => {
       <div onClick={toggleModal} className={style.FilterButton}>
         <span>필터</span> <FaFilter />
       </div>
-      {isOpen && <FilterModal onClose={toggleModal} />}
+      {isOpen && (
+        <FilterModal setFiledType={setFiledType} onClose={toggleModal} />
+      )}
     </div>
   );
 };

@@ -33,6 +33,12 @@
 
 .container>.header>h3 {
   flex: 1;
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+
 }
 
 .container>.header>button {
@@ -50,8 +56,14 @@
   gap: 5px 0px;
 }
 
-.section1>h4 {
-  padding-bottom: 2px;
+.container h4 {
+  flex: 1;
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+  padding: 10px 0px;
 }
 
 .TechStack {
@@ -102,5 +114,7 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
+
+  gap: 10px;
 
 }

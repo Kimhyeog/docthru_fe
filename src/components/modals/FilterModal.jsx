@@ -21,7 +21,7 @@ const statusOptions = [
   { value: "COMPLETED", text: "마감" },
 ];
 
-export default function FilterModal({ onClose }) {
+export default function FilterModal({ onClose, setFiledType }) {
   const [selectedFields, setSelectedFields] = useState([]);
   const [documentType, setDocumentType] = useState("");
   const [status, setStatus] = useState("");
@@ -41,6 +41,12 @@ export default function FilterModal({ onClose }) {
   const handleStatusChange = (e) => {
     const { value } = e.target;
     setStatus(value);
+  };
+
+  const handleResetOnClick = () => {
+    setSelectedFields("");
+    setDocumentType("");
+    setStatus("");
   };
 
   return (
@@ -104,8 +110,20 @@ export default function FilterModal({ onClose }) {
         </div>
       </div>
       <div className={style.btnSection}>
-        <Button text={"초기화"} onClick={() => {}} />
-        <Button type={"black"} text={"적용하기"} onClick={() => {}} />
+        <Button
+          text={"초기화"}
+          onClick={() => {
+            handleResetOnClick();
+          }}
+        />
+        <Button
+          type={"black"}
+          text={"적용하기"}
+          onClick={() => {
+            setFiledType(selectedFields);
+            onClose();
+          }}
+        />
       </div>
     </div>
   );

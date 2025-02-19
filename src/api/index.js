@@ -80,6 +80,12 @@ const getWorks = async (challengeId, cursor) => {
   return data;
 };
 
+const getChallengesByField = async (field, page = 1) => {
+  let url = `/challenges?field=${field}&page=${page}`;
+  const response = await client.get(url);
+  return response.data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -90,6 +96,7 @@ const api = {
   getChallenge,
   getUserDate,
   getWorks,
+  getChallengesByField,
 };
 
 export default api;

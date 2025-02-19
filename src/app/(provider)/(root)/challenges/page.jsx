@@ -18,6 +18,8 @@ export default function ChallengesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
+  const [selectedField, setSelectedField] = useState(""); // 기본값 설정
+
   // API에서 데이터 가져오는 함수
   const getChallenges = async (page) => {
     try {
@@ -29,10 +31,26 @@ export default function ChallengesPage() {
     }
   };
 
+  // field 타입에 따른 데이터 fetch 메소드
+  const fetchChallenges = async (page, field) => {
+    try {
+      const response = await api.getChallengesByField(field, page);
+      setChallenges(response.challenges);
+      setTotalPage(response.totalPages);
+    } catch (error) {
+      console.error("Failed to fetch challenges:", error);
+    }
+  };
+
   // 페이지 변경 시 데이터 다시 가져오기
+  // **이거 맞는지 확인
   useEffect(() => {
-    getChallenges(currentPage);
-  }, [currentPage]);
+    if (selectedField === "") {
+      getChallenges(currentPage);
+    } else {
+      fetchChallenges(currentPage, selectedField);
+    }
+  }, [currentPage, selectedField]);
 
   // totalPages가 변경될 때 currentPage 조정
   useEffect(() => {
@@ -65,7 +83,10 @@ export default function ChallengesPage() {
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
-              <FilterButton onClick={() => {}} />
+              <FilterButton
+                setFiledType={setSelectedField}
+                onClick={() => {}}
+              />
               <Search />
             </div>
           </div>
