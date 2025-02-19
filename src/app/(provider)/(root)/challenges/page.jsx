@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import api from "@/api/index";
 import React from "react";
 import { FilterButton } from "@/components/Button/FilterButton";
+import Link from "next/link";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -100,7 +101,7 @@ export default function ChallengesPage() {
             <Button
               type="black"
               text="신규 챌린지 신청 +"
-              onClick={() => router.push("/challenges/apply")}
+              onClick={() => router.push("/create")}
             />
           </div>
           <div className={style.header_main}>
@@ -117,8 +118,10 @@ export default function ChallengesPage() {
         </header>
 
         <main className={style.main}>
-          {challenges.map((group) => (
-            <Card key={group.id} {...group} />
+          {challenges.map((challenge) => (
+            <Link key={challenge.id} href={`/challenges/${challenge.id}`}>
+              <Card key={challenge.id} {...challenge} />
+            </Link>
           ))}
         </main>
 

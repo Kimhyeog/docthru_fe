@@ -58,6 +58,12 @@
   gap: 24px 0px;
 }
 
+.main a {
+  text-decoration-line: none;
+  color: black;
+}
+
+
 .footer {
   padding-top: 20px;
   margin: 0 auto;
