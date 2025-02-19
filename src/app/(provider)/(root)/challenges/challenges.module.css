@@ -32,14 +32,24 @@
 
 .header_main {
   display: flex;
+  margin: 0 auto;
   align-items: center;
   gap: 10px;
   /* 필요한 경우 간격 조정 */
   width: 100%;
+
 }
 
 .searchWrapper {
+
+
   flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0px 10px;
 }
 
 .main {

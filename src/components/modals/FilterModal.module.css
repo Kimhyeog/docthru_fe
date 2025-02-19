@@ -1,23 +1,19 @@
 .container {
-  /* 필터 버튼 아래에 출력되기 위한 속성 */
   position: absolute;
-  z-index: 1;
-
+  top: 100%;
+  /* 버튼 바로 아래에 위치하도록 설정 */
+  left: 0;
+  z-index: 10;
   width: 343px;
-
-  border: 2px solid #E5E5E5;
+  border: 2px solid #e5e5e5;
   border-radius: 8px;
-  border-width: 2px;
-
-  padding: 0px 20px;
-
+  background: white;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 13px;
-
-
-
 }
+
 
 .container * {
   margin: 0px;

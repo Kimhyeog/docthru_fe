@@ -1,14 +1,14 @@
 import style from "./FilterModal.module.css";
 import React, { useState } from "react";
 import Check from "@/components/Input/Check";
-import Button from "@/components/Button/Button"; // Check 컴포넌트 import
+import Button from "@/components/Button/Button";
 
 const fieldOptions = [
   { value: "NEXTJS", text: "Next.js" },
   { value: "MODERNJS", text: "Modern JS" },
   { value: "API", text: "API" },
   { value: "WEB", text: "Web" },
-  { value: "MODERNJS", text: "Career" },
+  { value: "CAREER", text: "Career" },
 ];
 
 const documentTypeOptions = [
@@ -21,7 +21,7 @@ const statusOptions = [
   { value: "COMPLETED", text: "마감" },
 ];
 
-export default function FilterModal() {
+export default function FilterModal({ onClose }) {
   const [selectedFields, setSelectedFields] = useState([]);
   const [documentType, setDocumentType] = useState("");
   const [status, setStatus] = useState("");
@@ -47,7 +47,7 @@ export default function FilterModal() {
     <div className={style.container}>
       <div className={style.header}>
         <h3>필터</h3>
-        <button>X</button>
+        <button onClick={onClose}>X</button>
       </div>
 
       {/* 분야 체크박스 그룹 */}

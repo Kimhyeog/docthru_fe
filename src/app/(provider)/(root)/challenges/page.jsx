@@ -8,6 +8,7 @@ import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 import api from "@/api/index";
 import React from "react";
+import { FilterButton } from "@/components/Button/FilterButton";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -64,6 +65,7 @@ export default function ChallengesPage() {
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
+              <FilterButton onClick={() => {}} />
               <Search />
             </div>
           </div>
