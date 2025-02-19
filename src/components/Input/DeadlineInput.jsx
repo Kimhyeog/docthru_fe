@@ -13,7 +13,9 @@ const DeadlineInput = ({ label, value, onChange }) => {
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
-        <Calendar size={20} className={styles.calendarIcon} />
+        <button className={styles.calendar}>
+          <Calendar size={20} className={styles.calendarIcon} />
+        </button>
       </div>
     </div>
   );
