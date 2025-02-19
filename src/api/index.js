@@ -75,6 +75,9 @@ const getWorks = async (challengeId, cursor) => {
   if (cursor) {
     url += `?cursor=${cursor}`;
   }
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
 };
 
 const api = {

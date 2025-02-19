@@ -14,6 +14,7 @@ async function ChallengeDetailPage({ params }) {
   const userId = challenge.participate[0].userId;
   const user = await api.getUserDate(userId);
   const worksData = await api.getWorks(challengeId);
+  console.log(worksData);
   const works = worksData.works;
   console.log(works);
   return (
