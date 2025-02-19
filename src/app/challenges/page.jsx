@@ -10,38 +10,41 @@ import { useRouter } from "next/navigation";
 import api from "@/api/index";
 import React from "react";
 
-const ITEMS_PER_PAGE = 5;
-
 export default function ChallengesPage() {
   const router = useRouter();
 
-  //불러온 데이터 State 변수
-  const [mockChallenges, setChallenges] = useState([]);
+  // 불러온 데이터 State 변수
+  const [challenges, setChallenges] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
-  //Api에서 갖고오는 부분
-  const getChallenges = async () => {
+  // API에서 데이터 가져오는 함수
+  const getChallenges = async (page) => {
     try {
-      const response = await api.getChalleges();
-      console.log(response); // 응답 데이터 확인
-      setChallenges(response.challenges); // 배열만 저장
+      const response = await api.getChalleges(page);
+      setChallenges(response.challenges);
+      setTotalPage(response.totalPages);
     } catch (error) {
       console.error("Failed to fetch challenges:", error);
     }
   };
-  //Mount 시에만 작동하기
+
+  // 페이지 변경 시 데이터 다시 가져오기
   useEffect(() => {
-    getChallenges();
-  }, []);
+    getChallenges(currentPage);
+  }, [currentPage]);
 
-  // 5개씩 카드 출력을 위한 State 와 핸들러 함수 구현부
-  const [currentPage, setCurrentPage] = useState(1);
+  // totalPages가 변경될 때 currentPage 조정
+  useEffect(() => {
+    if (currentPage > totalPage) {
+      setCurrentPage(totalPage);
+    }
+  }, [totalPage]);
 
-  const totalPages = Math.ceil(mockChallenges.length / ITEMS_PER_PAGE);
-  const paginatedData = mockChallenges.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  // totalPage 상태를 직접 사용
+  const totalPages = Math.max(totalPage, 1);
 
+  // 페이지 변경 핸들러
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -56,8 +59,8 @@ export default function ChallengesPage() {
           <div className={style.header_head}>
             <h2 className={style.header_title}>챌린지 목록</h2>
             <Button
-              type={"black"}
-              text={"신규 챌린지 신청 +"}
+              type="black"
+              text="신규 챌린지 신청 +"
               onClick={() => router.push("/challenges/apply")}
             />
           </div>
@@ -67,35 +70,39 @@ export default function ChallengesPage() {
             </div>
           </div>
         </header>
+
         <main className={style.main}>
-          {paginatedData.map((group) => (
+          {challenges.map((group) => (
             <Card key={group.id} {...group} />
           ))}
         </main>
+
         <footer className={style.footer}>
+          {/* 이전 페이지 버튼 */}
           <Button
-            type={"pageArrow"}
-            text={"<"}
+            type="pageArrow"
+            text="<"
             onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           />
+
           <div className={style.pageNumber}>
-            {/* mockData의 Card 데이터 개수에 따라 버튼 개수 출력 구현부 */}
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={
-                  "page" +
-                  `${currentPage === Number(index + 1) ? "Active" : ""}`
-                }
+                type={`page${currentPage === index + 1 ? "Active" : ""}`}
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
               />
             ))}
           </div>
+
+          {/* 다음 페이지 버튼 */}
           <Button
-            type={"pageArrow"}
-            text={">"}
+            type="pageArrow"
+            text=">"
             onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
           />
         </footer>
       </div>

@@ -44,8 +44,8 @@ const getUserMe = async () => {
   return data;
 };
 
-const getChalleges = async () => {
-  const url = "/challenges";
+const getChalleges = async (page = 1) => {
+  const url = `/challenges/?page=${page}`;
   const response = await client.get(url);
   const data = response.data;
   return data;
