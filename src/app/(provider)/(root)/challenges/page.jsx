@@ -13,6 +13,8 @@ import { FilterButton } from "@/components/Button/FilterButton";
 export default function ChallengesPage() {
   const router = useRouter();
 
+  // 검색창에 대한 state값
+
   // 불러온 데이터 State 변수
   const [challenges, setChallenges] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,30 +24,33 @@ export default function ChallengesPage() {
   const [selectedDocType, setSelectedDocType] = useState("");
   const [selectedProgress, setSelectedProgress] = useState("");
   const [selectedField, setSelectedField] = useState("");
+  const [inputWord, setKeyWord] = useState("");
   // API에서 데이터 가져오는 함수
   const fetchChallenges = async () => {
     try {
-      const pageToSend = currentPage < 1 ? 1 : currentPage; // page가 0이 되지 않도록 보장
+      const pageToSend = currentPage < 1 ? 1 : currentPage;
 
       const response = await api.getChallenges({
+        keyword: inputWord || undefined, // 🔥 keyWord -> keyword로 수정 (타이핑 오류)
         docType: selectedDocType || undefined,
         progress: selectedProgress || undefined,
         field: Array.isArray(selectedField)
-          ? selectedField[0]
+          ? selectedField.join(",") // 배열을 콤마로 구분된 문자열로 변환
           : selectedField || undefined,
-        page: pageToSend, // 수정된 page 값 전달
+        page: pageToSend,
       });
 
       setChallenges(response.challenges);
-      setTotalPage(response.totalPages);
+      setTotalPage(Math.max(1, response.totalPages)); // 🔥 페이지 수 업데이트
     } catch (error) {
-      console.error(
-        "Error fetching challenges:",
-        error.response ? error.response.data : error.message
-      );
+      console.error("Error fetching challenges:", error);
+      if (error.response) {
+        console.error("API response error:", error.response.data);
+      } else {
+        console.error("Error message:", error.message);
+      }
     }
   };
-
   // 페이지 변경 시 데이터 다시 가져오기
   // **이거 맞는지 확인
   useEffect(() => {
@@ -54,10 +59,16 @@ export default function ChallengesPage() {
       selectedDocType,
       selectedProgress,
       selectedField,
+      inputWord,
     });
     fetchChallenges();
-  }, [currentPage, selectedDocType, selectedProgress, selectedField]);
-
+  }, [
+    currentPage,
+    selectedDocType,
+    selectedProgress,
+    selectedField,
+    inputWord,
+  ]);
   // totalPages가 변경될 때 currentPage 조정
   useEffect(() => {
     if (currentPage > totalPage) {
@@ -73,6 +84,11 @@ export default function ChallengesPage() {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
+  };
+
+  const searchChallenges = (inputText) => {
+    setKeyWord(inputText); // 검색어 상태 업데이트
+    setCurrentPage(1);
   };
 
   return (
@@ -95,7 +111,7 @@ export default function ChallengesPage() {
                 setProgress={setSelectedProgress}
                 onClick={() => {}}
               />
-              <Search />
+              <Search onSearch={searchChallenges} />
             </div>
           </div>
         </header>

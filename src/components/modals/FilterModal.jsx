@@ -27,15 +27,26 @@ export default function FilterModal({
   setProgress,
   setDocType,
 }) {
-  const [selectedFields, setSelectedFields] = useState([]);
+  const [selectedFields, setSelectedFields] = useState("");
   const [documentType, setDocumentType] = useState("");
   const [status, setStatus] = useState("");
 
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
-    setSelectedFields((prev) =>
-      checked ? [...prev, value] : prev.filter((field) => field !== value)
-    );
+    setSelectedFields((prev) => {
+      if (checked) {
+        // 항목을 추가할 때 문자열로 연결
+        return prev ? `${prev},${value}` : value;
+      } else {
+        // 항목을 제거할 때 해당 항목을 제외한 나머지 항목들만 연결
+        return prev
+          .split(",")
+          .filter((field) => field !== value)
+          .join(",");
+      }
+    });
+
+    console.log(selectedFields);
   };
 
   const handleRadioChange = (e) => {
@@ -72,7 +83,7 @@ export default function FilterModal({
               name="field"
               value={option.value}
               text={option.text}
-              checked={selectedFields.includes(option.value)}
+              checked={selectedFields.split(",").includes(option.value)}
               onChange={handleCheckboxChange}
             />
           ))}
@@ -127,7 +138,7 @@ export default function FilterModal({
           onClick={() => {
             setDocType(documentType);
             setProgress(status);
-            setFiledType(selectedFields);
+            setFiledType(selectedFields.split(","));
             onClose();
           }}
         />

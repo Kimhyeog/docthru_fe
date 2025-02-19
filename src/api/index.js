@@ -75,9 +75,16 @@ const getWorks = async (challengeId, cursor) => {
 };
 
 // 유동적인 GET 요청 함수
-const getChallenges = async ({ docType, progress, page = 1, field } = {}) => {
+const getChallenges = async ({
+  keyword,
+  docType,
+  progress,
+  page = 1,
+  field,
+} = {}) => {
   const params = {};
 
+  if (keyword) params.keyword = keyword;
   if (docType) params.docType = docType;
   if (progress) params.progress = progress;
   if (field) params.field = field;
