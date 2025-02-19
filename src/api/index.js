@@ -2,7 +2,6 @@ const { default: axios } = require("axios");
 
 const baseURL = "http://localhost:5000";
 // const baseURL = "https://docthru-be-5u42.onrender.com";
-
 export const client = axios.create({
   baseURL,
 });
@@ -44,7 +43,6 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
-
 const getUserDate = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);
@@ -53,7 +51,7 @@ const getUserDate = async (userId) => {
 };
 
 const getChallenges = async (page = 1) => {
-  let url = `/challenges?pageSize=${pageSize || 5}`;
+  let url = `/challenges?page=${page}`;
   const response = await client.get(url);
   return response.data;
 };
@@ -77,9 +75,6 @@ const getWorks = async (challengeId, cursor) => {
   if (cursor) {
     url += `?cursor=${cursor}`;
   }
-  const response = await client.get(url);
-  const data = response.data;
-  return data;
 };
 
 const api = {
