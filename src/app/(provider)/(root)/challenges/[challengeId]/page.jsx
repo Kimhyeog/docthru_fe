@@ -1,10 +1,13 @@
+import Image from "next/image";
 import api from "@/api";
 import Chip from "@/components/Chips/Chip";
+import OptionButton from "@/assets/ic_option.svg";
 import ChipCategory from "@/components/Chips/ChipCategory";
 import React from "react";
 import Container from "@/components/Container/Container";
 import styles from "./challengeDetail.module.css";
 import ParticipationList from "./_component/ParticipationList";
+import Kyeboard from "@/assets/ic_keyboard.svg";
 
 async function ChallengeDetailPage({ params }) {
   const param = await params;
@@ -20,22 +23,37 @@ async function ChallengeDetailPage({ params }) {
       <div className={styles.headerContainer}>
         {/* 헤더 */}
         <div>
-          <div>
+          <div className={styles.challengeTitle}>
             <h2>{challenge.title}</h2>
-            {/* chips */}
-            <div>
-              <Chip type={type}>{type}</Chip>
-              <ChipCategory category="블로그" />
-            </div>
+            <Image
+              src={OptionButton}
+              alt="option"
+              width={24}
+              height={24}
+            ></Image>
+          </div>
+          {/* chips */}
+          <div className={styles.chips}>
+            <Chip type={type}>{type}</Chip>
+            <ChipCategory category="블로그" />
           </div>
           {/* 챌린지 내용 및 작성자 닉네임 */}
           <div>
-            <div>
+            <div className={styles.contentContainer}>
               <div>{challenge.content}</div>
-              <div>{user.nickname}</div>
+              <div className={styles.userContainer}>
+                <Image
+                  src={Kyeboard}
+                  alt="user icon"
+                  width={24}
+                  height={24}
+                ></Image>
+                <div>{user.nickname}</div>
+              </div>
             </div>
           </div>
         </div>
+
         {/* 원문보기, 작업도전하기 */}
         <div>
           <Container
@@ -44,8 +62,10 @@ async function ChallengeDetailPage({ params }) {
             maximumUserCount={challenge.maxParticipants}
           ></Container>
         </div>
+        <div className={styles.horizontalLine}></div>
       </div>
       {/* 참여 현황*/}
+      <div className={styles.horizontalLine}></div>
       <ParticipationList works={works} totalPages={worksData.totalPages} />
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import heartIcon from "@/assets/ic_heart.svg";
+import heartIcon from "@/assets/ic_heart_small.svg";
 import heartEmptyIcon from "@/assets/ic_heart_empty.svg";
 import style from "../work.module.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
