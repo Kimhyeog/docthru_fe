@@ -18,39 +18,45 @@ export default function ChallengesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
-  const [selectedField, setSelectedField] = useState(""); // 기본값 설정
-
+  // 필터링 관련 상태
+  const [selectedDocType, setSelectedDocType] = useState("");
+  const [selectedProgress, setSelectedProgress] = useState("");
+  const [selectedField, setSelectedField] = useState("");
   // API에서 데이터 가져오는 함수
-  const getChallenges = async (page) => {
+  const fetchChallenges = async () => {
     try {
-      const response = await api.getChallenges(page);
-      setChallenges(response.challenges);
-      setTotalPage(response.totalPages);
-    } catch (error) {
-      console.error("Failed to fetch challenges:", error);
-    }
-  };
+      const pageToSend = currentPage < 1 ? 1 : currentPage; // page가 0이 되지 않도록 보장
 
-  // field 타입에 따른 데이터 fetch 메소드
-  const fetchChallenges = async (page, field) => {
-    try {
-      const response = await api.getChallengesByField(field, page);
+      const response = await api.getChallenges({
+        docType: selectedDocType || undefined,
+        progress: selectedProgress || undefined,
+        field: Array.isArray(selectedField)
+          ? selectedField[0]
+          : selectedField || undefined,
+        page: pageToSend, // 수정된 page 값 전달
+      });
+
       setChallenges(response.challenges);
       setTotalPage(response.totalPages);
     } catch (error) {
-      console.error("Failed to fetch challenges:", error);
+      console.error(
+        "Error fetching challenges:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
   // 페이지 변경 시 데이터 다시 가져오기
   // **이거 맞는지 확인
   useEffect(() => {
-    if (selectedField === "") {
-      getChallenges(currentPage);
-    } else {
-      fetchChallenges(currentPage, selectedField);
-    }
-  }, [currentPage, selectedField]);
+    console.log("useEffect triggered", {
+      currentPage,
+      selectedDocType,
+      selectedProgress,
+      selectedField,
+    });
+    fetchChallenges();
+  }, [currentPage, selectedDocType, selectedProgress, selectedField]);
 
   // totalPages가 변경될 때 currentPage 조정
   useEffect(() => {
@@ -85,6 +91,8 @@ export default function ChallengesPage() {
             <div className={style.searchWrapper}>
               <FilterButton
                 setFiledType={setSelectedField}
+                setDocType={setSelectedDocType}
+                setProgress={setSelectedProgress}
                 onClick={() => {}}
               />
               <Search />

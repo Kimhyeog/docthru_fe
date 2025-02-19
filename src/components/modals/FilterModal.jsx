@@ -21,7 +21,12 @@ const statusOptions = [
   { value: "COMPLETED", text: "마감" },
 ];
 
-export default function FilterModal({ onClose, setFiledType }) {
+export default function FilterModal({
+  onClose,
+  setFiledType,
+  setProgress,
+  setDocType,
+}) {
   const [selectedFields, setSelectedFields] = useState([]);
   const [documentType, setDocumentType] = useState("");
   const [status, setStatus] = useState("");
@@ -120,6 +125,8 @@ export default function FilterModal({ onClose, setFiledType }) {
           type={"black"}
           text={"적용하기"}
           onClick={() => {
+            setDocType(documentType);
+            setProgress(status);
             setFiledType(selectedFields);
             onClose();
           }}
