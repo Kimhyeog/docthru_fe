@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-const baseURL = "https://docthru-be-5u42.onrender.com/";
-
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://docthru-be-5u42.onrender.com";
 export const client = axios.create({
   baseURL,
 });
@@ -43,12 +43,109 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
+const getUserDate = async (userId) => {
+  const url = `/users/${userId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getWork = async (workId) => {
+  const url = `/works/${workId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getWorks = async (challengeId, cursor) => {
+  let url = `/works/${challengeId}/many`;
+  if (cursor) {
+    url += `?cursor=${cursor}`;
+  }
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const createLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.post(url);
+  const data = response.data;
+  return data;
+};
+
+const deleteLike = async (workId) => {
+  const url = `/works/${workId}/like`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
+const getFeedbacks = async (workId, pageSize = 3) => {
+  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const createFeedback = async (workId, content) => {
+  const url = `/works/${workId}/feedback`;
+  const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
+// 유동적인 GET 요청 함수
+const getChallenges = async ({
+  keyword,
+  docType,
+  progress,
+  page = 1,
+  field,
+} = {}) => {
+  const params = {};
+
+  if (keyword) params.keyword = keyword;
+  if (docType) params.docType = docType;
+  if (progress) params.progress = progress;
+  if (field) params.field = field;
+  params.page = page;
+
+  console.log("📌 API 요청 params:", params); // 추가된 로그
+
+  try {
+    const response = await client.get("/challenges", { params });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "🔥 getChallenges API 요청 실패:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
 const api = {
   signUp,
   logIn,
   getUserMe,
   refreshToken,
+  getWork,
+  getChallenge,
+  getUserDate,
+  getWorks,
+  createLike,
+  deleteLike,
+  getFeedbacks,
+  createFeedback,
+  getChallenges,
 };
 
 export default api;

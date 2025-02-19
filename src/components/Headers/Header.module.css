@@ -13,6 +13,7 @@
   align-items: center;
   margin-left: 10rem;
 }
+
 .nav {
   display: flex;
 }
@@ -21,6 +22,7 @@
   margin-left: 1rem;
   text-decoration: none;
   color: #333;
+  white-space: nowrap;
 }
 
 .icons {
@@ -99,4 +101,8 @@
   margin-right: 10rem;
   align-items: center;
   text-decoration-line: none;
+}
+
+.header p {
+  margin: 0;
 }
