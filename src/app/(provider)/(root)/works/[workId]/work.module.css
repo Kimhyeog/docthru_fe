@@ -4,6 +4,10 @@
   margin: auto;
   width: 890px;
 }
+.container p {
+  margin-bottom: 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;

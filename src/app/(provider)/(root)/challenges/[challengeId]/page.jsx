@@ -13,7 +13,6 @@ async function ChallengeDetailPage({ params }) {
   const param = await params;
   const challengeId = param.challengeId;
   const challenge = await api.getChallenge(challengeId);
-  console.log(challenge);
   const type = challenge?.field;
   const userId = challenge?.application.userId;
   const user = await api.getUserData(userId);
