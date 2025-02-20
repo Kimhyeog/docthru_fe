@@ -132,6 +132,15 @@ const getChallenges = async ({
   }
 };
 
+//나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
+
+const getOngoingChallenges = async () => {
+  const url = `/users/me/challenges/ongoing`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -146,6 +155,7 @@ const api = {
   getFeedbacks,
   createFeedback,
   getChallenges,
+  getOngoingChallenges,
 };
 
 export default api;

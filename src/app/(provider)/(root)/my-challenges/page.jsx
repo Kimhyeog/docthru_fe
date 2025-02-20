@@ -8,6 +8,8 @@ import Card from "@/components/Card/Card";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext"; // AuthContext import
+import api from "@/api/index";
+import React from "react";
 
 const mockData = [
   {
@@ -23,7 +25,13 @@ const ITEMS_PER_PAGE = 5;
 
 export default function Page() {
   const router = useRouter();
+
+  const [challenges, setChallenges] = useState([]);
+
+  // 로그인 상태 관리 State()
   const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
+
+  // 페이지 값 State 변수
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(mockData.length / ITEMS_PER_PAGE);
@@ -49,6 +57,16 @@ export default function Page() {
   // 🔒 초기화 전에는 아무것도 렌더링하지 않음
   if (!isAuthInitialized) return null;
 
+  // 참여중인 Challenges api 호출하기
+  const fetchOngoingChallenges = async () => {
+    try {
+      const data = await api.getOngoingChallenges(); // API 호출
+      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
+    } catch (error) {
+      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
+    }
+  };
+
   return (
     <>
       <div className={style.container}>
@@ -64,7 +82,13 @@ export default function Page() {
             />
           </div>
           <div className={style.header_btns}>
-            <button>참여중인 챌린지</button>
+            <button
+              onClick={() => {
+                fetchOngoingChallenges();
+              }}
+            >
+              참여중인 챌린지
+            </button>
             <button>완료한 챌린지</button>
             <button>신청한 챌린지</button>
           </div>
