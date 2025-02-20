@@ -1,11 +1,11 @@
 .container {
+  width: 996px;
   display: flex;
   align-items: center;
   background: white;
-  border-radius: 30px;
+  border-radius: 20px;
+  border: solid 1px #e5e5e5;
   padding: 10px 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  width: 100%;
 }
 
 .input {
