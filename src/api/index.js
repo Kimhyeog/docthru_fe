@@ -134,22 +134,9 @@ const getChallenges = async ({
 
 //나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
 
-const getOngoingChallenges = async () => {
-  const url = `/users/me/challenges/ongoing`;
-  const response = await client.get(url);
-  const data = response.data;
-  return data;
-};
-
-const getCompleteChallenges = async () => {
-  const url = `/users/me/challenges/completed`;
-  const response = await client.get(url);
-  const data = response.data;
-  return data;
-};
-
-const getApplyChallenges = async () => {
-  const url = `/users/me/challenges/application`;
+// 공통 함수로 통합
+const getMyChallenges = async (type) => {
+  const url = `/users/me/challenges/${type}`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -169,9 +156,7 @@ const api = {
   getFeedbacks,
   createFeedback,
   getChallenges,
-  getOngoingChallenges,
-  getCompleteChallenges,
-  getApplyChallenges,
+  getMyChallenges,
 };
 
 export default api;

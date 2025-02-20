@@ -26,6 +26,8 @@ const ITEMS_PER_PAGE = 5;
 export default function Page() {
   const router = useRouter();
 
+  const [sortType, setSortType] = useState("ongoing");
+
   const [challenges, setChallenges] = useState([]);
 
   // 로그인 상태 관리 State()
@@ -54,37 +56,45 @@ export default function Page() {
     }
   }, [isAuthInitialized, isLoggedIn, router]);
 
-  // 🔒 초기화 전에는 아무것도 렌더링하지 않음
-  if (!isAuthInitialized) return null;
+  //로그인이 된 상태라면, => 초기의 참여상태의 Challenges렌더링
+  useEffect(() => {
+    if (isAuthInitialized && isLoggedIn) {
+      fetchMyChallenges(sortType);
+    }
+  }, [isAuthInitialized, isLoggedIn, sortType]);
 
-  // 참여중인 Challenges api 호출하기
-  const fetchOngoingChallenges = async () => {
+  // sortType 변경 시 해당 챌린지 데이터를 가져옴
+  useEffect(() => {
+    fetchMyChallenges(sortType);
+  }, [setSortType]); // ✅ sortType 변경 시마다 실행
+
+  const fetchMyChallenges = async (type) => {
     try {
-      const data = await api.getOngoingChallenges(); // API 호출
-      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
+      const data = await api.getMyChallenges(type); // 통합된 API 함수 호출
+      console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
       setChallenges(data.challenges);
     } catch (error) {
-      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
+      console.error(`${type} 챌린지 조회 실패:`, error); // 에러 출력
     }
   };
 
-  const fetchCompleteChallenges = async () => {
-    try {
-      const data = await api.getCompleteChallenges(); // API 호출
-      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
-      setChallenges(data.challenges);
-    } catch (error) {
-      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
-    }
-  };
-
-  const fetchApplyChallenges = async () => {
-    try {
-      const data = await api.getApplyChallenges(); // API 호출
-      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
-      setChallenges(data.challenges);
-    } catch (error) {
-      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
+  // 버튼 클릭 시 호출할 핸들러
+  const handleFetchChallenges = (challengeType) => {
+    switch (challengeType) {
+      case "ongoing":
+        setSortType("ongoing");
+        fetchMyChallenges("ongoing");
+        break;
+      case "completed":
+        setSortType("completed");
+        fetchMyChallenges("completed");
+        break;
+      case "application":
+        setSortType("application");
+        fetchMyChallenges("application");
+        break;
+      default:
+        console.error("유효하지 않은 챌린지 타입:", challengeType);
     }
   };
 
@@ -105,22 +115,25 @@ export default function Page() {
           <div className={style.header_btns}>
             <button
               onClick={() => {
-                fetchOngoingChallenges();
+                handleFetchChallenges("ongoing");
               }}
+              className={sortType === "ongoing" ? style.active : ""}
             >
               참여중인 챌린지
             </button>
             <button
               onClick={() => {
-                fetchCompleteChallenges();
+                handleFetchChallenges("completed");
               }}
+              className={sortType === "completed" ? style.active : ""}
             >
               완료한 챌린지
             </button>
             <button
               onClick={() => {
-                fetchApplyChallenges();
+                handleFetchChallenges("application");
               }}
+              className={sortType === "application" ? style.active : ""}
             >
               신청한 챌린지
             </button>

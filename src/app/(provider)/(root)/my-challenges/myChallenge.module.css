@@ -73,10 +73,9 @@
 
 }
 
-.header_btns button:focus {
+.header_btns .active {
   border-bottom: 3px solid black;
   font-weight: 900;
-
 }
 
 
