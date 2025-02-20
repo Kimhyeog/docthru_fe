@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const prevRefreshToken = localStorage.getItem("refreshToken");
     if (prevRefreshToken && (pathname === "/signup" || pathname === "/login"))
-      router.replace("/my-challenges");
+      router.replace("/challenges");
   }, [isLoggedIn, pathname]);
 
   // 새로고침해도 로그인 유지되게게
