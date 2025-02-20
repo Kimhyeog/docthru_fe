@@ -43,7 +43,7 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
-const getUserDate = async (userId) => {
+const getUserData = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);
   const data = response.data;
@@ -53,6 +53,13 @@ const getUserDate = async (userId) => {
 const getWork = async (workId) => {
   const url = `/works/${workId}`;
   const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const deleteWork = async (workId) => {
+  const url = `/works/${workId}`;
+  const response = await client.delete(url);
   const data = response.data;
   return data;
 };
@@ -88,8 +95,8 @@ const deleteLike = async (workId) => {
   return data;
 };
 
-const getFeedbacks = async (workId, pageSize = 3) => {
-  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+const getFeedbacks = async (workId) => {
+  const url = `/works/${workId}/feedback`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -98,6 +105,20 @@ const getFeedbacks = async (workId, pageSize = 3) => {
 const createFeedback = async (workId, content) => {
   const url = `/works/${workId}/feedback`;
   const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
+const deleteFeedback = async (feedbackId) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
+const updateFeedback = async (feedbackId, content) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.put(url, { content });
   const data = response.data;
   return data;
 };
@@ -149,14 +170,17 @@ const api = {
   refreshToken,
   getWork,
   getChallenge,
-  getUserDate,
+  getUserData,
   getWorks,
   createLike,
   deleteLike,
   getFeedbacks,
   createFeedback,
   getChallenges,
-  getMyChallenges,
+  getMyChallenges, // 'featture/ChallengePage'sIDPage' 브랜치에서 추가된 부분
+  deleteFeedback,
+  updateFeedback,
+  deleteWork,
 };
 
 export default api;

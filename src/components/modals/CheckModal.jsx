@@ -21,17 +21,8 @@ export default function CheckModal({ show, onHide }) {
         <p>정말 취소하시겠습니까?</p>
       </div>
       <div className={style.btnSection}>
-        <Button
-          text={"아니요"}
-          onClick={onHide}
-          className={style["modal-button"]} // ✅ 버튼 크기 적용
-        />
-        <Button
-          type={"black"}
-          text={"네"}
-          onClick={onHide}
-          className={style["modal-button"]} // ✅ 버튼 크기 적용
-        />
+        <Button text={"아니요"} onClick={onHide} />
+        <Button type={"black"} text={"네"} onClick={onHide} />
       </div>
     </Modal>
   );

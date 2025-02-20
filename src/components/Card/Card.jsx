@@ -4,6 +4,8 @@ import clockIcon from "@/assets/ic_clock.svg";
 import peopleIcon from "@/assets/ic_people.svg";
 import ChipCardStatus from "../Chips/ChipCardStatus";
 import { EllipsisVertical } from "lucide-react";
+import ChipCategory from "../Chips/ChipCategory";
+import Chip from "../Chips/Chip";
 
 const Card = ({
   deadline,
@@ -19,7 +21,7 @@ const Card = ({
 
   return (
     <div className={styles.card}>
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <ChipCardStatus type="Recruitment" />
         <button
           className={styles.moreOptions}
@@ -28,15 +30,17 @@ const Card = ({
         >
           <EllipsisVertical />
         </button>
-      </div>
+      </div> */}
 
       <h2 className={styles.title}>
         {title ? title : "Next.js - App Router: Routing Fundamentals"}
       </h2>
 
       <div className={styles.tags}>
-        <span className={styles.nextJsTag}>{field}</span>
-        <span className={styles.officialDoc}>{docType}</span>
+        {/* <span className={styles.nextJsTag}>{field}</span> */}
+        {/* <span className={styles.officialDoc}>{docType}</span> */}
+        <Chip type={field} />
+        <ChipCategory category={docType} />
       </div>
 
       <hr className={styles.separator} />

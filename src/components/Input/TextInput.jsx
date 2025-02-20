@@ -11,6 +11,7 @@ const TextInput = ({
   validate,
   dropdown,
   options,
+  isTextArea,
 }) => {
   const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -35,13 +36,22 @@ const TextInput = ({
   return (
     <div className={styles.inputGroup}>
       <label className={styles.label}>{label}</label>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={selectedOption || value}
-        onChange={handleChange}
-        className={styles.input}
-      />
+      {isTextArea ? (
+        <textarea
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          className={`${styles.input} ${styles.textarea}`} // textarea 스타일 적용
+        />
+      ) : (
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={selectedOption || value}
+          onChange={handleChange}
+          className={styles.input}
+        />
+      )}
       {dropdown && options && (
         <div className={styles.dropdown}>
           <button

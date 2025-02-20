@@ -46,3 +46,9 @@
   outline: none;
   display: inline-block;
 }
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+  padding: 10px;
+}

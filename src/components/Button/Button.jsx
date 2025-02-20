@@ -16,6 +16,7 @@ const btnTypeArr = [
   { rightBig: style.button_rightBig },
   { rightSmall: style.button_rightSmall },
   { bottom: style.button_bottom },
+  { customBlack: style.custom_black },
 ];
 
 export default function Button({ type, text, onClick, icon, ...props }) {
@@ -25,7 +26,7 @@ export default function Button({ type, text, onClick, icon, ...props }) {
   return (
     <button
       onClick={onClick}
-      className={`${style.button} ${buttonClass ? buttonClass[type] : ""}`}
+      className={`${style.button} ${buttonClass ? buttonClass[type] : ""} `}
       {...props}
     >
       {text}
