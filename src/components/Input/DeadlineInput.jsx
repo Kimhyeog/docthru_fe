@@ -13,28 +13,13 @@ const DeadlineInput = ({ label, value, onChange }) => {
     <div className={styles.inputGroup}>
       <label className={styles.label}>{label}</label>
 
-      {/* 달력 위치 조정 */}
-      {showCalendar && (
-        <div className={styles.datePickerContainer}>
-          <DatePicker
-            selected={value ? new Date(value) : null}
-            onChange={(date) => {
-              onChange(date.toISOString().split("T")[0]); // YYYY-MM-DD 형식
-              setShowCalendar(false);
-            }}
-            dateFormat="yy/MM/dd"
-            inline
-          />
-        </div>
-      )}
-
       <div className={styles.inputWrapper}>
         <input
           type="text"
           className={styles.input}
           placeholder="YY/MM/DD"
           value={value}
-          readOnly // 직접 입력 방지
+          readOnly
         />
         <button
           className={styles.calendar}
@@ -43,6 +28,20 @@ const DeadlineInput = ({ label, value, onChange }) => {
         >
           <Calendar size={20} className={styles.calendarIcon} />
         </button>
+
+        {showCalendar && (
+          <div className={styles.datePickerContainer}>
+            <DatePicker
+              selected={value ? new Date(value) : null}
+              onChange={(date) => {
+                onChange(date.toISOString().split("T")[0]);
+                setShowCalendar(false);
+              }}
+              dateFormat="yy/MM/dd"
+              inline
+            />
+          </div>
+        )}
       </div>
     </div>
   );
