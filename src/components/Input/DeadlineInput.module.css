@@ -1,0 +1,55 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.calendarIcon {
+  position: absolute;
+  right: 1rem;
+  bottom: 12px;
+  color: black;
+}
+
+.calendar {
+  all: unset;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+}
+
+.datePickerContainer {
+  position: absolute;
+  top: 36rem;
+  right: 25rem;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}

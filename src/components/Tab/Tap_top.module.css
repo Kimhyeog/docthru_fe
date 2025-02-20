@@ -1,0 +1,18 @@
+.tabButton {
+  width: 68px;
+  height: 60px;
+  background-color: white;
+  padding: 21px 17px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  color: #262626;
+}
+
+.inactive {
+  color: #737373;
+}

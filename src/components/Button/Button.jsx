@@ -11,19 +11,23 @@ const btnTypeArr = [
   { yellow: style.button_yellow },
   { outline_icon: style.button_outline_icon },
   { page: style.button_page },
+  { pageActive: style.button_page_active },
+  { pageArrow: style.button_page_arrow },
   { rightBig: style.button_rightBig },
   { rightSmall: style.button_rightSmall },
   { bottom: style.button_bottom },
+  { customBlack: style.custom_black },
 ];
 
-export default function Button({ type, text, onClick, icon }) {
+export default function Button({ type, text, onClick, icon, ...props }) {
   // btnTypeArr에서 type에 해당하는 클래스 찾기
   const buttonClass = btnTypeArr.find((btn) => btn[type]);
 
   return (
     <button
       onClick={onClick}
-      className={`${style.button} ${buttonClass ? buttonClass[type] : ""}`}
+      className={`${style.button} ${buttonClass ? buttonClass[type] : ""} `}
+      {...props}
     >
       {text}
       {(type === "outline_icon" ||

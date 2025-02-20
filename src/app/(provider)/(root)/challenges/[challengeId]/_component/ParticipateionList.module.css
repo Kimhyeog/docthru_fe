@@ -1,0 +1,81 @@
+.container {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.pagination {
+  color: gray;
+  font-size: 14px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+.rank {
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background: black;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.crown {
+  background: gold;
+}
+
+.userInfo {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.role {
+  display: block;
+  font-size: 12px;
+  color: gray;
+}
+
+.favorites {
+  color: gold;
+}
+
+.viewWork {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.favoriteContainer {
+  display: flex;
+  margin-right: 30px;
+}

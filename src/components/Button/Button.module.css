@@ -9,18 +9,19 @@
   border-radius: 12px;
   border: 1px solid black;
 
-
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
   font-style: pretendard;
 
+  white-space: nowrap;
   cursor: pointer;
 }
 
 /* 블랙 버튼 */
 
 .button_black {
+  width: 100%;
   background-color: black;
   color: white;
 }
@@ -28,11 +29,10 @@
 /* 레드 버튼 */
 
 .button_red {
-  background-color: #FFE7E7;
-  color: #F24744;
+  background-color: #ffe7e7;
+  color: #f24744;
   border: none;
 }
-
 
 /* 링크 열기 버튼 : btn-tranparent */
 .button_gray {
@@ -42,21 +42,20 @@
 }
 
 .button_yellow {
-  background-color: #FFC117;
+  width: 100%;
+  background-color: #ffc117;
   color: #262626;
   border: 2px solid #262626;
-
 }
 
 /* btn-outline-icon */
 
 .button_outline_icon {
-
   top: 7px;
   left: 16px;
   gap: 6px;
 
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #262626;
 
   border-radius: 30.5px;
@@ -73,7 +72,6 @@
 
   width: 132px;
   height: 33px;
-
 }
 
 /* page btn */
@@ -82,26 +80,52 @@
   width: 40px;
   height: 40px;
   padding: 11.5px 16.5px;
-  color: #A3A3A3;
+  color: #a3a3a3;
 
   font-weight: 500;
   font-size: 14px;
   line-height: 16.71px;
 
   border: 0.5px solid gray;
-
 }
 
-.button_page:active {
+.button_page_arrow {
+  width: 40px;
+  height: 40px;
+  padding: 11.5px 16.5px;
+  color: #a3a3a3;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.71px;
+
+  border: 0.5px solid gray;
+}
+
+.button_page_active {
+  width: 40px;
+  height: 40px;
+  padding: 11.5px 16.5px;
   background-color: #262626;
-  color: #FFC117;
-  border: none
+  color: #ffc117;
+  border: none;
+}
+
+.button_page:focus {
+  background-color: #262626;
+  color: #ffc117;
+  border: none;
+}
+
+.button_page_arrow:active {
+  background-color: #262626;
+  color: #ffc117;
+  border: none;
 }
 
 /* btn_right */
 
 .button_rightBig {
-
   width: 40px;
   height: 40px;
 
@@ -112,7 +136,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .button_rightSmall {
@@ -127,32 +150,32 @@
 }
 
 /* 이거 위치조정 해줄 수 있는 분 */
-.button_rightSmall>svg {
+.button_rightSmall > svg {
   position: absolute;
   bottom: 4px;
   right: 4.4px;
-
 }
-
-
 
 /* btn_bottom */
 
 .button_bottom {
-
   width: 40px;
   height: 40px;
   border: none;
-  background-color: #D4D4D4;
+  background-color: #d4d4d4;
 
   border-radius: 40px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .button_bottom:active {
   background-color: #262626;
+}
+
+.custom_black {
+  background-color: black;
+  color: white;
 }

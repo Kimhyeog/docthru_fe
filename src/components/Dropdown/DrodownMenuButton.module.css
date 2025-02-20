@@ -1,0 +1,35 @@
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  right: 0;
+}
+
+.button {
+  color: #6b7280;
+  width: 139px;
+  border-left: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first {
+  border-top: 1px solid #d1d5db;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #d1d5db;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.last {
+  border-bottom: 1px solid #d1d5db;
+  border-radius: 0 0 8px 8px;
+  border-top: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

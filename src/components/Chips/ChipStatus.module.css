@@ -1,0 +1,43 @@
+.chip_pending {
+  background-color: #fffde7;
+  color: #f2bc00;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_rejected {
+  background-color: #fff0f0;
+  color: #e54946;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_approved {
+  background-color: #dff0ff;
+  color: #4095de;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
+
+.chip_deleted {
+  background-color: #e5e5e5;
+  color: #737373;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 4px;
+  display: inline-block;
+}
