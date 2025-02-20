@@ -63,11 +63,6 @@ export default function Page() {
     }
   }, [isAuthInitialized, isLoggedIn, sortType]);
 
-  // sortType 변경 시 해당 챌린지 데이터를 가져옴
-  useEffect(() => {
-    fetchMyChallenges(sortType);
-  }, [setSortType]); // ✅ sortType 변경 시마다 실행
-
   const fetchMyChallenges = async (type) => {
     try {
       const data = await api.getMyChallenges(type); // 통합된 API 함수 호출
