@@ -26,6 +26,7 @@ export default function ChallengesPage() {
   const [selectedProgress, setSelectedProgress] = useState("");
   const [selectedField, setSelectedField] = useState("");
   const [inputWord, setKeyWord] = useState("");
+
   // API에서 데이터 가져오는 함수
   const fetchChallenges = async () => {
     try {

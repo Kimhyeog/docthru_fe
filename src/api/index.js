@@ -153,6 +153,16 @@ const getChallenges = async ({
   }
 };
 
+//나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
+
+// 공통 함수로 통합
+const getMyChallenges = async (type) => {
+  const url = `/users/me/challenges/${type}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -167,6 +177,7 @@ const api = {
   getFeedbacks,
   createFeedback,
   getChallenges,
+  getMyChallenges, // 'featture/ChallengePage'sIDPage' 브랜치에서 추가된 부분
   deleteFeedback,
   updateFeedback,
   deleteWork,
