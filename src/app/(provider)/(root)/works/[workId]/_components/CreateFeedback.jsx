@@ -26,7 +26,6 @@ function CreateFeedback() {
       alert("로그인해!");
       return;
     }
-    console.log(content);
     createFeedback({ workId, content });
     setContent("");
   };

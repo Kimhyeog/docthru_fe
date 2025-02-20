@@ -44,8 +44,3 @@
   border-top: 1px solid #f5f5f5;
   margin: 24px; /* 두께 1px, 검은색 실선 */
 }
-
-.favoriteContainer {
-  display: flex;
-  flex-direction: row;
-}

@@ -9,6 +9,7 @@ import keyboard from "@/assets/ic_keyboard.svg";
 import Favorite from "./_components/Favorite";
 import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
+import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -22,14 +23,17 @@ async function WorkPage({ params }) {
   return (
     <div className={style.container}>
       <div className={style.header}>
-        <h2 className={style.title}>{challenge?.title}</h2>
+        <div className={style.titleContainer}>
+          <h2 className={style.title}>{challenge?.title}</h2>
+          <DropdownMenuforWork writerId={writerData.id} />
+        </div>
+
         <div className={style.meta}>
           <Chip type={type}>{type}</Chip>
           <ChipCategory category="블로그" />
         </div>
       </div>
       <div className={style.divider} />
-      {/* 백엔드 수정해해서 하트 색깔 확인하기 */}
       <div className={style.info}>
         <div className={style.users}>
           <Image src={keyboard} alt="keyboradIcon" width={24} height={24} />

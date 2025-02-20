@@ -57,6 +57,13 @@ const getWork = async (workId) => {
   return data;
 };
 
+const deleteWork = async (workId) => {
+  const url = `/works/${workId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const getChallenge = async (challengeId) => {
   const url = `/challenges/${challengeId}`;
   const response = await client.get(url);
@@ -88,8 +95,8 @@ const deleteLike = async (workId) => {
   return data;
 };
 
-const getFeedbacks = async (workId, pageSize = 3) => {
-  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+const getFeedbacks = async (workId) => {
+  const url = `/works/${workId}/feedback`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -98,6 +105,20 @@ const getFeedbacks = async (workId, pageSize = 3) => {
 const createFeedback = async (workId, content) => {
   const url = `/works/${workId}/feedback`;
   const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
+const deleteFeedback = async (feedbackId) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
+const updateFeedback = async (feedbackId, content) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.put(url, { content });
   const data = response.data;
   return data;
 };
@@ -146,6 +167,9 @@ const api = {
   getFeedbacks,
   createFeedback,
   getChallenges,
+  deleteFeedback,
+  updateFeedback,
+  deleteWork,
 };
 
 export default api;

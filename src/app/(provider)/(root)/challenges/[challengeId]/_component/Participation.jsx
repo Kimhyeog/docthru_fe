@@ -10,7 +10,6 @@ async function Participation({ work, index }) {
   const workId = work.id;
   const userId = work.userId;
   const user = await api.getUserData(userId);
-  console.log(work);
   return (
     <div key={workId} className={styles.listItem}>
       <div className={`${styles.rank} ${index === 0 ? styles.crown : ""}`}>

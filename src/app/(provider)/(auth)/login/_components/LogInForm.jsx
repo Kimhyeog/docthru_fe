@@ -32,7 +32,7 @@ function LogInForm() {
     mutationFn: (userData) => api.logIn(userData),
     onSuccess: () => {
       logIn();
-      router.push("/");
+      router.back();
     },
     onError: (error) => {
       showModal(error.response?.data || "회원가입 실패", false);
