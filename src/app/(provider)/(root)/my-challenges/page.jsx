@@ -10,18 +10,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext"; // AuthContext import
 import api from "@/api/index";
 import React from "react";
-
-const mockData = [
-  {
-    id: 1,
-    date: new Date().toLocaleDateString(),
-    title: "점심 같이먹기",
-    userCount: 3,
-    maxUserCount: 7,
-  },
-];
-
-const ITEMS_PER_PAGE = 5;
+import WaitingChallengeItem from "./components/waitingChallengeItem";
 
 export default function Page() {
   const router = useRouter();
@@ -36,11 +25,7 @@ export default function Page() {
   // 페이지 값 State 변수
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(mockData.length / ITEMS_PER_PAGE);
-  const paginatedData = mockData.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const totalPages = Math.ceil(challenges.length / 5);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -62,6 +47,13 @@ export default function Page() {
       fetchMyChallenges(sortType);
     }
   }, [isAuthInitialized, isLoggedIn, sortType]);
+
+  useEffect(() => {
+    // 현재 페이지가 전체 페이지 수보다 크다면 마지막 페이지로 이동
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [challenges, totalPages, currentPage]);
 
   const fetchMyChallenges = async (type) => {
     try {
@@ -140,11 +132,17 @@ export default function Page() {
           </div>
         </header>
         <main className={style.main}>
-          {challenges.map((challenge) => (
-            <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
-              <Card {...challenge} />
-            </Link>
-          ))}
+          {sortType === "ongoing" || sortType === "completed"
+            ? challenges.map((challenge) => (
+                <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
+                  <Card {...challenge} />
+                </Link>
+              ))
+            : sortType === "application"
+            ? challenges.map((challenge) => (
+                <WaitingChallengeItem key={challenge.id} {...challenge} />
+              ))
+            : null}
         </main>
         <footer className={style.footer}>
           <Button
