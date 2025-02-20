@@ -17,7 +17,7 @@ async function WorkPage({ params }) {
   const challengeId = work.challengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
-  const writerData = await api.getUserDate(work.userId);
+  const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
   return (
     <div className={style.container}>

@@ -43,7 +43,7 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
-const getUserDate = async (userId) => {
+const getUserData = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);
   const data = response.data;
@@ -139,7 +139,7 @@ const api = {
   refreshToken,
   getWork,
   getChallenge,
-  getUserDate,
+  getUserData,
   getWorks,
   createLike,
   deleteLike,
