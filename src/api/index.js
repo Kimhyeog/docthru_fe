@@ -141,6 +141,20 @@ const getOngoingChallenges = async () => {
   return data;
 };
 
+const getCompleteChallenges = async () => {
+  const url = `/users/me/challenges/completed`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getApplyChallenges = async () => {
+  const url = `/users/me/challenges/application`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -156,6 +170,8 @@ const api = {
   createFeedback,
   getChallenges,
   getOngoingChallenges,
+  getCompleteChallenges,
+  getApplyChallenges,
 };
 
 export default api;

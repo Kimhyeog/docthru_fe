@@ -62,6 +62,27 @@ export default function Page() {
     try {
       const data = await api.getOngoingChallenges(); // API 호출
       console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
+      setChallenges(data.challenges);
+    } catch (error) {
+      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
+    }
+  };
+
+  const fetchCompleteChallenges = async () => {
+    try {
+      const data = await api.getCompleteChallenges(); // API 호출
+      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
+      setChallenges(data.challenges);
+    } catch (error) {
+      console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
+    }
+  };
+
+  const fetchApplyChallenges = async () => {
+    try {
+      const data = await api.getApplyChallenges(); // API 호출
+      console.log("참여중인 챌린지 데이터:", data); // 데이터 확인용 출력
+      setChallenges(data.challenges);
     } catch (error) {
       console.error("참여중인 챌린지 조회 실패:", error); // 에러 출력
     }
@@ -89,8 +110,20 @@ export default function Page() {
             >
               참여중인 챌린지
             </button>
-            <button>완료한 챌린지</button>
-            <button>신청한 챌린지</button>
+            <button
+              onClick={() => {
+                fetchCompleteChallenges();
+              }}
+            >
+              완료한 챌린지
+            </button>
+            <button
+              onClick={() => {
+                fetchApplyChallenges();
+              }}
+            >
+              신청한 챌린지
+            </button>
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
@@ -99,7 +132,7 @@ export default function Page() {
           </div>
         </header>
         <main className={style.main}>
-          {paginatedData.map((challenge) => (
+          {challenges.map((challenge) => (
             <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
               <Card {...challenge} />
             </Link>
