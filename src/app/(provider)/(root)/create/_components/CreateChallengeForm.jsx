@@ -73,6 +73,12 @@ function CreateChallengeForm() {
   //     },
   //   });
 
+  const handleMaxUsersChange = (val) => {
+    if (/^\d*$/.test(val)) {
+      setMaxUsers(val);
+    }
+  };
+
   const handleSubmit = () => {
     if (!Object.values(isValid).every(Boolean)) return;
 
@@ -87,6 +93,7 @@ function CreateChallengeForm() {
     // };
 
     // mutation.mutate(requestBody);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
@@ -108,6 +115,11 @@ function CreateChallengeForm() {
         placeholder="원문 링크를 입력하세요"
         value={link}
         onChange={setLink}
+        validate={(val) =>
+          /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*$/i.test(val)
+            ? ""
+            : "올바른 링크를 입력하세요"
+        }
       />
       <Dropdown label="분야" options={categoryOptions} onSelect={setCategory} />
       <Dropdown
@@ -120,7 +132,7 @@ function CreateChallengeForm() {
         label="최대 인원"
         placeholder="인원을 입력해 주세요"
         value={maxUsers}
-        onChange={setMaxUsers}
+        onChange={handleMaxUsersChange}
       />
       <TextInput
         label="내용"
@@ -128,6 +140,7 @@ function CreateChallengeForm() {
         value={content}
         className={style.content}
         onChange={setContent}
+        isTextArea={true}
       />
 
       <Button

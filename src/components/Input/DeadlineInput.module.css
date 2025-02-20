@@ -41,3 +41,15 @@
   outline: none;
   display: inline-block;
 }
+
+.datePickerContainer {
+  position: absolute;
+  top: 36rem;
+  right: 25rem;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
