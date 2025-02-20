@@ -150,7 +150,7 @@
 }
 
 /* 이거 위치조정 해줄 수 있는 분 */
-.button_rightSmall>svg {
+.button_rightSmall > svg {
   position: absolute;
   bottom: 4px;
   right: 4.4px;
@@ -173,4 +173,9 @@
 
 .button_bottom:active {
   background-color: #262626;
+}
+
+.custom_black {
+  background-color: black;
+  color: white;
 }

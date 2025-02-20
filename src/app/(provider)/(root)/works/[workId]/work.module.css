@@ -4,6 +4,10 @@
   margin: auto;
   width: 890px;
 }
+.container p {
+  margin-bottom: 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -12,6 +16,13 @@
 .title {
   font-size: 24px;
   font-weight: 600;
+  color: #262626;
+}
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-top: 30px;
 }
 .users {
@@ -27,6 +38,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -45,6 +57,7 @@
 
 .favorite {
   display: flex;
+  align-items: center;
 }
 .feedbackInput {
   display: flex;

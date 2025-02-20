@@ -7,14 +7,18 @@ import arrowIcon from "@/assets/arrow_bottom.svg";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/api";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useModalStore } from "@/store/useModalStore";
+import LoginCheckModal from "@/components/modals/LoginCheckModal";
 
 function CreateFeedback() {
   const queryClinet = useQueryClient();
   const { isLoggedIn } = useAuth();
+  const router = useRouter();
   const [content, setContent] = useState();
   const params = useParams();
   const workId = params.workId;
+  const { checkModalOn, showModal, closeModal } = useModalStore();
   const { mutate: createFeedback } = useMutation({
     mutationFn: ({ workId, content }) => api.createFeedback(workId, content),
     onSuccess: () => queryClinet.invalidateQueries(["feedbacks", { workId }]),
@@ -23,13 +27,18 @@ function CreateFeedback() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isLoggedIn) {
-      alert("로그인해!");
+      showModal("", false);
       return;
     }
-    console.log(content);
     createFeedback({ workId, content });
     setContent("");
   };
+
+  const onHide = () => {
+    closeModal();
+    router.push("/login");
+  };
+
   return (
     <form className={style.feedbackInput} onSubmit={handleSubmit}>
       <TextBox
@@ -46,6 +55,7 @@ function CreateFeedback() {
         height={40}
         onClick={handleSubmit}
       />
+      <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
     </form>
   );
 }
