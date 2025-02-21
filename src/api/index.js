@@ -163,6 +163,28 @@ const getMyChallenges = async (type) => {
   return data;
 };
 
+// api/index.js
+const getApplications = async (status = "WAITING", pageSize = 5) => {
+  const url = `/users/me/challenges/application`;
+  const params = { option: status, pageSize };
+
+  // Authorization 헤더가 없으면 오류를 던짐
+  if (!client.defaults.headers["Authorization"]) {
+    throw new Error("Unauthenticated");
+  }
+
+  try {
+    const response = await client.get(url, { params });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "🔥 getApplications API 요청 실패:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 const api = {
   signUp,
   logIn,
@@ -181,6 +203,7 @@ const api = {
   deleteFeedback,
   updateFeedback,
   deleteWork,
+  getApplications,
 };
 
 export default api;

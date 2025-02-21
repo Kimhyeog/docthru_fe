@@ -19,6 +19,8 @@ export default function Page() {
 
   const [challenges, setChallenges] = useState([]);
 
+  let challenges_no = 1;
+
   // 로그인 상태 관리 State()
   const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
 
@@ -65,6 +67,21 @@ export default function Page() {
     }
   };
 
+  // 로그인된 상태에서만 API 호출
+  // 로그인 상태가 true일 때만 데이터 로드
+
+  const fetchApplications = async () => {
+    try {
+      console.log("로그인 상태:", isLoggedIn); // 로그인 상태 확인
+      const data = await api.getApplications();
+      console.log("API 응답:", data); // 응답 확인
+      setChallenges(data.challenges); // challenges는 API의 응답 body에서 오는 키입니다.
+    } catch (err) {
+      console.error("데이터 요청 오류:", err); // 오류 내용 확인
+      setError("데이터를 가져오는 데 실패했습니다.");
+    }
+  };
+
   // 버튼 클릭 시 호출할 핸들러
   const handleFetchChallenges = (challengeType) => {
     switch (challengeType) {
@@ -78,7 +95,7 @@ export default function Page() {
         break;
       case "application":
         setSortType("application");
-        fetchMyChallenges("application");
+        fetchApplications();
         break;
       default:
         console.error("유효하지 않은 챌린지 타입:", challengeType);
@@ -132,17 +149,39 @@ export default function Page() {
           </div>
         </header>
         <main className={style.main}>
-          {sortType === "ongoing" || sortType === "completed"
-            ? challenges.map((challenge) => (
-                <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
-                  <Card {...challenge} />
-                </Link>
-              ))
-            : sortType === "application"
-            ? challenges.map((challenge) => (
-                <WaitingChallengeItem key={challenge.id} {...challenge} />
-              ))
-            : null}
+          {sortType === "ongoing" || sortType === "completed" ? (
+            challenges.map((challenge) => (
+              <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
+                <Card {...challenge} />
+              </Link>
+            ))
+          ) : sortType === "application" ? (
+            <>
+              {/* 헤더 */}
+              <div className={style.table_header}>
+                <div className={style.cell}>No.</div>
+                <div className={style.cell}>분야</div>
+                <div className={style.cell}>카테고리</div>
+                <div className={style.cell_title}>챌린지 제목</div>
+                <div className={style.cell}>모집 인원</div>
+                <div className={style.cell}>마감 기한</div>
+                <div className={style.cell}>상태</div>
+              </div>
+              {/* 데이터 목록 */}
+              {challenges.map((challenge) => (
+                <WaitingChallengeItem
+                  key={challenge.id}
+                  {...challenge}
+                  no={
+                    challenges_no < challenges.length
+                      ? challenges_no++
+                      : challenges_no
+                  }
+                  application={challenge.application} // 수정된 부분
+                />
+              ))}
+            </>
+          ) : null}
         </main>
         <footer className={style.footer}>
           <Button
