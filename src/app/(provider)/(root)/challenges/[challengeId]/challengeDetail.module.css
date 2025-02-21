@@ -15,8 +15,11 @@
 
 .userContainer {
   display: flex;
-  flex-direction: raw;
-  gap: 5px;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  line-height: 14.32px;
 }
 .challengeTitle {
   width: 549px;
@@ -43,4 +46,10 @@
 .horizontalLine {
   border-top: 1px solid #f5f5f5;
   margin: 24px; /* 두께 1px, 검은색 실선 */
+}
+
+.content {
+  color: #404040;
+  font-weight: 400;
+  font-size: 16px;
 }

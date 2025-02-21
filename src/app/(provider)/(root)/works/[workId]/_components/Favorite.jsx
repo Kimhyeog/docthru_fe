@@ -48,7 +48,7 @@ function Favorite({ work }) {
             deleteLike(workId);
           }}
         >
-          <Image src={heartIcon} alt="heartIcon" />
+          <Image src={heartIcon} alt="heartIcon" width={16} height={16} />
         </div>
       ) : (
         <div
@@ -60,7 +60,12 @@ function Favorite({ work }) {
             createLike(workId);
           }}
         >
-          <Image src={heartEmptyIcon} alt="heartEmptyIcon" />
+          <Image
+            src={heartEmptyIcon}
+            alt="heartEmptyIcon"
+            width={16}
+            height={16}
+          />
         </div>
       )}
 

@@ -3,29 +3,24 @@
   display: inline-block;
 }
 
-
 .FilterButton {
-  width: 88px;
-  height: 19px;
-
+  width: 112px;
+  height: 40px;
   cursor: pointer;
-
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-
-  border: 1px solid #D4D4D4;
+  border: 1px solid #d4d4d4;
   border-radius: 32px;
   padding: 8px 12px;
+  box-sizing: border-box;
 }
 
 .FilterButton span {
-
   font-family: Pretendard;
   font-weight: 400;
   font-size: 16px;
   line-height: 19.09px;
   letter-spacing: 0%;
-
+  color: #a3a3a3;
 }

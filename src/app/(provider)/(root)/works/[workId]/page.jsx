@@ -27,17 +27,16 @@ async function WorkPage({ params }) {
           <h2 className={style.title}>{challenge?.title}</h2>
           <DropdownMenuforWork writerId={writerData.id} />
         </div>
-
         <div className={style.meta}>
           <Chip type={type}>{type}</Chip>
-          <ChipCategory category="블로그" />
+          <ChipCategory category={challenge.docType} />
         </div>
       </div>
       <div className={style.divider} />
       <div className={style.info}>
         <div className={style.users}>
           <Image src={keyboard} alt="keyboradIcon" width={24} height={24} />
-          <p>{writerData.nickname}</p>
+          <p className={style.nickname}>{writerData.nickname}</p>
           <Favorite work={work} />
         </div>
         <div className={style.favoriteCount}>

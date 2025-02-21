@@ -12,23 +12,29 @@ async function Participation({ work, index }) {
   const user = await api.getUserData(userId);
   return (
     <div key={workId} className={styles.listItem}>
-      <div className={`${styles.rank} ${index === 0 ? styles.crown : ""}`}>
-        {String(index + 1).padStart(2, "0")}
+      <div className={styles.listItemFirst}>
+        <div className={`${styles.rank} `}>
+          {String(index + 1).padStart(2, "0")}
+        </div>
+        <div className={styles.userInfoContainer}>
+          <Image src={Keyboard} alt="user icon" width={24} height={24}></Image>
+          <div className={styles.uerInfo}>
+            <span className={styles.nickname}>{user.nickname}</span>
+            <span className={styles.role}>
+              {user.grade === "GENERAL" ? "전문가" : "일반"}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className={styles.userInfo}>
-        <Image src={Keyboard} alt="user icon" width={16} height={16}></Image>
-        <span className={styles.nickname}>{user.nickname}</span>
-        <span className={styles.role}>
-          {user.grade === "GENERAL" ? "전문가" : "일반"}
-        </span>
+      <div className={styles.listItemSecond}>
+        <div className={styles.favoriteContainer}>
+          <Image src={Heart} alt="heart" width={16} height={16}></Image>
+          <div className={styles.favorites}>{work.likeCount}</div>
+        </div>
+        <Link href={`/works/${workId}`} className={styles.viewWork}>
+          작업물 보기
+        </Link>
       </div>
-      <div className={styles.favoriteContainer}>
-        <Image src={Heart} alt="heart" width={16} height={16}></Image>
-        <div className={styles.favorites}>{work.likeCount}</div>
-      </div>
-      <Link href={`/works/${workId}`} className={styles.viewWork}>
-        작업물 보기
-      </Link>
     </div>
   );
 }

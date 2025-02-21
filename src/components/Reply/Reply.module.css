@@ -1,9 +1,11 @@
 .replyContainer {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   background-color: #fafafa;
   padding: 16px;
   border-radius: 8px;
+  gap: 12px;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
@@ -14,10 +16,9 @@
 
 .replyContent {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin-left: 12px;
-  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 }
 
 .header {
@@ -42,7 +43,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 6px;
 }
 
 .moreButton {
@@ -61,7 +61,8 @@
 .comment {
   font-size: 16px;
   color: #404040;
-  line-height: 1.5;
+  line-height: 19.09px;
+  font-weight: 400;
 }
 .textarea {
   width: 100%;
