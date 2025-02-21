@@ -24,7 +24,7 @@ async function ChallengeDetailPage({ params }) {
         {/* 헤더 */}
         <div>
           <div className={styles.challengeTitle}>
-            <h2>{challenge.title}</h2>
+            <div>{challenge.title}</div>
             <Image
               src={OptionButton}
               alt="option"
