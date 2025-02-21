@@ -1,8 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import styles from "./ParticipateionList.module.css";
-import Heart from "@/assets/ic_heart.svg";
-import Keyboard from "@/assets/ic_keyboard.svg";
 import Participation from "./Participation";
 
 const ParticipationList = ({ works, currentPage = 1, totalPages = 1 }) => {

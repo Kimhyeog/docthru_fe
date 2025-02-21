@@ -142,13 +142,14 @@ function CreateChallengeForm() {
         onChange={setContent}
         isTextArea={true}
       />
-
-      <Button
-        type="black"
-        text="신청하기"
-        onClick={handleSubmit}
-        disabled={!Object.values(isValid).every(Boolean)} // mutation.isPending ||
-      />
+      <div className={style.button}>
+        <Button
+          type="black"
+          text="신청하기"
+          onClick={handleSubmit}
+          disabled={!Object.values(isValid).every(Boolean)} // mutation.isPending ||
+        />
+      </div>
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>
         성공적으로 신청되었습니다!
