@@ -4,7 +4,7 @@ import { basicFont } from "@/assets/fonts";
 
 export default function HTMLLayout({ children }) {
   return (
-    <html lang="en" className={basicFont.className}>
+    <html lang="ko" style={{ fontFamily: basicFont.style.fontFamily }}>
       <body>{children}</body>
     </html>
   );

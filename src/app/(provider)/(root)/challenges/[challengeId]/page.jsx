@@ -35,12 +35,12 @@ async function ChallengeDetailPage({ params }) {
           {/* chips */}
           <div className={styles.chips}>
             <Chip type={type}>{type}</Chip>
-            <ChipCategory category="블로그" />
+            <ChipCategory category={challenge.docType} />
           </div>
           {/* 챌린지 내용 및 작성자 닉네임 */}
           <div>
             <div className={styles.contentContainer}>
-              <div>{challenge.content}</div>
+              <div className={styles.content}>{challenge.content}</div>
               <div className={styles.userContainer}>
                 <Image
                   src={Kyeboard}

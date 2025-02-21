@@ -11,7 +11,7 @@ const TextInput = ({
   validate,
   dropdown,
   options,
-  isTextArea,
+  isTextArea = false,
 }) => {
   const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);

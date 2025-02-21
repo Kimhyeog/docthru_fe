@@ -1,5 +1,4 @@
 .container {
-
   padding-top: 10px;
 
   width: 996px;
@@ -18,16 +17,11 @@
   gap: 4px 0px;
 }
 
-
 .header_head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
 }
-
-
-
 
 .header_title {
   font-family: Pretendard;
@@ -35,22 +29,20 @@
   font-size: 20px;
   line-height: 23.87px;
   letter-spacing: 0%;
-
 }
 
 .header_head button {
   width: auto;
 }
 
-
 .header_btns {
   display: flex;
 
   justify-content: flex-start;
   align-items: center;
-
-  padding-left: 10px;
   gap: 0px 5px;
+
+  border-bottom: 1px solid #d4d4d4;
 }
 
 .header_btns button {
@@ -70,18 +62,17 @@
   letter-spacing: 0%;
 
   cursor: pointer;
-
 }
 
 .header_btns .active {
   border-bottom: 3px solid black;
-  font-weight: 900;
+  font-weight: 600;
+  color: #262626;
 }
-
-
-
-
-
+.header_btns .inactive {
+  color: #737373;
+  font-weight: 600;
+}
 .header_main {
   display: flex;
   align-items: center;
@@ -90,11 +81,11 @@
   width: 100%;
 }
 
-
 .searchWrapper {
   flex: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-
 
 .main {
   display: flex;
@@ -106,7 +97,6 @@
   text-decoration: none;
   color: black;
 }
-
 
 .footer {
   padding-top: 20px;

@@ -155,7 +155,7 @@ const getChallenges = async ({
 
 //나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
 
-// 공통 함수로 통합
+// 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
 const getMyChallenges = async (type) => {
   const url = `/users/me/challenges/${type}`;
   const response = await client.get(url);

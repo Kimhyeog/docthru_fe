@@ -14,41 +14,35 @@
   gap: 13px;
 }
 
-
 .container * {
   margin: 0px;
 }
 
-
-.container>.header {
-
+.container > .header {
   padding: 10px 0px;
 
   display: flex;
 
   align-items: center;
 
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.container>.header>h3 {
+.container > .header > h3 {
   flex: 1;
-  font-family: Pretendard;
   font-weight: 600;
   font-size: 22px;
   line-height: 16.71px;
   letter-spacing: 0%;
-
 }
 
-.container>.header>button {
+.container > .header > button {
   border: none;
   background-color: white;
   cursor: pointer;
 
   font-size: 20px;
 }
-
 
 .section1 {
   display: flex;
@@ -72,7 +66,7 @@
   gap: 10px;
 
   padding-bottom: 10px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .section2 {
@@ -87,9 +81,8 @@
   gap: 10px;
 
   padding-bottom: 10px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
-
 
 .section3 {
   display: flex;
@@ -103,12 +96,11 @@
   gap: 10px;
 
   padding-bottom: 10px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
   padding-bottom: 3px;
 }
 
 .btnSection {
-
   display: flex;
 
   justify-content: space-between;
@@ -116,5 +108,4 @@
   padding-bottom: 15px;
 
   gap: 10px;
-
 }

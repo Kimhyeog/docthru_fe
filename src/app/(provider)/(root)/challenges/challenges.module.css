@@ -8,22 +8,22 @@
   display: flex;
   flex-direction: column;
 
-  gap: 10px 0px;
+  gap: 24px;
 }
 
 .header_head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 0px;
 }
 
 .header_title {
-  font-family: Pretendard;
   font-weight: 600;
   font-size: 20px;
   line-height: 23.87px;
   letter-spacing: 0%;
+  color: #262626;
 }
 
 .header_head button {
@@ -46,7 +46,7 @@
 
   align-items: center;
 
-  gap: 0px 10px;
+  gap: 12px;
 }
 
 .main {
