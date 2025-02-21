@@ -39,14 +39,14 @@ const Reply = ({ username, date, content, isMyFeedback, feedbackId }) => {
 
   return (
     <div className={styles.replyContainer}>
-      <Image
-        src={keyboardIcon}
-        alt="User Avatar"
-        width={32}
-        height={32}
-        className={styles.keyboardIcon}
-      />
       <div className={styles.replyContent}>
+        <Image
+          src={keyboardIcon}
+          alt="User Avatar"
+          width={32}
+          height={32}
+          className={styles.keyboardIcon}
+        />
         <div className={styles.header}>
           <div className={styles.userAndDate}>
             <span className={styles.username}>{username ? username : ""}</span>
@@ -63,30 +63,30 @@ const Reply = ({ username, date, content, isMyFeedback, feedbackId }) => {
             )}
           </div>
         </div>
-        {edit ? (
-          <div className={styles.textContainer}>
-            <textarea
-              className={styles.textarea}
-              value={updatedFeedback}
-              onChange={(e) => setUpdateFeedback(e.target.value)}
-            />
-            <div className={styles.buttons}>
-              <Button text={"취소"} onClick={handleCancelButton}>
-                취소
-              </Button>
-              <Button
-                type={"customBlack"}
-                text={"수정"}
-                onClick={handlebuttonclick}
-              >
-                수정
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <p className={styles.comment}>{content ? content : ""}</p>
-        )}
       </div>
+      {edit ? (
+        <div className={styles.textContainer}>
+          <textarea
+            className={styles.textarea}
+            value={updatedFeedback}
+            onChange={(e) => setUpdateFeedback(e.target.value)}
+          />
+          <div className={styles.buttons}>
+            <Button text={"취소"} onClick={handleCancelButton}>
+              취소
+            </Button>
+            <Button
+              type={"customBlack"}
+              text={"수정"}
+              onClick={handlebuttonclick}
+            >
+              수정
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <p className={styles.comment}>{content ? content : ""}</p>
+      )}
     </div>
   );
 };

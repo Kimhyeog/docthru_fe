@@ -57,7 +57,10 @@
 
 .favorite {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 .feedbackInput {
   display: flex;
@@ -85,4 +88,15 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  height: 26px;
+}
+.nickname {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14.32px;
 }
