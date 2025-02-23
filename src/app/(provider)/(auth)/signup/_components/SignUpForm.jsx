@@ -12,8 +12,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useModalStore } from "@/store/useModalStore";
 import { useSignUpValidataion } from "@/hooks/useAuthValidation";
+import { useAuth } from "@/contexts/AuthContext";
 
 function SignUpForm() {
+  const { logIn } = useAuth();
   const router = useRouter();
   const [isValid, setIsValid] = useState(false);
   const [userData, setUserData] = useState({
@@ -48,7 +50,8 @@ function SignUpForm() {
   const onHide = () => {
     closeModal();
     if (isSuccess) {
-      router.push("/login");
+      logIn();
+      router.back();
     }
   };
 

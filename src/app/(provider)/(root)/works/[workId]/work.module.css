@@ -105,3 +105,9 @@
   font-size: 12px;
   line-height: 14.32px;
 }
+
+.chipCardStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

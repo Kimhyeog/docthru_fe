@@ -53,3 +53,15 @@
   font-weight: 400;
   font-size: 16px;
 }
+
+.chipStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+}
