@@ -13,7 +13,7 @@
 .inputWrapper {
   display: flex;
   align-items: center;
-  position: relative;
+  position: relative; /* 달력 위치 기준점 */
 }
 
 .input {
@@ -44,8 +44,8 @@
 
 .datePickerContainer {
   position: absolute;
-  top: 36rem;
-  right: 25rem;
+  top: 0;
+  left: 100%;
   z-index: 1000;
   background: white;
   border: 1px solid #ddd;

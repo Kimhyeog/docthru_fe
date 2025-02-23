@@ -98,6 +98,38 @@
   color: black;
 }
 
+<<<<<<< HEAD
+=======
+.table_header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #262626;
+  border-radius: 8px;
+  color: white;
+  align-items: center;
+}
+
+.cell {
+  flex: 1;
+  padding: 11px 0px;
+  padding-left: 13px;
+  text-align: start;
+  font-size: 14px;
+  height: 10px;
+}
+
+
+.table_header .cell_title {
+  height: 10px;
+  text-align: center;
+  font-size: 14px;
+  flex: 2;
+}
+
+
+
+>>>>>>> 5cc2e4ace8feaefeb15d38fe98658f997864400e
 .footer {
   padding-top: 20px;
   margin: 0 auto;
