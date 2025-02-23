@@ -10,6 +10,7 @@ import Favorite from "./_components/Favorite";
 import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
 import DropdownMenuforWork from "./_components/DropdownMenuforWork";
+import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -20,11 +21,20 @@ async function WorkPage({ params }) {
   const type = challenge?.field;
   const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
+  const { progress, participants, maxParticipants } = challenge;
+
   return (
     <div className={style.container}>
       <div className={style.header}>
         <div className={style.titleContainer}>
-          <h2 className={style.title}>{challenge?.title}</h2>
+          <div className={style.chipCardStatus}>
+            {progress === "COMPLETED" ? (
+              <ChipCardStatus />
+            ) : participants === maxParticipants ? (
+              <ChipCardStatus type="Recruitment" />
+            ) : null}
+            <h2 className={style.title}>{challenge?.title}</h2>
+          </div>
           <DropdownMenuforWork writerId={writerData.id} />
         </div>
         <div className={style.meta}>

@@ -5,6 +5,7 @@ import peopleIcon from "@/assets/ic_people.svg";
 import ChipCategory from "../Chips/ChipCategory";
 import Chip from "../Chips/Chip";
 import dayjs from "dayjs";
+import ChipCardStatus from "../Chips/ChipCardStatus";
 
 const Card = ({
   deadline,
@@ -17,14 +18,20 @@ const Card = ({
   const handleMoreOptionsClick = () => {
     // 더보기 버튼 클릭 시
   };
-
+  const now = dayjs();
+  console.log(now.isAfter(deadline));
   return (
     <div className={styles.card}>
       <div className={styles.titleContainer}>
+        {now.isAfter(deadline) ? (
+          <ChipCardStatus />
+        ) : participants === maxParticipants ? (
+          <ChipCardStatus type="Recruitment" />
+        ) : null}
+
         <h2 className={styles.title}>
           {title ? title : "Next.js - App Router: Routing Fundamentals"}
         </h2>
-
         <div className={styles.tags}>
           <Chip type={field} />
           <ChipCategory category={docType} />
