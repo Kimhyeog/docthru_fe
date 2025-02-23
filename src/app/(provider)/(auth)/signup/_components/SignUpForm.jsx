@@ -12,8 +12,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useModalStore } from "@/store/useModalStore";
 import { useSignUpValidataion } from "@/hooks/useAuthValidation";
+import { useAuth } from "@/contexts/AuthContext";
 
 function SignUpForm() {
+  const { logIn } = useAuth();
   const router = useRouter();
   const [isValid, setIsValid] = useState(false);
   const [userData, setUserData] = useState({
@@ -48,7 +50,8 @@ function SignUpForm() {
   const onHide = () => {
     closeModal();
     if (isSuccess) {
-      router.push("/login");
+      logIn();
+      router.back();
     }
   };
 
@@ -92,7 +95,10 @@ function SignUpForm() {
       </div>
       <Button text="로그인" type="black" disabled={!isValid} />
       <p className={style.authPrompt}>
-        회원이신가요? <Link href="./login">로그인하기</Link>
+        회원이신가요?{" "}
+        <Link href="./login" className={style.link}>
+          로그인하기
+        </Link>
       </p>
       <PopUpModal show={checkModalOn} onHide={onHide}>
         {modalMessage}

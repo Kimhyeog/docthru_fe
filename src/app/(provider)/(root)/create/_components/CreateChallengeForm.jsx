@@ -156,7 +156,6 @@ function CreateChallengeForm() {
         onChange={setContent}
         isTextArea={true}
       />
-
       <Button
         type="black"
         text="신청하기"

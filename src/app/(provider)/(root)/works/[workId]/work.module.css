@@ -1,9 +1,18 @@
+.layout {
+  background-color: white !important;
+  min-height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   margin: auto;
   width: 890px;
 }
+.container p {
+  margin-bottom: 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -12,6 +21,13 @@
 .title {
   font-size: 24px;
   font-weight: 600;
+  color: #262626;
+}
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-top: 30px;
 }
 .users {
@@ -27,6 +43,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -45,6 +62,10 @@
 
 .favorite {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 .feedbackInput {
   display: flex;
@@ -72,4 +93,21 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  height: 26px;
+}
+.nickname {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14.32px;
+}
+
+.chipCardStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

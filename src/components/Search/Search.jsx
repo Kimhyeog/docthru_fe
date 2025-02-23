@@ -20,7 +20,7 @@ const Search = ({ onSearch }) => {
 
   return (
     <div className={styles.container}>
-      <Image src={searchIcon} alt="search" width={20} height={20} />
+      <Image src={searchIcon} alt="search" width={24} height={24} />
       <input
         type="text"
         placeholder="챌린지 이름을 검색해보세요"

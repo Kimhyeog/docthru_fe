@@ -8,31 +8,73 @@
   display: flex;
   flex-direction: column;
 
-  gap: 24px;
+  gap: 10px 0px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0px;
 }
 
 .header_head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px;
 }
 
 .header_title {
+  font-family: Pretendard;
   font-weight: 600;
   font-size: 20px;
   line-height: 23.87px;
   letter-spacing: 0%;
-  color: #262626;
 }
 
 .header_head button {
   width: auto;
 }
 
+.header_btns {
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0px 5px;
+
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.header_btns button {
+  width: 162px;
+  height: 53px;
+  background-color: white;
+
+  border: none;
+
+  padding: 15px 12px;
+
+  text-align: center;
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.48px;
+  letter-spacing: 0%;
+
+  cursor: pointer;
+}
+
+.header_btns .active {
+  border-bottom: 3px solid black;
+  font-weight: 600;
+  color: #262626;
+}
+.header_btns .inactive {
+  color: #737373;
+  font-weight: 600;
+}
 .header_main {
   display: flex;
-  margin: 0 auto;
   align-items: center;
   gap: 10px;
   /* 필요한 경우 간격 조정 */
@@ -41,12 +83,8 @@
 
 .searchWrapper {
   flex: 1;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .main {
@@ -56,7 +94,7 @@
 }
 
 .main a {
-  text-decoration-line: none;
+  text-decoration: none;
   color: black;
 }
 

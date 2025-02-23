@@ -1,3 +1,7 @@
+.layout {
+  background-color: white !important;
+  min-height: 100vh;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -10,7 +14,6 @@
 
 .title {
   padding-top: 2rem;
-  padding-bottom: 2rem;
   align-self: flex-start;
   font-size: 1.5rem;
   font-weight: 600;
@@ -18,4 +21,9 @@
 
 .content {
   padding: 20px;
+}
+
+.button {
+  width: 100%;
+  margin-top: 8px;
 }

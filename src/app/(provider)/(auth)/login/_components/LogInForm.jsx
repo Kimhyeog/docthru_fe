@@ -32,7 +32,7 @@ function LogInForm() {
     mutationFn: (userData) => api.logIn(userData),
     onSuccess: () => {
       logIn();
-      router.push("/");
+      router.back();
     },
     onError: (error) => {
       showModal(error.response?.data || "회원가입 실패", false);
@@ -70,7 +70,10 @@ function LogInForm() {
       </div>
       <Button text="로그인" type="black" disabled={!isValid} />
       <p className={style.authPrompt}>
-        회원이 아니신가요? <Link href="./signup">회원가입하기</Link>
+        회원이 아니신가요?{" "}
+        <Link href="./signup" className={style.link}>
+          회원가입하기
+        </Link>
       </p>
       <PopUpModal show={checkModalOn} onHide={onHide}>
         {modalMessage}

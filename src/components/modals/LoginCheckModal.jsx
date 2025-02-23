@@ -24,12 +24,7 @@ export default function LoginCheckModal({ show, onHide }) {
         </div>
       </div>
       <div className={style.btnSection}>
-        <Button
-          type={"black"}
-          text={"로그인하러 가기"}
-          onClick={onHide}
-          className={style["modal-button"]} // ✅ 버튼 크기 적용
-        />
+        <Button type="black" text={"로그인하러 가기"} onClick={onHide} />
       </div>
     </Modal>
   );

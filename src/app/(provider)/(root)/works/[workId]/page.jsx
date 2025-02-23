@@ -9,6 +9,8 @@ import keyboard from "@/assets/ic_keyboard.svg";
 import Favorite from "./_components/Favorite";
 import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
+import DropdownMenuforWork from "./_components/DropdownMenuforWork";
+import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -17,23 +19,34 @@ async function WorkPage({ params }) {
   const challengeId = work.challengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
-  const writerData = await api.getUserDate(work.userId);
+  const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
+  const { progress, participants, maxParticipants } = challenge;
+
   return (
     <div className={style.container}>
       <div className={style.header}>
-        <h2 className={style.title}>{challenge?.title}</h2>
+        <div className={style.titleContainer}>
+          <div className={style.chipCardStatus}>
+            {progress === "COMPLETED" ? (
+              <ChipCardStatus />
+            ) : participants === maxParticipants ? (
+              <ChipCardStatus type="Recruitment" />
+            ) : null}
+            <h2 className={style.title}>{challenge?.title}</h2>
+          </div>
+          <DropdownMenuforWork writerId={writerData.id} />
+        </div>
         <div className={style.meta}>
           <Chip type={type}>{type}</Chip>
-          <ChipCategory category="블로그" />
+          <ChipCategory category={challenge.docType} />
         </div>
       </div>
       <div className={style.divider} />
-      {/* 백엔드 수정해해서 하트 색깔 확인하기 */}
       <div className={style.info}>
         <div className={style.users}>
           <Image src={keyboard} alt="keyboradIcon" width={24} height={24} />
-          <p>{writerData.nickname}</p>
+          <p className={style.nickname}>{writerData.nickname}</p>
           <Favorite work={work} />
         </div>
         <div className={style.favoriteCount}>

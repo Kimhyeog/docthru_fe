@@ -8,23 +8,33 @@ import Container from "@/components/Container/Container";
 import styles from "./challengeDetail.module.css";
 import ParticipationList from "./_component/ParticipationList";
 import Kyeboard from "@/assets/ic_keyboard.svg";
+import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 
 async function ChallengeDetailPage({ params }) {
   const param = await params;
   const challengeId = param.challengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
-  const userId = challenge?.participate[0].userId;
-  const user = await api.getUserDate(userId);
+  const userId = challenge?.application.userId;
+  const user = await api.getUserData(userId);
   const worksData = await api.getWorks(challengeId);
   const works = worksData.works;
+  const { progress, participants, maxParticipants } = challenge;
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
         {/* 헤더 */}
         <div>
           <div className={styles.challengeTitle}>
-            <h2>{challenge.title}</h2>
+            <div className={styles.chipStatus}>
+              {progress === "COMPLETED" ? (
+                <ChipCardStatus />
+              ) : participants === maxParticipants ? (
+                <ChipCardStatus type="Recruitment" />
+              ) : null}
+              <div className={styles.title}>{challenge.title} </div>
+            </div>
             <Image
               src={OptionButton}
               alt="option"
@@ -35,12 +45,12 @@ async function ChallengeDetailPage({ params }) {
           {/* chips */}
           <div className={styles.chips}>
             <Chip type={type}>{type}</Chip>
-            <ChipCategory category="블로그" />
+            <ChipCategory category={challenge.docType} />
           </div>
           {/* 챌린지 내용 및 작성자 닉네임 */}
           <div>
             <div className={styles.contentContainer}>
-              <div>{challenge.content}</div>
+              <div className={styles.content}>{challenge.content}</div>
               <div className={styles.userContainer}>
                 <Image
                   src={Kyeboard}

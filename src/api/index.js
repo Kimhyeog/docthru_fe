@@ -10,6 +10,11 @@ const signUp = async (dto) => {
   const url = "/auth/signUp";
   const response = await client.post(url, dto);
   const data = response.data;
+
+  const { accessToken, refreshToken } = data;
+  client.defaults.headers.Authorization = `Bearer ${accessToken}`;
+  localStorage.setItem("refreshToken", refreshToken);
+
   return data;
 };
 
@@ -43,7 +48,7 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
-const getUserDate = async (userId) => {
+const getUserData = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);
   const data = response.data;
@@ -53,6 +58,13 @@ const getUserDate = async (userId) => {
 const getWork = async (workId) => {
   const url = `/works/${workId}`;
   const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const deleteWork = async (workId) => {
+  const url = `/works/${workId}`;
+  const response = await client.delete(url);
   const data = response.data;
   return data;
 };
@@ -88,8 +100,8 @@ const deleteLike = async (workId) => {
   return data;
 };
 
-const getFeedbacks = async (workId, pageSize = 3) => {
-  const url = `/works/${workId}/feedback?pageSize=${pageSize}`;
+const getFeedbacks = async (workId) => {
+  const url = `/works/${workId}/feedback`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -98,6 +110,20 @@ const getFeedbacks = async (workId, pageSize = 3) => {
 const createFeedback = async (workId, content) => {
   const url = `/works/${workId}/feedback`;
   const response = await client.post(url, { content });
+  const data = response.data;
+  return data;
+};
+
+const deleteFeedback = async (feedbackId) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
+const updateFeedback = async (feedbackId, content) => {
+  const url = `/feedback/${feedbackId}`;
+  const response = await client.put(url, { content });
   const data = response.data;
   return data;
 };
@@ -132,6 +158,16 @@ const getChallenges = async ({
   }
 };
 
+//나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
+
+// 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
+const getMyChallenges = async (type) => {
+  const url = `/users/me/challenges/${type}`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -139,13 +175,17 @@ const api = {
   refreshToken,
   getWork,
   getChallenge,
-  getUserDate,
+  getUserData,
   getWorks,
   createLike,
   deleteLike,
   getFeedbacks,
   createFeedback,
   getChallenges,
+  getMyChallenges, // 'featture/ChallengePage'sIDPage' 브랜치에서 추가된 부분
+  deleteFeedback,
+  updateFeedback,
+  deleteWork,
 };
 
 export default api;
