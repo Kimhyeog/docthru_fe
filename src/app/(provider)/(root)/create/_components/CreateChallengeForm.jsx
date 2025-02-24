@@ -43,35 +43,34 @@ function CreateChallengeForm() {
     });
   }, [title, link, category, docType, maxUsers, date, content]);
 
-  //   const createChallenge = async (challengeData) => {
-  //     const response = await fetch(
-  //       "https://docthru-be-5u42.onrender.com/challenges",
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(challengeData),
-  //       }
-  //     );
+  const createChallenge = async (challengeData) => {
+    const response = await fetch(
+      "https://docthru-be-5u42.onrender.com/challenges",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(challengeData),
+      }
+    );
 
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       throw new Error(errorData.message || "챌린지 생성 실패");
-  //     }
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "챌린지 생성 실패");
+    }
 
-  //     return response.json();
-  //   };
+    return response.json();
+  };
 
-  //   const mutation = useMutation({
-  //     mutationFn: createChallenge,
-  //     onSuccess: () => {
-  //       console.log("챌린지 생성 성공!");
-  //       setShowModal(true);
-  //     },
-  //     onError: (error) => {
-  //       console.error("에러 발생:", error.message);
-  //       alert("챌린지 생성 중 문제가 발생했습니다.");
-  //     },
-  //   });
+  const mutation = useMutation({
+    mutationFn: createChallenge,
+    onSuccess: () => {
+      console.log("챌린지 생성 성공!");
+      setShowModal(true);
+    },
+    onError: (error) => {
+      console.error("에러 발생:", error.message);
+    },
+  });
 
   const handleMaxUsersChange = (val) => {
     if (/^\d*$/.test(val)) {
@@ -79,21 +78,36 @@ function CreateChallengeForm() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!Object.values(isValid).every(Boolean)) return;
+  const handleSubmit = async () => {
+    const requestBody = {
+      title: title.trim(),
+      field: category ? category.toUpperCase() : "",
+      docType: docType === "블로그" ? "BLOG" : "OFFICIAL",
+      docUrl: link.trim(),
+      deadline: date ? new Date(date).toISOString() : null,
+      maxParticipants: maxUsers ? Number(maxUsers) : 0,
+      content: content.trim(),
+    };
 
-    // const requestBody = {
-    //   title,
-    //   field: category.toUpperCase(),
-    //   docType: docType === "블로그" ? "BLOG" : "OFFICIAL",
-    //   docUrl: link,
-    //   deadline: date,
-    //   maxParticipants: Number(maxUsers),
-    //   content,
-    // };
+    try {
+      const response = await fetch(
+        "https://docthru-be-5u42.onrender.com/challenges",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody),
+        }
+      );
 
-    // mutation.mutate(requestBody);
-    setShowModal(true);
+      const responseText = await response.text();
+      console.log("서버 응답:", responseText);
+
+      if (!response.ok) {
+        throw new Error(responseText);
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
   };
 
   const handleCloseModal = () => {
@@ -142,14 +156,12 @@ function CreateChallengeForm() {
         onChange={setContent}
         isTextArea={true}
       />
-      <div className={style.button}>
-        <Button
-          type="black"
-          text="신청하기"
-          onClick={handleSubmit}
-          disabled={!Object.values(isValid).every(Boolean)} // mutation.isPending ||
-        />
-      </div>
+      <Button
+        type="black"
+        text="신청하기"
+        onClick={handleSubmit}
+        disabled={!Object.values(isValid).every(Boolean) || mutation.isPending}
+      />
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>
         성공적으로 신청되었습니다!
