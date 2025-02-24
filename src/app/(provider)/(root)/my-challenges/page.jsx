@@ -11,11 +11,32 @@ import { useAuth } from "@/contexts/AuthContext"; // AuthContext import
 import api from "@/api/index";
 import React from "react";
 import WaitingChallengeItem from "./components/waitingChallengeItem";
+import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
+
+const statusText = {
+  "승인 대기": "WAITING",
+  "신청 거절": "REJECTED",
+  "신청 승인": "ACCEPTED",
+  "챌린지 삭제": "DELETED",
+};
+
+const sortAttendTypeArr = {
+  "승인 대기": "WAITING",
+  "신청 거절": "REJECTED",
+  "신청 승인": "ACCEPTED",
+  "신청 시간 빠른순": "appliedAtDsc",
+  "신청 시간 느린순": "appliedAtAsc",
+  "마감 기한 빠른순": "deadlineDsc",
+  "마감 기한 느린순": "deadlineAsc",
+};
 
 export default function Page() {
   const router = useRouter();
 
   const [sortType, setSortType] = useState("ongoing");
+
+  // 신청한 챌린지 필터 Sort State 변수
+  const [sortAttendType, setSortAttendType] = useState("승인 대기");
 
   const [challenges, setChallenges] = useState([]);
 
@@ -59,26 +80,18 @@ export default function Page() {
 
   const fetchMyChallenges = async (type) => {
     try {
-      const data = await api.getMyChallenges(type); // 통합된 API 함수 호출
+      let data;
+      if (type === "application") {
+        // 신청한 챌린지의 경우 별도의 API 호출
+        data = await api.getApplications(); // 이 부분은 기존의 fetchApplications처럼 동작
+      } else {
+        // ongoing 또는 completed일 경우 통합된 API 호출
+        data = await api.getMyChallenges(type);
+      }
       console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
-      setChallenges(data.challenges);
+      setChallenges(data.challenges); // 챌린지 데이터 설정
     } catch (error) {
       console.error(`${type} 챌린지 조회 실패:`, error); // 에러 출력
-    }
-  };
-
-  // 로그인된 상태에서만 API 호출
-  // 로그인 상태가 true일 때만 데이터 로드
-
-  const fetchApplications = async () => {
-    try {
-      console.log("로그인 상태:", isLoggedIn); // 로그인 상태 확인
-      const data = await api.getApplications();
-      console.log("API 응답:", data); // 응답 확인
-      setChallenges(data.challenges); // challenges는 API의 응답 body에서 오는 키입니다.
-    } catch (err) {
-      console.error("데이터 요청 오류:", err); // 오류 내용 확인
-      setError("데이터를 가져오는 데 실패했습니다.");
     }
   };
 
@@ -95,7 +108,7 @@ export default function Page() {
         break;
       case "application":
         setSortType("application");
-        fetchApplications();
+        fetchMyChallenges("application"); // 통합된 함수 호출
         break;
       default:
         console.error("유효하지 않은 챌린지 타입:", challengeType);
@@ -144,7 +157,13 @@ export default function Page() {
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
-              <Search />
+              <Search />{" "}
+              {sortType === "application" && (
+                <StatusFilterButton
+                  setSortAttendType={setSortAttendType}
+                  sortAttendType={sortAttendType}
+                />
+              )}
             </div>
           </div>
         </header>
