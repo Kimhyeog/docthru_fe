@@ -9,6 +9,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import BestWork from "./BestWork";
+import "./slider.css";
+import nextButton from "@/assets/btn_right.svg";
+import Image from "next/image";
 
 function BestWorks({ topLikeWorks: initialWorks }) {
   const params = useParams();
@@ -25,9 +28,12 @@ function BestWorks({ topLikeWorks: initialWorks }) {
   return (
     <div className={styles.wrap}>
       <Swiper
-        navigation={true}
+        // navigation={true}
+        navigation={{ nextEl: ".next" }}
         modules={[Navigation]}
-        className={styles.mySwiper}
+        className="mySwiper"
+        slidesPerView={1.08}
+        spaceBetween={20}
       >
         {works.map((work) => {
           const user = work.user;
@@ -38,6 +44,13 @@ function BestWorks({ topLikeWorks: initialWorks }) {
           );
         })}
       </Swiper>
+      <Image
+        src={nextButton}
+        alt="nextButton"
+        width={40}
+        height={40}
+        className="next"
+      />
     </div>
   );
 }

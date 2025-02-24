@@ -6,6 +6,7 @@ import Keyboard from "@/assets/ic_keyboard.svg";
 import heart from "@/assets/ic_heart.svg";
 import heartEmpty from "@/assets/ic_heart_empty.svg";
 import styles from "./BestWork.module.css";
+
 function BestWork({ work, user }) {
   return (
     <div className={styles.container}>
