@@ -17,14 +17,12 @@ const ParticipationList = ({ works }) => {
 
   const currentWorks = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, works.length); // Prevent overflow
+    const endIndex = Math.min(startIndex + itemsPerPage, works.length);
     return works.slice(startIndex, endIndex);
   }, [works, currentPage, itemsPerPage]);
 
   const handlePageChange = (pageNumber) => {
-    console.log("pageNumber:", pageNumber); // 추가
     setCurrentPage(pageNumber);
-    console.log("currentPage:", currentPage); // 추가
   };
 
   return (
@@ -53,7 +51,6 @@ const ParticipationList = ({ works }) => {
             <button
               onClick={() => {
                 handlePageChange(currentPage + 1);
-                console.log("Next page button clicked"); // 추가
               }}
               disabled={currentPage === calculatedTotalPages}
               className={styles.paginationButton}
