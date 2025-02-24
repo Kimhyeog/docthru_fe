@@ -145,17 +145,17 @@
 .footer {
   padding-top: 20px;
   margin: 0 auto;
-  width: 60%;
+  width: 30%;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .pageNumber {
+  flex: 1;
+
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 20px;
 }

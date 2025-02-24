@@ -45,13 +45,15 @@ export default function Page() {
 
   let challenges_no = 1;
 
+  const [itemsSize, setItemSize] = useState(5);
+
   // 로그인 상태 관리 State()
   const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
 
   // 페이지 값 State 변수
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(challenges.length / 5);
+  const totalPages = Math.ceil(challenges.length / itemsSize);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -134,14 +136,17 @@ export default function Page() {
     switch (challengeType) {
       case "ongoing":
         setSortType("ongoing");
+        setItemSize(5);
         fetchMyChallenges("ongoing");
         break;
       case "completed":
         setSortType("completed");
+        setItemSize(5);
         fetchMyChallenges("completed");
         break;
       case "application":
         setSortType("application");
+        setItemSize(10);
         fetchMyChallenges("application"); // 통합된 함수 호출
         break;
       default:
@@ -239,7 +244,7 @@ export default function Page() {
         </main>
         <footer className={style.footer}>
           <Button
-            type={"page"}
+            type={"pageArrow"}
             text={"<"}
             onClick={() => handlePageChange(currentPage - 1)}
           />
@@ -257,7 +262,7 @@ export default function Page() {
             ))}
           </div>
           <Button
-            type={"page"}
+            type={"pageArrow"}
             text={">"}
             onClick={() => handlePageChange(currentPage + 1)}
           />
