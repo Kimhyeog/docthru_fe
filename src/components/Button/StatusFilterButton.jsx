@@ -3,13 +3,6 @@ import style from "./StatusFilterButton.module.css";
 import { IoIosOptions } from "react-icons/io";
 import MyChallengeFilterModal from "../modals/MyChallengeFilterModal";
 
-const statusText = {
-  "승인 대기": "WAITING",
-  "신청 거절": "REJECTED",
-  "신청 승인": "ACCEPTED",
-  "챌린지 삭제": "DELETED",
-};
-
 export const StatusFilterButton = ({ sortAttendType, setSortAttendType }) => {
   const [isOpen, setIsOpen] = useState(false);
 

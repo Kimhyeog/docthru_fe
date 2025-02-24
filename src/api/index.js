@@ -164,23 +164,38 @@ const getMyChallenges = async (type) => {
 };
 
 // api/index.js
-const getApplications = async (status = "WAITING", pageSize = 5) => {
+const getApplications = async (option = "WAITING", pageSize = 10) => {
   const url = `/users/me/challenges/application`;
-  const params = { option: status, pageSize };
+  const params = { option, pageSize };
 
-  // Authorization 헤더가 없으면 오류를 던짐
-  if (!client.defaults.headers["Authorization"]) {
+  const prevRefreshToken = localStorage.getItem("refreshToken");
+  if (!prevRefreshToken) {
     throw new Error("Unauthenticated");
   }
 
   try {
-    const response = await client.get(url, { params });
+    await refreshToken(prevRefreshToken);
+
+    const response = await client.get(url, {
+      params,
+      headers: {
+        Authorization: client.defaults.headers.Authorization,
+      },
+    });
+
     return response.data;
   } catch (error) {
     console.error(
       "🔥 getApplications API 요청 실패:",
       error.response?.data || error.message
     );
+
+    if (error.response?.status === 401) {
+      localStorage.removeItem("refreshToken");
+      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.href = "/login";
+    }
+
     throw error;
   }
 };

@@ -24,16 +24,19 @@ const sortAttendTypeArr = {
   "승인 대기": "WAITING",
   "신청 거절": "REJECTED",
   "신청 승인": "ACCEPTED",
-  "신청 시간 빠른순": "appliedAtDsc",
-  "신청 시간 느린순": "appliedAtAsc",
-  "마감 기한 빠른순": "deadlineDsc",
-  "마감 기한 느린순": "deadlineAsc",
+  "신청 시간 빠른순": "ApplyDeadlineDesc",
+  "신청 시간 느린순": "ApplyDeadlineAsc",
+  "마감 기한 빠른순": "DeadlineDesc",
+  "마감 기한 느린순": "DeadlineAsc",
 };
 
 export default function Page() {
   const router = useRouter();
 
   const [sortType, setSortType] = useState("ongoing");
+
+  // 검색창 State 변수수
+  const [searchInput, setSearchInput] = useState("");
 
   // 신청한 챌린지 필터 Sort State 변수
   const [sortAttendType, setSortAttendType] = useState("승인 대기");
@@ -78,12 +81,22 @@ export default function Page() {
     }
   }, [challenges, totalPages, currentPage]);
 
+  // sortAttendType 변경 시 데이터를 다시 가져오는 useEffect 추가
+  useEffect(() => {
+    if (sortType === "application" && isAuthInitialized && isLoggedIn) {
+      fetchMyChallenges(sortType);
+    }
+  }, [sortAttendType, sortType, isAuthInitialized, isLoggedIn]);
+
+  // api에서 데이터 fetch하는 코드:
   const fetchMyChallenges = async (type) => {
     try {
       let data;
       if (type === "application") {
         // 신청한 챌린지의 경우 별도의 API 호출
-        data = await api.getApplications(); // 이 부분은 기존의 fetchApplications처럼 동작
+        data = await api.getApplications(
+          `${sortAttendTypeArr[sortAttendType]}`
+        ); // 매개변수 수정
       } else {
         // ongoing 또는 completed일 경우 통합된 API 호출
         data = await api.getMyChallenges(type);
@@ -157,7 +170,7 @@ export default function Page() {
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
-              <Search />{" "}
+              <Search onSearch={setSearchInput} />{" "}
               {sortType === "application" && (
                 <StatusFilterButton
                   setSortAttendType={setSortAttendType}
