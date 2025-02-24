@@ -91,7 +91,7 @@ export default function Page() {
   // 🔍 searchInput이 변경될 때마다 fetch
   useEffect(() => {
     // sortType이 application일 때만 검색
-    if (sortType !== "application" && isAuthInitialized && isLoggedIn) {
+    if (isAuthInitialized && isLoggedIn) {
       fetchMyChallenges(sortType);
     }
   }, [searchInput, sortType, isAuthInitialized, isLoggedIn]);
