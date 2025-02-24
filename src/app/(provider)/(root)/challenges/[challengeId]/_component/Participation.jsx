@@ -13,7 +13,7 @@ async function Participation({ work, index }) {
   return (
     <div key={workId} className={styles.listItem}>
       <div className={styles.listItemFirst}>
-        <div className={`${styles.rank} `}>
+        <div className={`${styles.rank}`}>
           {String(index + 1).padStart(2, "0")}
         </div>
         <div className={styles.userInfoContainer}>

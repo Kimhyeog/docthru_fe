@@ -6,14 +6,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/api";
 import { useParams, useRouter } from "next/navigation";
 
-function DropdownMenuforWork({ writerId }) {
+function DropdownMenuforWork({ writerId, challenge: initialChallenge }) {
   const { isLoggedIn } = useAuth();
   const params = useParams();
   const workId = params.workId;
   const router = useRouter();
+  const challengeId = initialChallenge.id;
+
   const { data: userMe } = useQuery({
     queryFn: api.getUserMe,
-    queryKey: ["useData"],
+    queryKey: ["userData"],
     enabled: isLoggedIn,
     initialData: {},
   });
@@ -25,7 +27,15 @@ function DropdownMenuforWork({ writerId }) {
     },
   });
 
+  const { data: challenge } = useQuery({
+    queryFn: () => api.getChallenge(challengeId),
+    queryKey: ["challenge", { challengeId }],
+    initialData: initialChallenge,
+  });
+  const progress = challenge.progress;
+
   return (
+    progress !== "COMPLETED" &&
     isLoggedIn &&
     writerId === userMe.id && (
       <DropdownMenuButton

@@ -190,6 +190,13 @@ const getApplications = async (status = "WAITING", pageSize = 5) => {
   }
 };
 
+const participateChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}/participation`;
+  const response = await client.post(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -209,6 +216,7 @@ const api = {
   updateFeedback,
   deleteWork,
   getApplications,
+  participateChallenge,
 };
 
 export default api;

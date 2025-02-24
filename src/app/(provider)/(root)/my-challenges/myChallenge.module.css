@@ -98,8 +98,6 @@
   color: black;
 }
 
-<<<<<<< HEAD
-=======
 .table_header {
   display: flex;
   flex-direction: row;
@@ -119,7 +117,6 @@
   height: 10px;
 }
 
-
 .table_header .cell_title {
   height: 10px;
   text-align: center;
@@ -127,9 +124,6 @@
   flex: 2;
 }
 
-
-
->>>>>>> 5cc2e4ace8feaefeb15d38fe98658f997864400e
 .footer {
   padding-top: 20px;
   margin: 0 auto;

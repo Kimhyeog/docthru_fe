@@ -70,6 +70,7 @@ async function ChallengeDetailPage({ params }) {
             date={challenge.deadline}
             userCount={challenge.participants}
             maximumUserCount={challenge.maxParticipants}
+            challenge={challenge}
           ></Container>
         </div>
         <div className={styles.horizontalLine}></div>
