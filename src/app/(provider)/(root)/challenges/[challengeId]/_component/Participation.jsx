@@ -8,6 +8,7 @@ import api from "@/api";
 
 async function Participation({ work, index }) {
   const workId = work.id;
+
   const userId = work.userId;
   const user = await api.getUserData(userId);
   return (
