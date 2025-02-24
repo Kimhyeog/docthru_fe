@@ -88,18 +88,39 @@ export default function Page() {
     }
   }, [sortAttendType, sortType, isAuthInitialized, isLoggedIn]);
 
+  // 🔍 searchInput이 변경될 때마다 fetch
+  useEffect(() => {
+    // sortType이 application일 때만 검색
+    if (sortType !== "application" && isAuthInitialized && isLoggedIn) {
+      fetchMyChallenges(sortType);
+    }
+  }, [searchInput, sortType, isAuthInitialized, isLoggedIn]);
+
+  // api에서 데이터 fetch하는 코드:
   // api에서 데이터 fetch하는 코드:
   const fetchMyChallenges = async (type) => {
     try {
       let data;
       if (type === "application") {
-        // 신청한 챌린지의 경우 별도의 API 호출
-        data = await api.getApplications(
-          `${sortAttendTypeArr[sortAttendType]}`
-        ); // 매개변수 수정
+        if (searchInput === "") {
+          // 신청한 챌린지의 경우 별도의 API 호출
+          data = await api.getApplications(
+            `${sortAttendTypeArr[sortAttendType]}`
+          ); // 매개변수 수정
+        } else {
+          data = await api.getApplications(
+            `${sortAttendTypeArr[sortAttendType]}`,
+            10,
+            searchInput
+          );
+        }
       } else {
         // ongoing 또는 completed일 경우 통합된 API 호출
-        data = await api.getMyChallenges(type);
+        if (searchInput === "") {
+          data = await api.getMyChallenges(type); // keyword 없이 호출
+        } else {
+          data = await api.getMyChallenges(type, searchInput); // keyword 포함하여 호출
+        }
       }
       console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
       setChallenges(data.challenges); // 챌린지 데이터 설정
@@ -128,6 +149,7 @@ export default function Page() {
     }
   };
 
+  console.log(`검색창의 내용 : ${searchInput}`);
   return (
     <>
       <div className={style.container}>
