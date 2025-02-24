@@ -24,7 +24,7 @@ function HeaderLogInMenu({ userData }) {
           ) : (
             <Image src={Bell} alt="bell" width={24} height={24} />
           )}
-          <div>
+          <div className={styles.none}>
             <div onClick={() => setIsOpen((prev) => !prev)}>
               {userData.role === "ADMIN" ? (
                 <Image src={Admin} alt="Admin" width={32} height={32} />

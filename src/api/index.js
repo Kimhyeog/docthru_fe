@@ -10,6 +10,11 @@ const signUp = async (dto) => {
   const url = "/auth/signUp";
   const response = await client.post(url, dto);
   const data = response.data;
+
+  const { accessToken, refreshToken } = data;
+  client.defaults.headers.Authorization = `Bearer ${accessToken}`;
+  localStorage.setItem("refreshToken", refreshToken);
+
   return data;
 };
 

@@ -34,7 +34,11 @@ const PasswordInput = ({ label, placeholder, value, onChange, validate }) => {
           onClick={() => setShowPassword((prev) => !prev)}
           className={styles.eyeButton}
         >
-          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          {showPassword ? (
+            <EyeOff size={20} className={styles.eyeIcon} />
+          ) : (
+            <Eye size={20} className={styles.eyeIcon} />
+          )}
         </button>
       </div>
       {error && <span className={styles.errorText}>{error}</span>}

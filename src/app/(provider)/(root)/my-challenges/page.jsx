@@ -174,7 +174,7 @@ export default function Page() {
               onClick={() => {
                 handleFetchChallenges("ongoing");
               }}
-              className={sortType === "ongoing" ? style.active : ""}
+              className={sortType === "ongoing" ? style.active : style.inactive}
             >
               참여중인 챌린지
             </button>
@@ -182,7 +182,9 @@ export default function Page() {
               onClick={() => {
                 handleFetchChallenges("completed");
               }}
-              className={sortType === "completed" ? style.active : ""}
+              className={
+                sortType === "completed" ? style.active : style.inactive
+              }
             >
               완료한 챌린지
             </button>
@@ -190,7 +192,9 @@ export default function Page() {
               onClick={() => {
                 handleFetchChallenges("application");
               }}
-              className={sortType === "application" ? style.active : ""}
+              className={
+                sortType === "application" ? style.active : style.inactive
+              }
             >
               신청한 챌린지
             </button>
