@@ -8,6 +8,7 @@ import Container from "@/components/Container/Container";
 import styles from "./challengeDetail.module.css";
 import ParticipationList from "./_component/ParticipationList";
 import Kyeboard from "@/assets/ic_keyboard.svg";
+import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 
 async function ChallengeDetailPage({ params }) {
   const param = await params;
@@ -18,13 +19,22 @@ async function ChallengeDetailPage({ params }) {
   const user = await api.getUserData(userId);
   const worksData = await api.getWorks(challengeId);
   const works = worksData.works;
+  const { progress, participants, maxParticipants } = challenge;
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
         {/* 헤더 */}
         <div>
           <div className={styles.challengeTitle}>
-            <h2>{challenge.title}</h2>
+            <div className={styles.chipStatus}>
+              {progress === "COMPLETED" ? (
+                <ChipCardStatus />
+              ) : participants === maxParticipants ? (
+                <ChipCardStatus type="Recruitment" />
+              ) : null}
+              <div className={styles.title}>{challenge.title} </div>
+            </div>
             <Image
               src={OptionButton}
               alt="option"
