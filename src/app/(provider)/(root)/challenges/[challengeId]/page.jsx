@@ -9,6 +9,7 @@ import styles from "./challengeDetail.module.css";
 import ParticipationList from "./_component/ParticipationList";
 import Kyeboard from "@/assets/ic_keyboard.svg";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
+import BestWork from "./_component/BestWorks";
 
 async function ChallengeDetailPage({ params }) {
   const param = await params;
@@ -21,6 +22,7 @@ async function ChallengeDetailPage({ params }) {
   const works = worksData.works;
   const { progress, participants, maxParticipants } = challenge;
 
+  const topLikeWorks = await api.getTopLikeWorks(challengeId);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -77,7 +79,12 @@ async function ChallengeDetailPage({ params }) {
       </div>
       {/* 참여 현황*/}
       <div className={styles.horizontalLine}></div>
-      <ParticipationList works={works} totalPages={worksData.totalPages} />
+      <div className={styles.contentContainer}>
+        {progress === "COMPLETED" && topLikeWorks && (
+          <BestWork topLikeWorks={topLikeWorks} />
+        )}
+        <ParticipationList works={works} totalPages={worksData.totalPages} />
+      </div>
     </div>
   );
 }
