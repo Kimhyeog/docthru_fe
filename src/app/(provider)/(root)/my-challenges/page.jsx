@@ -61,6 +61,10 @@ export default function Page() {
     }
   };
 
+  console.log(`현재 페이지 수 : ${currentPage}`);
+
+  console.log(`전체 페이지 수 : ${totalPages}`);
+
   // 🔒 페이지 접근 제한 로직
   useEffect(() => {
     if (isAuthInitialized && !isLoggedIn) {
@@ -154,7 +158,6 @@ export default function Page() {
     }
   };
 
-  console.log(`검색창의 내용 : ${searchInput}`);
   return (
     <>
       <div className={style.container}>
@@ -251,15 +254,15 @@ export default function Page() {
             type={"pageArrow"}
             text={"<"}
             onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           />
           <div className={style.pageNumber}>
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={
-                  "page" +
-                  `${currentPage === Number(index + 1) ? "Active" : ""}`
-                }
+                type={`page${
+                  currentPage + 1 === Number(index + 1) ? "Active" : ""
+                }`}
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
               />
@@ -269,6 +272,7 @@ export default function Page() {
             type={"pageArrow"}
             text={">"}
             onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
           />
         </footer>
       </div>
