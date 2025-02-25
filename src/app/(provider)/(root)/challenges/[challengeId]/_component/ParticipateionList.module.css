@@ -89,6 +89,7 @@
 
 .userInfoContainer {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
@@ -137,6 +138,7 @@
 .listItemFirst {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 .listItemSecond {
   display: flex;

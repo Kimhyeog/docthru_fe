@@ -76,11 +76,25 @@ const getChallenge = async (challengeId) => {
   return data;
 };
 
+const createChallenge = async (dto) => {
+  const url = `/challenges`;
+  const response = await client.post(url, dto);
+  const data = response.data;
+  return data;
+};
+
 const getWorks = async (challengeId, cursor) => {
   let url = `/works/${challengeId}/many`;
   if (cursor) {
     url += `?cursor=${cursor}`;
   }
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getTopLikeWorks = async (challengeId) => {
+  let url = `/works/${challengeId}/topLike`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -161,9 +175,58 @@ const getChallenges = async ({
 //나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
 
 // 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
-const getMyChallenges = async (type) => {
-  const url = `/users/me/challenges/${type}`;
-  const response = await client.get(url);
+const getMyChallenges = async (type, keyword = "") => {
+  const url = `/users/me/challenges/${type}${keyword ? `?keyword=${keyword}` : ""
+    }`;
+  const response = await client.get(url); // ?keyword=value 형식으로 URL에 전달
+  const data = response.data;
+  return data;
+};
+
+// api/index.js
+const getApplications = async (option = "WAITING", pageSize = 10, keyword) => {
+  const url = `/users/me/challenges/application`;
+  const params = { option, pageSize };
+
+  if (keyword) {
+    params.keyword = keyword;
+  }
+
+  const prevRefreshToken = localStorage.getItem("refreshToken");
+  if (!prevRefreshToken) {
+    throw new Error("Unauthenticated");
+  }
+
+  try {
+    await refreshToken(prevRefreshToken);
+
+    const response = await client.get(url, {
+      params,
+      headers: {
+        Authorization: client.defaults.headers.Authorization,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      "🔥 getApplications API 요청 실패:",
+      error.response?.data || error.message
+    );
+
+    if (error.response?.status === 401) {
+      localStorage.removeItem("refreshToken");
+      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.href = "/login";
+    }
+
+    throw error;
+  }
+};
+
+const participateChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}/participation`;
+  const response = await client.post(url);
   const data = response.data;
   return data;
 };
@@ -186,6 +249,10 @@ const api = {
   deleteFeedback,
   updateFeedback,
   deleteWork,
+  getApplications,
+  participateChallenge,
+  createChallenge,
+  getTopLikeWorks,
 };
 
 export default api;

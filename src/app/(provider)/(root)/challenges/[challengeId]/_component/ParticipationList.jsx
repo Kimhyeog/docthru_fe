@@ -7,7 +7,7 @@ import Image from "next/image";
 import ArrowLeft from "@/assets/ic_arrow_left.svg";
 import ArrowRight from "@/assets/ic_arrow_right.svg";
 
-const ParticipationList = ({ works }) => {
+const ParticipationList = ({ initialWorks }) => {
   const [works, setWorks] = useState([]);
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);

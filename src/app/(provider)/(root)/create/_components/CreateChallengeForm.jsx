@@ -1,3 +1,4 @@
+"use client";
 import { useMutation } from "@tanstack/react-query";
 import DeadlineInput from "@/components/Input/DeadlineInput";
 import TextInput from "@/components/Input/TextInput";
@@ -7,6 +8,8 @@ import Button from "@/components/Button/Button";
 import PopUpModal from "@/components/modals/PopUpModal";
 import { useRouter } from "next/navigation";
 import Dropdown from "@/components/Dropdown/Dropdown";
+import api from "@/api";
+import { z } from "zod";
 
 function CreateChallengeForm() {
   const router = useRouter();
@@ -14,14 +17,15 @@ function CreateChallengeForm() {
 
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
-  const [category, setCategory] = useState("");
-  const [docType, setDocType] = useState("");
+  const [category, setCategory] = useState("Career");
+  const [docType, setDocType] = useState("BLOG");
   const [maxUsers, setMaxUsers] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
 
-  const categoryOptions = ["Career", "Modern JS", "Web", "Next.js", "API"];
+  const categoryOptions = ["Career", "ModernJS", "Web", "Nextjs", "API"];
   const docTypeOptions = ["블로그", "공식문서"];
+  const urlSchema = z.string().url();
 
   const [isValid, setIsValid] = useState({
     title: true,
@@ -43,28 +47,10 @@ function CreateChallengeForm() {
     });
   }, [title, link, category, docType, maxUsers, date, content]);
 
-  const createChallenge = async (challengeData) => {
-    const response = await fetch(
-      "https://docthru-be-5u42.onrender.com/challenges",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(challengeData),
-      }
-    );
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "챌린지 생성 실패");
-    }
-
-    return response.json();
-  };
-
-  const mutation = useMutation({
-    mutationFn: createChallenge,
-    onSuccess: () => {
-      console.log("챌린지 생성 성공!");
+  const { mutate: createChallenge } = useMutation({
+    mutationFn: (dto) => api.createChallenge(dto),
+    onSuccess: (data) => {
+      console.log(data);
       setShowModal(true);
     },
     onError: (error) => {
@@ -88,26 +74,7 @@ function CreateChallengeForm() {
       maxParticipants: maxUsers ? Number(maxUsers) : 0,
       content: content.trim(),
     };
-
-    try {
-      const response = await fetch(
-        "https://docthru-be-5u42.onrender.com/challenges",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestBody),
-        }
-      );
-
-      const responseText = await response.text();
-      console.log("서버 응답:", responseText);
-
-      if (!response.ok) {
-        throw new Error(responseText);
-      }
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
+    createChallenge(requestBody);
   };
 
   const handleCloseModal = () => {
@@ -129,11 +96,10 @@ function CreateChallengeForm() {
         placeholder="원문 링크를 입력하세요"
         value={link}
         onChange={setLink}
-        validate={(val) =>
-          /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*$/i.test(val)
-            ? ""
-            : "올바른 링크를 입력하세요"
-        }
+        validate={(val) => {
+          const result = urlSchema.safeParse(val);
+          return result.success ? "" : "올바른 링크를 입력하세요";
+        }}
       />
       <Dropdown label="분야" options={categoryOptions} onSelect={setCategory} />
       <Dropdown
@@ -160,7 +126,7 @@ function CreateChallengeForm() {
         type="black"
         text="신청하기"
         onClick={handleSubmit}
-        disabled={!Object.values(isValid).every(Boolean) || mutation.isPending}
+        disabled={!Object.values(isValid).every(Boolean)}
       />
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>

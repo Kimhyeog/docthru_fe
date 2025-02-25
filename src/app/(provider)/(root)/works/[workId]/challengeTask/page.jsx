@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import SimpleMDE from "simplemde";
+import Split from "split.js";
 import "simplemde/dist/simplemde.min.css";
 
 function Page() {
@@ -12,7 +13,7 @@ function Page() {
     if (textareaRef.current) {
       const simplemde = new SimpleMDE({
         element: textareaRef.current,
-        // SimpleMDE 옵션 (예: 도구 모음 버튼 설정)
+
         toolbar: [
           "bold",
           "italic",
@@ -29,10 +30,9 @@ function Page() {
         ],
       });
 
-      simplemde.value(content); // 초기 내용 설정
+      simplemde.value(content);
 
       simplemde.codemirror.on("change", () => {
-        // 내용 변경 시 상태 업데이트
         setContent(simplemde.value());
       });
 
@@ -44,7 +44,6 @@ function Page() {
   }, []);
 
   const handleSave = () => {
-    // 저장 로직 (예: 서버에 내용 전송)
     console.log("저장:", content);
   };
 
