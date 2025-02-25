@@ -1,4 +1,4 @@
-.chip_pending {
+.chip_WAITING {
   background-color: #fffde7;
   color: #f2bc00;
   font-weight: 600;
@@ -9,7 +9,7 @@
   display: inline-block;
 }
 
-.chip_rejected {
+.chip_REJECTED {
   background-color: #fff0f0;
   color: #e54946;
   font-weight: 600;
@@ -20,7 +20,7 @@
   display: inline-block;
 }
 
-.chip_approved {
+.chip_ACCEPTED {
   background-color: #dff0ff;
   color: #4095de;
   font-weight: 600;
@@ -31,7 +31,7 @@
   display: inline-block;
 }
 
-.chip_deleted {
+.chip_DELETED {
   background-color: #e5e5e5;
   color: #737373;
   font-weight: 600;
