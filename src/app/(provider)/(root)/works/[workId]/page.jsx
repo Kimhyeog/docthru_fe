@@ -35,7 +35,7 @@ async function WorkPage({ params }) {
             ) : null}
             <h2 className={style.title}>{challenge?.title}</h2>
           </div>
-          <DropdownMenuforWork writerId={writerData.id} />
+          <DropdownMenuforWork writerId={writerData.id} challenge={challenge} />
         </div>
         <div className={style.meta}>
           <Chip type={type}>{type}</Chip>
@@ -56,8 +56,8 @@ async function WorkPage({ params }) {
       <div className={style.divider} />
       <div className={style.description}>{work?.description}</div>
       <div className={style.divider} />
-      <CreateFeedback />
-      <Feedbacks feedbacks={feedbacks} />
+      <CreateFeedback challenge={challenge} />
+      <Feedbacks feedbacks={feedbacks} challenge={challenge} />
     </div>
   );
 }

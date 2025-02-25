@@ -76,11 +76,25 @@ const getChallenge = async (challengeId) => {
   return data;
 };
 
+const createChallenge = async (dto) => {
+  const url = `/challenges`;
+  const response = await client.post(url, dto);
+  const data = response.data;
+  return data;
+};
+
 const getWorks = async (challengeId, cursor) => {
   let url = `/works/${challengeId}/many`;
   if (cursor) {
     url += `?cursor=${cursor}`;
   }
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getTopLikeWorks = async (challengeId) => {
+  let url = `/works/${challengeId}/topLike`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -211,6 +225,13 @@ const getApplications = async (option = "WAITING", pageSize = 10, keyword) => {
   }
 };
 
+const participateChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}/participation`;
+  const response = await client.post(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -230,6 +251,9 @@ const api = {
   updateFeedback,
   deleteWork,
   getApplications,
+  participateChallenge,
+  createChallenge,
+  getTopLikeWorks,
 };
 
 export default api;
