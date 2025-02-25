@@ -6,7 +6,7 @@ import "simplemde/dist/simplemde.min.css";
 
 function Page() {
   const textareaRef = useRef(null);
-  const [content, setContent] = useState(""); // 에디터 내용 상태 관리
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     if (textareaRef.current) {
