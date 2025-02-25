@@ -1,5 +1,5 @@
 import style from "./FilterModal.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Check from "@/components/Input/Check";
 import Button from "@/components/Button/Button";
 
@@ -23,44 +23,42 @@ const statusOptions = [
 
 export default function FilterModal({
   onClose,
-  setFiledType,
+  selectedDocType = "",
+  selectedProgress = "",
+  selectedField = "",
+  setSelectedField,
   setProgress,
   setDocType,
 }) {
-  const [selectedFields, setSelectedFields] = useState("");
-  const [documentType, setDocumentType] = useState("");
-  const [status, setStatus] = useState("");
+  // selectedField가 문자열이므로, 배열로 변환하여 관리
+  const [selectedFields, setSelectedFields] = useState(
+    selectedField ? selectedField.split(",").map((item) => item.trim()) : []
+  );
+  const [documentType, setDocumentType] = useState(selectedDocType);
+  const [status, setStatus] = useState(selectedProgress);
 
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
+
     setSelectedFields((prev) => {
       if (checked) {
-        // 항목을 추가할 때 문자열로 연결
-        return prev ? `${prev},${value}` : value;
+        return [...prev, value]; // 체크 시 배열에 추가
       } else {
-        // 항목을 제거할 때 해당 항목을 제외한 나머지 항목들만 연결
-        return prev
-          .split(",")
-          .filter((field) => field !== value)
-          .join(",");
+        return prev.filter((field) => field !== value); // 체크 해제 시 제거
       }
     });
-
-    console.log(selectedFields);
   };
 
   const handleRadioChange = (e) => {
-    const { value } = e.target;
-    setDocumentType(value);
+    setDocumentType(e.target.value);
   };
 
   const handleStatusChange = (e) => {
-    const { value } = e.target;
-    setStatus(value);
+    setStatus(e.target.value);
   };
 
   const handleResetOnClick = () => {
-    setSelectedFields("");
+    setSelectedFields([]);
     setDocumentType("");
     setStatus("");
   };
@@ -83,7 +81,7 @@ export default function FilterModal({
               name="field"
               value={option.value}
               text={option.text}
-              checked={selectedFields.split(",").includes(option.value)}
+              checked={selectedFields.includes(option.value)}
               onChange={handleCheckboxChange}
             />
           ))}
@@ -125,20 +123,16 @@ export default function FilterModal({
           ))}
         </div>
       </div>
+
       <div className={style.btnSection}>
-        <Button
-          text={"초기화"}
-          onClick={() => {
-            handleResetOnClick();
-          }}
-        />
+        <Button text={"초기화"} onClick={handleResetOnClick} />
         <Button
           type={"black"}
           text={"적용하기"}
           onClick={() => {
             setDocType(documentType);
             setProgress(status);
-            setFiledType(selectedFields.split(","));
+            setSelectedField(selectedFields.join(",")); // 문자열 형태로 변환하여 전달
             onClose();
           }}
         />

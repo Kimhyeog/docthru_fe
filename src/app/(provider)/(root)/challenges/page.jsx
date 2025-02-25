@@ -93,6 +93,8 @@ export default function ChallengesPage() {
     setCurrentPage(1);
   };
 
+  console.log(`챌린지 filed :${selectedField}`);
+
   return (
     <>
       <div className={style.container}>
@@ -108,9 +110,12 @@ export default function ChallengesPage() {
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
               <FilterButton
-                setFiledType={setSelectedField}
+                setSelectedField={setSelectedField}
                 setDocType={setSelectedDocType}
                 setProgress={setSelectedProgress}
+                selectedDocType={selectedDocType}
+                selectedProgress={selectedProgress}
+                selectedField={selectedField}
                 onClick={() => {}}
               />
               <Search onSearch={searchChallenges} />

@@ -45,8 +45,6 @@ export default function Page() {
 
   let challenges_no = 1;
 
-  const [itemsSize, setItemSize] = useState(5);
-
   // 로그인 상태 관리 State()
   const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
 
