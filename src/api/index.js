@@ -213,11 +213,17 @@ const getApplications = async (
       },
     });
 
+    // ✅ 응답 데이터가 예상한 형태인지 검증
+    if (!response.data || !Array.isArray(response.data.challenges)) {
+      console.warn("🚨 예상치 못한 응답 형식:", response.data);
+      return { challenges: [] }; // 빈 배열 반환하여 오류 방지
+    }
+
     return response.data;
   } catch (error) {
     console.error(
       "🔥 getApplications API 요청 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message || "알 수 없는 오류 발생"
     );
 
     if (error.response?.status === 401) {
@@ -226,7 +232,7 @@ const getApplications = async (
       window.location.href = "/login";
     }
 
-    throw error;
+    return { challenges: [] }; // ✅ 에러 발생 시 빈 배열 반환 (이전 코드에서는 예외 발생 후 throw 했음)
   }
 };
 

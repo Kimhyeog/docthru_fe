@@ -119,10 +119,21 @@ export default function Page() {
 
       console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
 
-      setChallenges(data.challenges); // 챌린지 데이터 설정
-      setTotalPages(Math.ceil(data.totalCount / 10)); // ✅ 전체 페이지 수 계산
+      // ✅ 응답 데이터가 비어 있을 경우 안전 처리
+      const challengesList = Array.isArray(data.challenges)
+        ? data.challenges
+        : [];
+      setChallenges(challengesList);
+
+      // ✅ totalCount가 존재하지 않을 경우 안전한 기본값(0) 적용
+      const totalCount = data.totalCount ?? 0;
+      setTotalPages(totalCount > 0 ? Math.ceil(totalCount / 10) : 1);
     } catch (error) {
       console.error(`${type} 챌린지 조회 실패:`, error);
+
+      // ✅ 오류 발생 시 안전한 초기값 적용
+      setChallenges([]);
+      setTotalPages(1);
     }
   };
 
