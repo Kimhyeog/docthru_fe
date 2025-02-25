@@ -2,10 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import SimpleMDE from "simplemde";
-import Split from "split.js";
 import "simplemde/dist/simplemde.min.css";
+import Image from "next/image";
+import logo from "@/assets/logo.svg";
+import Button from "@/components/Button/Button";
+import { LuDoorOpen } from "react-icons/lu";
+import styles from "./challengeTask.module.css";
 
-function Page() {
+function ChallengeTask() {
   const textareaRef = useRef(null);
   const [content, setContent] = useState("");
 
@@ -13,7 +17,6 @@ function Page() {
     if (textareaRef.current) {
       const simplemde = new SimpleMDE({
         element: textareaRef.current,
-
         toolbar: [
           "bold",
           "italic",
@@ -24,10 +27,9 @@ function Page() {
           "ordered-list",
           "|",
           "link",
-          "image",
-          "|",
-          "preview",
         ],
+        placeholder: "번역 내용을 적어주세요",
+        status: false,
       });
 
       simplemde.value(content);
@@ -44,15 +46,45 @@ function Page() {
   }, []);
 
   const handleSave = () => {
-    console.log("저장:", content);
+    console.log("제출하기:", content);
   };
 
   return (
-    <div>
-      <textarea id="MyID" ref={textareaRef}></textarea>
-      <button onClick={handleSave}>저장</button>
+    <div className={styles.container}>
+      <div className={styles.headerContainer}>
+        <Image src={logo} alt="logo" width={108.95} height={31}></Image>
+
+        <div className={styles.buttonContainer}>
+          <Button
+            className={styles.exitButton}
+            onClick={handleSave}
+            text={"포기"}
+            type={"red"}
+            icon={<LuDoorOpen />}
+          />
+          <Button
+            className={styles.saveDraftButton}
+            onClick={handleSave}
+            text={"임시저장"}
+          />
+          <Button
+            className={styles.submitButton}
+            onClick={handleSave}
+            text={"제출하기"}
+            type={"black"}
+          />
+        </div>
+      </div>
+      <div className={styles.challengeTitle}>타이틀 들어갈 자리</div>
+      <div className={styles.horizontalLine}></div>
+      <div className={styles.editorContainer}>
+        <textarea
+          ref={textareaRef}
+          style={{ display: "none" }} // SimpleMDE가 textarea를 관리하므로 숨김
+        ></textarea>
+      </div>
     </div>
   );
 }
 
-export default Page;
+export default ChallengeTask;
