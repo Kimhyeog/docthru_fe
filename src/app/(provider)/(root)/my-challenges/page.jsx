@@ -53,13 +53,17 @@ export default function Page() {
   // 페이지 값 State 변수
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(challenges.length / itemsSize);
+  const [totalPages, setTotalPages] = useState(1); // ✅ totalPages 상태 추가
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
+
+  console.log(`현재 페이지 수 : ${currentPage}`);
+
+  console.log(`전체 페이지 수 : ${totalPages}`);
 
   // 🔒 페이지 접근 제한 로직
   useEffect(() => {
@@ -99,37 +103,35 @@ export default function Page() {
   }, [searchInput, sortType, isAuthInitialized, isLoggedIn]);
 
   // api에서 데이터 fetch하는 코드:
-  // api에서 데이터 fetch하는 코드:
   const fetchMyChallenges = async (type) => {
     try {
       let data;
       if (type === "application") {
-        if (searchInput === "") {
-          // 신청한 챌린지의 경우 별도의 API 호출
-          data = await api.getApplications(
-            `${sortAttendTypeArr[sortAttendType]}`
-          ); // 매개변수 수정
-        } else {
-          data = await api.getApplications(
-            `${sortAttendTypeArr[sortAttendType]}`,
-            10,
-            searchInput
-          );
-        }
+        data = await api.getApplications(
+          sortAttendTypeArr[sortAttendType],
+          10, // ✅ pageSize
+          searchInput || undefined,
+          currentPage // ✅ 현재 페이지 적용
+        );
       } else {
-        // ongoing 또는 completed일 경우 통합된 API 호출
-        if (searchInput === "") {
-          data = await api.getMyChallenges(type); // keyword 없이 호출
-        } else {
-          data = await api.getMyChallenges(type, searchInput); // keyword 포함하여 호출
-        }
+        data = await api.getMyChallenges(type, searchInput || undefined);
       }
+
       console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
+
       setChallenges(data.challenges); // 챌린지 데이터 설정
+      setTotalPages(Math.ceil(data.totalCount / 10)); // ✅ 전체 페이지 수 계산
     } catch (error) {
-      console.error(`${type} 챌린지 조회 실패:`, error); // 에러 출력
+      console.error(`${type} 챌린지 조회 실패:`, error);
     }
   };
+
+  // ✅ useEffect에서 currentPage 변경 감지하여 fetch 실행
+  useEffect(() => {
+    if (isAuthInitialized && isLoggedIn) {
+      fetchMyChallenges(sortType);
+    }
+  }, [currentPage, sortType, isAuthInitialized, isLoggedIn]);
 
   // 버튼 클릭 시 호출할 핸들러
   const handleFetchChallenges = (challengeType) => {
@@ -154,7 +156,6 @@ export default function Page() {
     }
   };
 
-  console.log(`검색창의 내용 : ${searchInput}`);
   return (
     <>
       <div className={style.container}>
@@ -251,15 +252,13 @@ export default function Page() {
             type={"pageArrow"}
             text={"<"}
             onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           />
           <div className={style.pageNumber}>
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={
-                  "page" +
-                  `${currentPage === Number(index + 1) ? "Active" : ""}`
-                }
+                type={`page${currentPage === index + 1 ? "Active" : ""}`} // ✅ 수정
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
               />
@@ -269,6 +268,7 @@ export default function Page() {
             type={"pageArrow"}
             text={">"}
             onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage >= totalPages} // ✅ 수정
           />
         </footer>
       </div>

@@ -139,7 +139,9 @@ export default function ChallengesPage() {
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={`page${currentPage === index + 1 ? "Active" : ""}`}
+                type={`page${
+                  currentPage === Number(index + 1) ? "Active" : ""
+                }`}
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
               />

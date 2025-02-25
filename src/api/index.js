@@ -185,9 +185,14 @@ const getMyChallenges = async (type, keyword = "") => {
 };
 
 // api/index.js
-const getApplications = async (option = "WAITING", pageSize = 10, keyword) => {
+const getApplications = async (
+  option = "WAITING",
+  pageSize = 10,
+  keyword,
+  page = 1
+) => {
   const url = `/users/me/challenges/application`;
-  const params = { option, pageSize };
+  const params = { option, pageSize, page };
 
   if (keyword) {
     params.keyword = keyword;
