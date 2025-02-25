@@ -238,8 +238,8 @@ export default function Page() {
                   {...challenge}
                   no={
                     challenges_no < challenges.length
-                      ? challenges_no++
-                      : challenges_no
+                      ? (currentPage - 1) * 10 + challenges_no++
+                      : (currentPage - 1) * 10 + challenges_no
                   }
                   application={challenge.application} // 수정된 부분
                 />
