@@ -39,7 +39,7 @@ export default function Page() {
   const [searchInput, setSearchInput] = useState("");
 
   // 신청한 챌린지 필터 Sort State 변수
-  const [sortAttendType, setSortAttendType] = useState("승인 대기");
+  const [sortAttendType, setSortAttendType] = useState("신청 시간 빠른순");
 
   const [challenges, setChallenges] = useState([]);
 
@@ -60,10 +60,6 @@ export default function Page() {
       setCurrentPage(page);
     }
   };
-
-  console.log(`현재 페이지 수 : ${currentPage}`);
-
-  console.log(`전체 페이지 수 : ${totalPages}`);
 
   // 🔒 페이지 접근 제한 로직
   useEffect(() => {

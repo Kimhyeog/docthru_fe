@@ -186,7 +186,7 @@ const getMyChallenges = async (type, keyword = "") => {
 
 // api/index.js
 const getApplications = async (
-  option = "WAITING",
+  option = "ApplyDeadlineDesc",
   pageSize = 10,
   keyword,
   page = 1
