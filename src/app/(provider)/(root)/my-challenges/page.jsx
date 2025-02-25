@@ -45,6 +45,8 @@ export default function Page() {
 
   let challenges_no = 1;
 
+  const [itemSize, setItemSize] = useState(5);
+
   // 로그인 상태 관리 State()
   const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
 
@@ -103,7 +105,7 @@ export default function Page() {
       if (type === "application") {
         data = await api.getApplications(
           sortAttendTypeArr[sortAttendType],
-          10, // ✅ pageSize
+          itemSize, // ✅ pageSize
           searchInput || undefined,
           currentPage // ✅ 현재 페이지 적용
         );
@@ -121,7 +123,7 @@ export default function Page() {
 
       // ✅ totalCount가 존재하지 않을 경우 안전한 기본값(0) 적용
       const totalCount = data.totalCount ?? 0;
-      setTotalPages(totalCount > 0 ? Math.ceil(totalCount / 10) : 1);
+      setTotalPages(totalCount > 0 ? Math.ceil(totalCount / itemSize) : 1);
     } catch (error) {
       console.error(`${type} 챌린지 조회 실패:`, error);
 
@@ -137,6 +139,12 @@ export default function Page() {
       fetchMyChallenges(sortType);
     }
   }, [currentPage, sortType, isAuthInitialized, isLoggedIn]);
+
+  useEffect(() => {
+    if (isAuthInitialized && isLoggedIn) {
+      fetchMyChallenges(sortType);
+    }
+  }, [itemSize, sortType, isAuthInitialized, isLoggedIn]);
 
   // 버튼 클릭 시 호출할 핸들러
   const handleFetchChallenges = (challengeType) => {
@@ -238,16 +246,21 @@ export default function Page() {
               </div>
               {/* 데이터 목록 */}
               {challenges.map((challenge) => (
-                <WaitingChallengeItem
+                <Link
                   key={challenge.id}
-                  {...challenge}
-                  no={
-                    challenges_no < challenges.length
-                      ? (currentPage - 1) * 10 + challenges_no++
-                      : (currentPage - 1) * 10 + challenges_no
-                  }
-                  application={challenge.application} // 수정된 부분
-                />
+                  href={`/my-challenges/${challenge.id}`}
+                >
+                  <WaitingChallengeItem
+                    key={challenge.id}
+                    {...challenge}
+                    no={
+                      challenges_no < challenges.length
+                        ? (currentPage - 1) * 10 + challenges_no++
+                        : (currentPage - 1) * 10 + challenges_no
+                    }
+                    application={challenge.application} // 수정된 부분
+                  />
+                </Link>
               ))}
             </>
           ) : null}
