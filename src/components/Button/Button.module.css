@@ -97,10 +97,10 @@
   color: #a3a3a3;
 
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 16.71px;
-
-  border: 0.5px solid gray;
+  font-weight: bolder;
+  border: none
 }
 
 .button_page_active {
@@ -118,11 +118,6 @@
   border: none;
 }
 
-.button_page_arrow:active {
-  background-color: #262626;
-  color: #ffc117;
-  border: none;
-}
 
 /* btn_right */
 
@@ -151,7 +146,7 @@
 }
 
 /* 이거 위치조정 해줄 수 있는 분 */
-.button_rightSmall > svg {
+.button_rightSmall>svg {
   position: absolute;
   bottom: 4px;
   right: 4.4px;

@@ -81,8 +81,12 @@
   width: 100%;
 }
 
+/* searchWrapper 스타일 병합 */
 .searchWrapper {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0px 10px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -97,7 +101,7 @@
   text-decoration: none;
   color: black;
 }
-
+/* .table_header 스타일 병합 */
 .table_header {
   display: flex;
   flex-direction: row;
@@ -127,17 +131,17 @@
 .footer {
   padding-top: 20px;
   margin: 0 auto;
-  width: 60%;
+  width: 30%;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .pageNumber {
+  flex: 1;
+
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 20px;
 }

@@ -175,31 +175,52 @@ const getChallenges = async ({
 //나의 챌린지 of 참여중인 챌린지 조회 GET 요철 함수
 
 // 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
-const getMyChallenges = async (type) => {
-  const url = `/users/me/challenges/${type}`;
-  const response = await client.get(url);
+const getMyChallenges = async (type, keyword = "") => {
+  const url = `/users/me/challenges/${type}${
+    keyword ? `?keyword=${keyword}` : ""
+  }`;
+  const response = await client.get(url); // ?keyword=value 형식으로 URL에 전달
   const data = response.data;
   return data;
 };
 
 // api/index.js
-const getApplications = async (status = "WAITING", pageSize = 5) => {
+const getApplications = async (option = "WAITING", pageSize = 10, keyword) => {
   const url = `/users/me/challenges/application`;
-  const params = { option: status, pageSize };
+  const params = { option, pageSize };
 
-  // Authorization 헤더가 없으면 오류를 던짐
-  if (!client.defaults.headers["Authorization"]) {
+  if (keyword) {
+    params.keyword = keyword;
+  }
+
+  const prevRefreshToken = localStorage.getItem("refreshToken");
+  if (!prevRefreshToken) {
     throw new Error("Unauthenticated");
   }
 
   try {
-    const response = await client.get(url, { params });
+    await refreshToken(prevRefreshToken);
+
+    const response = await client.get(url, {
+      params,
+      headers: {
+        Authorization: client.defaults.headers.Authorization,
+      },
+    });
+
     return response.data;
   } catch (error) {
     console.error(
       "🔥 getApplications API 요청 실패:",
       error.response?.data || error.message
     );
+
+    if (error.response?.status === 401) {
+      localStorage.removeItem("refreshToken");
+      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
+      window.location.href = "/login";
+    }
+
     throw error;
   }
 };
