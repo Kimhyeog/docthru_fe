@@ -1,9 +1,108 @@
-.challengeTitle {
-  width: 549px;
-  font-size: 24px;
+.Container {
+  margin: 0 auto;
+  width: 75%;
+
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  gap: 11px 0px;
+
+  padding: 20px 0px;
+}
+
+.Container>div {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+
+.Container .statusTitle {
+  width: 100%;
+
+  background-color: #737373;
+  color: white;
+
+  text-align: center;
+
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+
+
+  border-radius: 17.5px;
+
+}
+
+
+
+.Container .container {
+  display: flex;
+  flex-direction: column;
+  width: 890px;
+  margin: 0 auto;
+}
+
+
+.Container .statusCommentContainer {
+  width: 100%;
+  background-color: #FAFAFA;
+
+  border-radius: 16px;
+  border: 1px solid #E5E5E5;
+
+  display: flex;
+
   align-items: center;
+
+  flex-direction: column;
+
+  gap: 10px 0px;
+
+  padding: 20px 0px;
+
+}
+
+.statusCommentContainer .commentTitle {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+  text-align: center;
+
+}
+
+.statusCommentContainer div {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+
+
+.cardContainer {
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+
+  padding-left: 5px;
+
+  gap: 16px 0px;
+
+}
+
+.cardContainer .challengeTitle {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.64px;
+  letter-spacing: 0%;
 }
 
 .chips {
@@ -11,35 +110,53 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+
+}
+
+.cardContainer .challengeContent {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20.8px;
+  letter-spacing: 0%;
+
+}
+
+.cardContainer .footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  color: #525252;
+  gap: 12px;
+}
+
+
+.cardContainer .footer .date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardContainer .footer .participants {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .contentContainer {
   display: flex;
+
   flex-direction: column;
-  margin-top: 16px;
-  gap: 12px;
+
+  padding-left: 5px;
 }
 
-.horizontalLine {
-  border-top: 1px solid #f5f5f5;
-  margin: 24px;
-  /* 두께 1px, 검은색 실선 */
-}
-
-.content {
-  color: #404040;
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.chipStatus {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.title {
-  font-size: 24px;
+.linkTitle {
+  font-family: Pretendard;
   font-weight: 600;
-  color: #262626;
+  font-size: 18px;
+  line-height: 21.48px;
+  letter-spacing: 0%;
+
 }
