@@ -12,6 +12,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/api";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import Sidebar from "./sideBar";
 
 function ChallengeTask() {
   const textareaRef = useRef(null);
@@ -109,7 +110,6 @@ function ChallengeTask() {
             className={styles.exitButton}
             onClick={handleGiveUp}
             text={"포기"}
-            type={"red"}
             icon={<LuDoorOpen />}
           />
           <Button
@@ -121,7 +121,6 @@ function ChallengeTask() {
             className={styles.submitButton}
             onClick={handleSubmit}
             text={"제출하기"}
-            type={"black"}
           />
         </div>
       </div>
@@ -133,6 +132,7 @@ function ChallengeTask() {
           style={{ display: "none" }} // SimpleMDE가 textarea를 관리하므로 숨김
         ></textarea>
       </div>
+      <Sidebar width={500}></Sidebar>
     </div>
   );
 }

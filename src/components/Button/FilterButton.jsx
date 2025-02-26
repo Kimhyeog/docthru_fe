@@ -3,7 +3,14 @@ import { FaFilter } from "react-icons/fa";
 import style from "./FilterButton.module.css";
 import FilterModal from "../modals/FilterModal";
 
-export const FilterButton = ({ setFiledType, setDocType, setProgress }) => {
+export const FilterButton = ({
+  selectedDocType,
+  selectedProgress,
+  selectedField,
+  setSelectedField,
+  setDocType,
+  setProgress,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -17,9 +24,12 @@ export const FilterButton = ({ setFiledType, setDocType, setProgress }) => {
       </div>
       {isOpen && (
         <FilterModal
+          selectedDocType={selectedDocType}
+          selectedProgress={selectedProgress}
+          setSelectedField={setSelectedField}
           setProgress={setProgress}
           setDocType={setDocType}
-          setFiledType={setFiledType}
+          selectedField={selectedField}
           onClose={toggleModal}
         />
       )}

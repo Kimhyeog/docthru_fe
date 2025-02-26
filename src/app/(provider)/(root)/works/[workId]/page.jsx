@@ -28,8 +28,13 @@ async function WorkPage({ params }) {
   console.log(work.description);
 
   const markdownText = `
-  # 안녕하세요!
-  저는 현재 리액트에서 \`react-markdown\`를 이용하여 **마크다운**을 랜더링하고 있습니다.
+**볼드 테스트**  
+*기울림테스트*  
+# 제목테스트  
+> 따옴표 테스트  
+1. * 글머리테스트  
+1. 숫자 테스트  
+
   `;
 
   return (
