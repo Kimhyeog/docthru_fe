@@ -25,18 +25,6 @@ async function WorkPage({ params }) {
   const feedbacks = await api.getFeedbacks(workId);
   const { progress, participants, maxParticipants } = challenge;
 
-  console.log(work.description);
-
-  const markdownText = `
-**볼드 테스트**  
-*기울림테스트*  
-# 제목테스트  
-> 따옴표 테스트  
-1. * 글머리테스트  
-1. 숫자 테스트  
-
-  `;
-
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -71,7 +59,6 @@ async function WorkPage({ params }) {
       <div className={style.description}>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {work?.description}
-          {/* {markdownText} */}
         </ReactMarkdown>
       </div>
       <div className={style.divider} />

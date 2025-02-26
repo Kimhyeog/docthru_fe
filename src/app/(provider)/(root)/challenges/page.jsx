@@ -11,6 +11,8 @@ import React from "react";
 import { FilterButton } from "@/components/Button/FilterButton";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { useModalStore } from "@/store/useModalStore";
+import LoginCheckModal from "@/components/modals/LoginCheckModal";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -27,6 +29,8 @@ export default function ChallengesPage() {
   const [selectedProgress, setSelectedProgress] = useState("");
   const [selectedField, setSelectedField] = useState("");
   const [inputWord, setKeyWord] = useState("");
+
+  const { checkModalOn, showModal, closeModal } = useModalStore();
 
   // API에서 데이터 가져오는 함수
   const fetchChallenges = async () => {
@@ -82,6 +86,11 @@ export default function ChallengesPage() {
   // totalPage 상태를 직접 사용
   const totalPages = Math.max(totalPage, 1);
 
+  const onHide = () => {
+    closeModal();
+    router.push("/login");
+  };
+
   // 페이지 변경 핸들러
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -94,7 +103,7 @@ export default function ChallengesPage() {
     setCurrentPage(1);
   };
 
-  console.log(`챌린지 filed :${selectedField}`);
+  console.log(`챌린지 filed :${selectedField} , ${isLoggedIn}`);
 
   return (
     <>
@@ -106,8 +115,11 @@ export default function ChallengesPage() {
               type="black"
               text="신규 챌린지 신청 +"
               onClick={() => {
-                if (isLoggedIn) router.push("/create");
-                router.push("/login");
+                if (isLoggedIn) {
+                  router.push("/create");
+                  return;
+                }
+                showModal("", false);
               }}
             />
           </div>
@@ -165,6 +177,7 @@ export default function ChallengesPage() {
             disabled={currentPage === totalPages}
           />
         </footer>
+        <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
       </div>
     </>
   );
