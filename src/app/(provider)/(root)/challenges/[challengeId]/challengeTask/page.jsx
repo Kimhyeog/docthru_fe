@@ -1,18 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import styles from "./challengeTask.module.css";
 import SimpleMDE from "simplemde";
 import "simplemde/dist/simplemde.min.css";
 import Image from "next/image";
 import logo from "@/assets/logo.svg";
 import Button from "@/components/Button/Button";
 import { LuDoorOpen } from "react-icons/lu";
-import styles from "./challengeTask.module.css";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/api";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
+import bold from "@/assets/ic_bold.svg";
+import italic from "@/assets/ic_italic.svg";
+import underline from "@/assets/ic_underline.svg";
+import numbering from "@/assets/ic_numbering.svg";
+import bullet from "@/assets/ic_bullet.svg";
+import coloring from "@/assets/ic_coloring.svg";
+import alignCenter from "@/assets/ic_alignment_center.svg";
+import alignLeft from "@/assets/ic_alignment_left.svg";
+import alignRight from "@/assets/ic_alignment_right.svg";
 
 function ChallengeTask() {
   const textareaRef = useRef(null);
@@ -28,15 +37,98 @@ function ChallengeTask() {
       const simplemde = new SimpleMDE({
         element: textareaRef.current,
         toolbar: [
-          "bold",
-          "italic",
-          "heading",
+          {
+            name: "bold",
+            action: SimpleMDE.toggleBold,
+            className: "fa fa-bold",
+            title: "Bold",
+          },
+          //커스텀 방법
+          {
+            name: "custom",
+            action: function customFunction(editor) {
+              // Add your own code
+            },
+            className: "fa fa-star",
+            title: "Custom Button",
+          },
+
+          {
+            name: "italic",
+            action: SimpleMDE.toggleItalic,
+            className: "fa fa-italic",
+            title: "기울임",
+          },
+          {
+            name: "underline",
+            action: function (editor) {
+              editor.codemirror.execCommand("underline");
+            },
+            className: "underline-button",
+            title: "밑줄",
+            icon: underline,
+          },
           "|",
-          "quote",
-          "unordered-list",
-          "ordered-list",
+          {
+            name: "numbering",
+            action: function (editor) {
+              editor.toggleOrderedList();
+            },
+            className: "fa fa-list-ol",
+            title: "번호 매기기",
+            icon: numbering,
+          },
+          {
+            name: "bullet",
+            action: function (editor) {
+              editor.toggleUnorderedList();
+            },
+            className: "fa fa-list-ul",
+            title: "글머리 기호",
+            icon: bullet,
+          },
           "|",
-          "link",
+          {
+            name: "alignLeft",
+            action: function (editor) {
+              const selectedText = editor.codemirror.getSelection();
+              const alignedText = `<div style="text-align: left;">${selectedText}</div>`;
+              editor.codemirror.replaceSelection(alignedText);
+            },
+            className: "custom-icon",
+            title: "왼쪽 정렬",
+            icon: alignLeft,
+          },
+          {
+            name: "alignCenter",
+            action: function (editor) {
+              const selectedText = editor.codemirror.getSelection();
+              const alignedText = `<div style="text-align: center;">${selectedText}</div>`;
+              editor.codemirror.replaceSelection(alignedText);
+            },
+            className: "custom-icon",
+            title: "가운데 정렬",
+            icon: alignCenter,
+          },
+          {
+            name: "alignRight",
+            action: function (editor) {
+              const selectedText = editor.codemirror.getSelection();
+              const alignedText = `<div style="text-align: right;">${selectedText}</div>`;
+              editor.codemirror.replaceSelection(alignedText);
+            },
+            className: "custom-icon",
+            title: "오른쪽 정렬",
+            icon: alignRight,
+          },
+          "|",
+          {
+            name: "coloring", // 컬러 바꾸게 하는건데 이거 뭐 파렛트 넣고해야하는거?!
+            action: function (editor) {},
+            className: "custom-icon",
+            title: "색상 변경",
+            icon: coloring,
+          },
         ],
         placeholder: "번역 내용을 적어주세요",
         status: false,
