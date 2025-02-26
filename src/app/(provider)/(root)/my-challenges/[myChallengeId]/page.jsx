@@ -5,7 +5,7 @@ import api from "@/api";
 
 async function DeletedOrRejectedPage({ params }) {
   const param = await params;
-  const challengeId = param.challengeId;
+  const challengeId = param.myChallengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
   const userId = challenge?.application.userId;
@@ -31,7 +31,6 @@ async function DeletedOrRejectedPage({ params }) {
           ) : null}
           <div className={styles.title}>{challenge.title} </div>
         </div>
-        <Image src={OptionButton} alt="option" width={24} height={24}></Image>
       </div>
     </div>
   );
