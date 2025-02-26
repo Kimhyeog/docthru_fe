@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://docthru-be-5u42.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://docthru-be-5u42.onrender.com";
 export const client = axios.create({
   baseURL,
 });
@@ -100,6 +100,27 @@ const getTopLikeWorks = async (challengeId) => {
   return data;
 };
 
+const createWork = async (challengeId, description) => {
+  let url = `/works/${challengeId}`;
+  const response = await client.post(url, { description });
+  const data = response.data;
+  return data;
+};
+
+const saveWork = async (challengeId, description) => {
+  let url = `/works/${challengeId}/save`;
+  const response = await client.post(url, { description });
+  const data = response.data;
+  return data;
+};
+
+const getSavedWork = async (challengeId) => {
+  let url = `/works/${challengeId}/save`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const createLike = async (workId) => {
   const url = `/works/${workId}/like`;
   const response = await client.post(url);
@@ -176,8 +197,9 @@ const getChallenges = async ({
 
 // 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
 const getMyChallenges = async (type, keyword = "") => {
-  const url = `/users/me/challenges/${type}${keyword ? `?keyword=${keyword}` : ""
-    }`;
+  const url = `/users/me/challenges/${type}${
+    keyword ? `?keyword=${keyword}` : ""
+  }`;
   const response = await client.get(url); // ?keyword=value 형식으로 URL에 전달
   const data = response.data;
   return data;
@@ -242,6 +264,13 @@ const participateChallenge = async (challengeId) => {
   return data;
 };
 
+const deleteParticipate = async (challengeId) => {
+  const url = `/challenges/${challengeId}/participation`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -264,6 +293,10 @@ const api = {
   participateChallenge,
   createChallenge,
   getTopLikeWorks,
+  createWork,
+  saveWork,
+  getSavedWork,
+  deleteParticipate,
 };
 
 export default api;

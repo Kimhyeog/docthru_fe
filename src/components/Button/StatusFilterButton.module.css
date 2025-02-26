@@ -3,15 +3,14 @@
 
   padding: 8px 12px;
 
-  border: 1px solid #D4D4D4;
+  border: 1px solid #d4d4d4;
 
   color: gray;
-
+  background-color: white;
   border-radius: 32px;
   cursor: pointer;
 
   display: flex;
-
 
   position: relative;
 }
@@ -21,19 +20,19 @@
 
   justify-content: space-between;
 
-
   width: 100%;
   /* 부모의 너비에 맞게 설정 */
 }
 
 .sortType {
-
   font-family: Pretendard;
   font-weight: 400;
   font-size: 16px;
   line-height: 19.09px;
   letter-spacing: 0%;
-
   white-space: nowrap;
+}
 
+.sortType:last-child {
+  border-bottom: none;
 }

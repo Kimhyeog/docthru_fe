@@ -11,6 +11,8 @@ import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
 import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -22,6 +24,18 @@ async function WorkPage({ params }) {
   const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
   const { progress, participants, maxParticipants } = challenge;
+
+  console.log(work.description);
+
+  const markdownText = `
+**볼드 테스트**  
+*기울림테스트*  
+# 제목테스트  
+> 따옴표 테스트  
+1. * 글머리테스트  
+1. 숫자 테스트  
+
+  `;
 
   return (
     <div className={style.container}>
@@ -54,7 +68,12 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
-      <div className={style.description}>{work?.description}</div>
+      <div className={style.description}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {work?.description}
+          {/* {markdownText} */}
+        </ReactMarkdown>
+      </div>
       <div className={style.divider} />
       <CreateFeedback challenge={challenge} />
       <Feedbacks feedbacks={feedbacks} challenge={challenge} />
