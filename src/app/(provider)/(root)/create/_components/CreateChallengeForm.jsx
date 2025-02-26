@@ -50,7 +50,6 @@ function CreateChallengeForm() {
   const { mutate: createChallenge } = useMutation({
     mutationFn: (dto) => api.createChallenge(dto),
     onSuccess: (data) => {
-      console.log(data);
       setShowModal(true);
     },
     onError: (error) => {

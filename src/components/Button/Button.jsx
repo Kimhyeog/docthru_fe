@@ -33,7 +33,8 @@ export default function Button({ type, text, onClick, icon, ...props }) {
       {(type === "outline_icon" ||
         type === "rightBig" ||
         type === "rightSmall" ||
-        type === "bottom") &&
+        type === "bottom" ||
+        type === "red") &&
         icon}
     </button>
   );

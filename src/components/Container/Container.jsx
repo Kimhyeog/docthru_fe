@@ -6,19 +6,15 @@ import peopleIcon from "@/assets/ic_people.svg";
 import dayjs from "dayjs";
 import Button from "../Button/Button";
 import api from "@/api";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
 import { useModalStore } from "@/store/useModalStore";
 import LoginCheckModal from "../modals/LoginCheckModal";
 
-const Container = ({
-  date,
-  userCount,
-  maximumUserCount: maxUserCount,
-  challenge,
-}) => {
+const Container = ({ date, challenge: initialChallenge }) => {
   // userCount는 maximumUserCount 보다 낮아야 함
-  const challengeId = challenge.id;
+  const params = useParams();
+  const challengeId = params.challengeId;
   const router = useRouter();
   const { checkModalOn, showModal, closeModal } = useModalStore();
   const { mutate: participateChallenge } = useMutation({
@@ -40,6 +36,12 @@ const Container = ({
     },
   });
 
+  const { data: challenge } = useQuery({
+    queryFn: () => api.getChallenge(challengeId),
+    queryKey: ["challenge", { challengeId }],
+    initialData: initialChallenge,
+  });
+
   const handleParticipateClick = async () => {
     participateChallenge();
   };
@@ -59,7 +61,7 @@ const Container = ({
         </div>
         <div className={styles.participants}>
           <Image src={peopleIcon} alt="참여 인원" width={16} height={16} />
-          {`${userCount}/${maxUserCount}`}
+          {`${challenge.participants}/${challenge.maxParticipants}`}
         </div>
       </div>
       <Button

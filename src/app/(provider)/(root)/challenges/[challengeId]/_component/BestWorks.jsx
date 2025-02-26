@@ -16,6 +16,7 @@ import Image from "next/image";
 function BestWorks({ topLikeWorks: initialWorks }) {
   const params = useParams();
   const challengeId = params.challengeId;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data: topLikedWorks } = useQuery({
     queryFn: () => api.getTopLikeWorks(challengeId),
@@ -32,8 +33,9 @@ function BestWorks({ topLikeWorks: initialWorks }) {
         navigation={{ nextEl: ".next" }}
         modules={[Navigation]}
         className="mySwiper"
-        slidesPerView={1.08}
+        slidesPerView={works.length === 1 ? 1 : 1.08}
         spaceBetween={20}
+        onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
       >
         {works.map((work) => {
           const user = work.user;
@@ -44,13 +46,15 @@ function BestWorks({ topLikeWorks: initialWorks }) {
           );
         })}
       </Swiper>
-      <Image
-        src={nextButton}
-        alt="nextButton"
-        width={40}
-        height={40}
-        className="next"
-      />
+      {currentIndex < works.length - 1 && (
+        <Image
+          src={nextButton}
+          alt="nextButton"
+          width={40}
+          height={40}
+          className="next"
+        />
+      )}
     </div>
   );
 }

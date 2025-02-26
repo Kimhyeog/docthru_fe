@@ -16,10 +16,10 @@ async function ChallengeDetailPage({ params }) {
   const challengeId = param.challengeId;
   const challenge = await api.getChallenge(challengeId);
   const type = challenge?.field;
+
   const userId = challenge?.application.userId;
   const user = await api.getUserData(userId);
-  const worksData = await api.getWorks(challengeId);
-  const works = worksData.works;
+  const works = await api.getWorks(challengeId);
   const { progress, participants, maxParticipants } = challenge;
 
   const topLikeWorks = await api.getTopLikeWorks(challengeId);
@@ -70,8 +70,6 @@ async function ChallengeDetailPage({ params }) {
         <div>
           <Container
             date={challenge.deadline}
-            userCount={challenge.participants}
-            maximumUserCount={challenge.maxParticipants}
             challenge={challenge}
           ></Container>
         </div>
@@ -83,7 +81,7 @@ async function ChallengeDetailPage({ params }) {
         {progress === "COMPLETED" && topLikeWorks && (
           <BestWork topLikeWorks={topLikeWorks} />
         )}
-        <ParticipationList works={works} totalPages={worksData.totalPages} />
+        <ParticipationList works={works} />
       </div>
     </div>
   );
