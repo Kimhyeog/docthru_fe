@@ -245,23 +245,42 @@ export default function Page() {
                 <div className={style.cell}>상태</div>
               </div>
               {/* 데이터 목록 */}
-              {challenges.map((challenge) => (
-                <Link
-                  key={challenge.id}
-                  href={`/my-challenges/${challenge.id}`}
-                >
+              {challenges.map((challenge) => {
+                // challenge.application이 존재하는지 확인
+                const applicationStatus = challenge.application
+                  ? challenge.application.status
+                  : null;
+
+                const challengeNo =
+                  challenges_no < challenges.length
+                    ? (currentPage - 1) * 10 + challenges_no++
+                    : (currentPage - 1) * 10 + challenges_no;
+
+                const challengeItem = (
                   <WaitingChallengeItem
                     key={challenge.id}
                     {...challenge}
-                    no={
-                      challenges_no < challenges.length
-                        ? (currentPage - 1) * 10 + challenges_no++
-                        : (currentPage - 1) * 10 + challenges_no
-                    }
-                    application={challenge.application} // 수정된 부분
+                    no={challengeNo}
+                    application={challenge.application}
                   />
-                </Link>
-              ))}
+                );
+
+                if (
+                  applicationStatus === "DELETED" ||
+                  applicationStatus === "REJECTED"
+                ) {
+                  return (
+                    <Link
+                      key={challenge.id}
+                      href={`/my-challenges/${challenge.id}`}
+                    >
+                      {challengeItem}
+                    </Link>
+                  );
+                }
+
+                return challengeItem;
+              })}
             </>
           ) : null}
         </main>
