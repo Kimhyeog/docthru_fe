@@ -21,8 +21,9 @@ const Container = ({ date, challenge: initialChallenge }) => {
     mutationFn: () => api.participateChallenge(challengeId),
     onSuccess: (data) => {
       const workId = data.workId;
+      console.log(data);
       if (!workId) {
-        router.push(`/challenges/${challengeId}/create`); // 바로 가는가? ㄴㄴ work가 있으면 그페이지로 가야함
+        router.push(`/challenges/${challengeId}/challengeTask`); // 바로 가는가? ㄴㄴ work가 있으면 그페이지로 가야함
       } else {
         router.push(`/works/${workId}`);
       }

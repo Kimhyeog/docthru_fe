@@ -11,6 +11,8 @@ import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
 import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -22,6 +24,13 @@ async function WorkPage({ params }) {
   const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
   const { progress, participants, maxParticipants } = challenge;
+
+  console.log(work.description);
+
+  const markdownText = `
+  # 안녕하세요!
+  저는 현재 리액트에서 \`react-markdown\`를 이용하여 **마크다운**을 랜더링하고 있습니다.
+  `;
 
   return (
     <div className={style.container}>
@@ -54,7 +63,12 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
-      <div className={style.description}>{work?.description}</div>
+      <div className={style.description}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {work?.description}
+          {/* {markdownText} */}
+        </ReactMarkdown>
+      </div>
       <div className={style.divider} />
       <CreateFeedback challenge={challenge} />
       <Feedbacks feedbacks={feedbacks} challenge={challenge} />

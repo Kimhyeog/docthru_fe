@@ -10,10 +10,11 @@ import api from "@/api/index";
 import React from "react";
 import { FilterButton } from "@/components/Button/FilterButton";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function ChallengesPage() {
   const router = useRouter();
-
+  const { isLoggedIn } = useAuth();
   // 검색창에 대한 state값
 
   // 불러온 데이터 State 변수
@@ -102,7 +103,10 @@ export default function ChallengesPage() {
             <Button
               type="black"
               text="신규 챌린지 신청 +"
-              onClick={() => router.push("/create")}
+              onClick={() => {
+                if (isLoggedIn) router.push("/create");
+                router.push("/login");
+              }}
             />
           </div>
           <div className={style.header_main}>
