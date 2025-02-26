@@ -81,10 +81,7 @@
   color: #ffc117;
   background: black;
   border-radius: 16px;
-}
-
-.crown {
-  background: gold;
+  font-size: 14px;
 }
 
 .userInfoContainer {

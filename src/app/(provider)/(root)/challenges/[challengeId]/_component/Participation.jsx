@@ -7,11 +7,11 @@ import Keyboard from "@/assets/ic_keyboard.svg";
 import Link from "next/link";
 import api from "@/api";
 import { useQuery } from "@tanstack/react-query";
+import crown from "@/assets/ic_crown.svg";
 
 function Participation({ work: initialWork, index }) {
   const workId = initialWork.id;
   const user = initialWork.user;
-  console.log(initialWork);
   const { data: work } = useQuery({
     queryFn: () => api.getWork(workId),
     queryKey: ["work", { workId }],
@@ -22,6 +22,9 @@ function Participation({ work: initialWork, index }) {
     <div key={workId} className={styles.listItem}>
       <div className={styles.listItemFirst}>
         <div className={`${styles.rank}`}>
+          {index === 0 ? (
+            <Image src={crown} alt="crown" width={16} height={16} />
+          ) : null}
           {String(index + 1).padStart(2, "0")}
         </div>
         <div className={styles.userInfoContainer}>

@@ -24,7 +24,7 @@ const ParticipationList = ({
   });
   const itemsPerPage = 5;
   const works = worksData.works;
-  const totalPages = worksData.totalPage !== 0 ? worksData.totalPage : 1;
+  const totalPages = worksData.totalPage !== 0 ? worksData.totalPage : 0;
   const currentWorks = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = Math.min(startIndex + itemsPerPage, works.length);
@@ -34,12 +34,11 @@ const ParticipationList = ({
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  console.log(worksData);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <span>참여 현황</span>
-        {itemsPerPage && (
+        {totalPages > 0 && itemsPerPage && (
           <div className={styles.pagination}>
             <div className={styles.paginationList}>
               <span className={styles.currentPage}>{currentPage}</span>
@@ -72,7 +71,11 @@ const ParticipationList = ({
       </div>
       <div className={styles.list}>
         {currentWorks.map((work, index) => (
-          <Participation key={work.id} work={work} index={index} />
+          <Participation
+            key={work.id}
+            work={work}
+            index={index + (currentPage - 1) * itemsPerPage}
+          />
         ))}
       </div>
       {works.length === 0 && (

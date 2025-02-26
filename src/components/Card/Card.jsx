@@ -19,7 +19,6 @@ const Card = ({
     // 더보기 버튼 클릭 시
   };
   const now = dayjs();
-  console.log(now.isAfter(deadline));
   return (
     <div className={styles.card}>
       <div className={styles.titleContainer}>
