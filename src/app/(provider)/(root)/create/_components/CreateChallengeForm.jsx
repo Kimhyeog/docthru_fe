@@ -78,7 +78,7 @@ function CreateChallengeForm() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    router.push("/login");
+    router.push("/");
   };
 
   return (

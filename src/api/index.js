@@ -1,7 +1,5 @@
 const { default: axios } = require("axios");
 
-// const baseURL = "https://docthru-be-5u42.onrender.com"
-// const baseURL = "http://localhost:5000";
 const baseURL = "http://localhost:5000";
 export const client = axios.create({
   baseURL,
@@ -96,6 +94,34 @@ const getWorks = async (challengeId, cursor) => {
 
 const getTopLikeWorks = async (challengeId) => {
   let url = `/works/${challengeId}/topLike`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const createWork = async (challengeId, description) => {
+  let url = `/works/${challengeId}`;
+  const response = await client.post(url, { description });
+  const data = response.data;
+  return data;
+};
+
+const updateWork = async (workId, description) => {
+  let url = `/works/${workId}`;
+  const response = await client.put(url, { description });
+  const data = response.data;
+  return data;
+};
+
+const saveWork = async (challengeId, description) => {
+  let url = `/works/${challengeId}/save`;
+  const response = await client.post(url, { description });
+  const data = response.data;
+  return data;
+};
+
+const getSavedWork = async (challengeId) => {
+  let url = `/works/${challengeId}/save`;
   const response = await client.get(url);
   const data = response.data;
   return data;
@@ -244,6 +270,13 @@ const participateChallenge = async (challengeId) => {
   return data;
 };
 
+const deleteParticipate = async (challengeId) => {
+  const url = `/challenges/${challengeId}/participation`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -266,6 +299,11 @@ const api = {
   participateChallenge,
   createChallenge,
   getTopLikeWorks,
+  createWork,
+  saveWork,
+  getSavedWork,
+  deleteParticipate,
+  updateWork,
 };
 
 export default api;

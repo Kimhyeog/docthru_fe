@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
 
-
   border-radius: 10px;
 
   border: 1px solid #737373;
@@ -17,8 +16,11 @@
   background-color: white;
 }
 
-.container div {
+.container :last-child {
+  border-bottom: none;
+}
 
+.container div {
   cursor: pointer;
   padding: 12px 16px;
 

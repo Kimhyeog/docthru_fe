@@ -11,6 +11,8 @@ import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
 import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -54,7 +56,11 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
-      <div className={style.description}>{work?.description}</div>
+      <div className={style.description}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {work?.description}
+        </ReactMarkdown>
+      </div>
       <div className={style.divider} />
       <CreateFeedback challenge={challenge} />
       <Feedbacks feedbacks={feedbacks} challenge={challenge} />

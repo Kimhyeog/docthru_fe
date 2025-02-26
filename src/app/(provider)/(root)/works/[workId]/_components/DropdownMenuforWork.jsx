@@ -43,7 +43,7 @@ function DropdownMenuforWork({ writerId, challenge: initialChallenge }) {
           {
             label: "수정하기",
             onClick: () => {
-              router.push("/works/edit");
+              router.push(`/works/${workId}/edit`);
             },
           },
           {
