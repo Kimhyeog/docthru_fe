@@ -14,15 +14,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
 import Link from "next/link";
-import bold from "@/assets/ic_bold.svg";
-import italic from "@/assets/ic_italic.svg";
-import underline from "@/assets/ic_underline.svg";
-import numbering from "@/assets/ic_numbering.svg";
-import bullet from "@/assets/ic_bullet.svg";
-import coloring from "@/assets/ic_coloring.svg";
-import alignCenter from "@/assets/ic_alignment_center.svg";
-import alignLeft from "@/assets/ic_alignment_left.svg";
-import alignRight from "@/assets/ic_alignment_right.svg";
 
 function ChallengeTask() {
   const textareaRef = useRef(null);
@@ -46,15 +37,15 @@ function ChallengeTask() {
             className: "fa fa-bold",
             title: "Bold",
           },
-          //커스텀 방법
-          {
-            name: "custom",
-            action: function customFunction(editor) {
-              // Add your own code
-            },
-            className: "fa fa-star",
-            title: "Custom Button",
-          },
+          // 커스텀 방법
+          // {
+          //   name: "custom",
+          //   action: function customFunction(editor) {
+          //     // Add your own code
+          //   },
+          //   className: "fa fa-star",
+          //   title: "Custom Button",
+          // },
 
           {
             name: "italic",
@@ -67,30 +58,10 @@ function ChallengeTask() {
             action: function (editor) {
               editor.codemirror.execCommand("underline");
             },
-            className: "underline-button",
+            className: "fa fa-underline",
             title: "밑줄",
-            icon: underline,
           },
-          "|",
-          {
-            name: "numbering",
-            action: function (editor) {
-              editor.toggleOrderedList();
-            },
-            className: "fa fa-list-ol",
-            title: "번호 매기기",
-            icon: numbering,
-          },
-          {
-            name: "bullet",
-            action: function (editor) {
-              editor.toggleUnorderedList();
-            },
-            className: "fa fa-list-ul",
-            title: "글머리 기호",
-            icon: bullet,
-          },
-          "|",
+
           {
             name: "alignLeft",
             action: function (editor) {
@@ -98,9 +69,8 @@ function ChallengeTask() {
               const alignedText = `<div style="text-align: left;">${selectedText}</div>`;
               editor.codemirror.replaceSelection(alignedText);
             },
-            className: "custom-icon",
+            className: "fa fa-align-left",
             title: "왼쪽 정렬",
-            icon: alignLeft,
           },
           {
             name: "alignCenter",
@@ -109,9 +79,8 @@ function ChallengeTask() {
               const alignedText = `<div style="text-align: center;">${selectedText}</div>`;
               editor.codemirror.replaceSelection(alignedText);
             },
-            className: "custom-icon",
+            className: "fa fa-align-center",
             title: "가운데 정렬",
-            icon: alignCenter,
           },
           {
             name: "alignRight",
@@ -120,17 +89,32 @@ function ChallengeTask() {
               const alignedText = `<div style="text-align: right;">${selectedText}</div>`;
               editor.codemirror.replaceSelection(alignedText);
             },
-            className: "custom-icon",
+            className: "fa fa-align-right",
             title: "오른쪽 정렬",
-            icon: alignRight,
           },
-          "|",
+
+          {
+            name: "bullet",
+            action: function (editor) {
+              editor.toggleUnorderedList();
+            },
+            className: "fa fa-list-ul",
+            title: "글머리 기호",
+          },
+          {
+            name: "numbering",
+            action: function (editor) {
+              editor.toggleOrderedList();
+            },
+            className: "fa fa-list-ol",
+            title: "번호 매기기",
+          },
+
           {
             name: "coloring", // 컬러 바꾸게 하는건데 이거 뭐 파렛트 넣고해야하는거?!
             action: function (editor) {},
-            className: "custom-icon",
+            className: "fa fa-paint-brush",
             title: "색상 변경",
-            icon: coloring,
           },
         ],
 

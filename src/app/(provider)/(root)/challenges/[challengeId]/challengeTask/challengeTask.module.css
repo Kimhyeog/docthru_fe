@@ -64,14 +64,3 @@
   color: #262626;
   margin-top: 24px;
 }
-
-.editor-toolbar .underline-button {
-  /* 아이콘 이미지 경로 */
-  background-size: contain; /* 이미지 크기 조정 */
-  background-repeat: no-repeat;
-  width: 20px; /* 버튼 크기 조정 */
-  height: 20px;
-  border: none; /* 기본 테두리 제거 */
-  padding: 0; /* 기본 패딩 제거 */
-  cursor: pointer;
-}
