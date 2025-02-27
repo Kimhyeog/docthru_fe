@@ -53,6 +53,35 @@
 }
 
 
+.header .statusTitle_WAITING {
+  width: 100%;
+  height: 35px;
+
+  background-color: #FFFDE7;
+  color: #F2BC00;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+
+
+  border-radius: 17.5px;
+
+
+
+}
+
+
 
 
 
@@ -120,11 +149,47 @@
 
 .chips {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+}
+
+.chips .chip_category {
+  height: 26px;
+  padding: 0px 10px;
+}
+
+.chips .buttonSection {
+  flex: 1;
+  display: flex;
+
+  justify-content: flex-end;
 
 }
+
+.buttonSection button {
+  cursor: pointer;
+
+  width: 139px;
+  height: 43px;
+
+  border: 1px solid #D4D4D4;
+  border-radius: 8px;
+  background-color: white;
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+
+
+  color: #737373;
+
+
+}
+
 
 .cardContainer .challengeContent {
   font-family: Pretendard;

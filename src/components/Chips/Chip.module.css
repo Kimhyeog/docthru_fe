@@ -62,3 +62,12 @@
   align-items: center;
   box-sizing: border-box;
 }
+
+
+.chip_nextjs,
+.chip_api,
+.chip_career,
+.chip_modernjs,
+.chip_web {
+  height: 26px;
+}

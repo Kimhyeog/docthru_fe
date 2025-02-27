@@ -267,7 +267,8 @@ export default function Page() {
 
                 if (
                   applicationStatus === "DELETED" ||
-                  applicationStatus === "REJECTED"
+                  applicationStatus === "REJECTED" ||
+                  applicationStatus === "WAITING"
                 ) {
                   return (
                     <Link

@@ -29,11 +29,13 @@ async function DeletedOrRejectedPage({ params }) {
   const statusTitle = [
     { value: "DELETED", title: "삭제된 챌린지입니다.", subTitle: "삭제사유" },
     { value: "REJECTED", title: "신청이 거절된 챌린지입니다." },
+    { value: "WAITING", title: "승인 대기 중입니다." },
   ];
 
   const getTitle = (status) => {
     if (status === statusTitle[0].value) return statusTitle[0].title;
     if (status === statusTitle[1].value) return statusTitle[1].title;
+    if (status === statusTitle[2].value) return statusTitle[2].title;
 
     return "알 수 없는 상태입니다.";
   };
@@ -51,17 +53,30 @@ async function DeletedOrRejectedPage({ params }) {
     <>
       <div className={styles.Container}>
         <div className={styles.header}>
-          <div className={styles.statusTitle}>{getTitle(status)}</div>
-          <div className={styles.statusCommentContainer}>
-            <p className={styles.commentTitle}>{getSubTitle(status)}</p>
-            <div>{reasonComment}</div>
+          <div
+            className={`${styles.statusTitle} ${
+              status === "WAITING" ? styles.statusTitle_WAITING : ""
+            }`}
+          >
+            {getTitle(status)}
           </div>
+          {status !== "WAITING" && (
+            <div className={styles.statusCommentContainer}>
+              <p className={styles.commentTitle}>{getSubTitle(status)}</p>
+              <div>{reasonComment}</div>
+            </div>
+          )}
         </div>
         <div className={styles.cardContainer}>
           <div className={styles.challengeTitle}>{challengeTitle}</div>
           <div className={styles.chips}>
             <Chip type={type}>{type}</Chip>
             <ChipCategory category={challenge.docType} />
+            {status === "WAITING" && (
+              <div className={styles.buttonSection}>
+                <button>취소하기</button>
+              </div>
+            )}
           </div>
           <div className={styles.challengeContent}>{challengeContent}</div>
           <div className={styles.footer}>
