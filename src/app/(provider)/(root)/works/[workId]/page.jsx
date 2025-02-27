@@ -13,6 +13,7 @@ import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import "github-markdown-css/github-markdown.css"; //
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -56,7 +57,7 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
-      <div className={style.description}>
+      <div className={`${style.description} markdown-body`}>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {work?.description}
         </ReactMarkdown>
