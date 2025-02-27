@@ -100,7 +100,7 @@
   font-size: 18px;
   line-height: 16.71px;
   font-weight: bolder;
-  border: none
+  border: none;
 }
 
 .button_page_active {
@@ -117,7 +117,6 @@
   color: #ffc117;
   border: none;
 }
-
 
 /* btn_right */
 
@@ -146,7 +145,7 @@
 }
 
 /* 이거 위치조정 해줄 수 있는 분 */
-.button_rightSmall>svg {
+.button_rightSmall > svg {
   position: absolute;
   bottom: 4px;
   right: 4.4px;
@@ -174,4 +173,18 @@
 .custom_black {
   background-color: black;
   color: white;
+}
+
+.load {
+  background-color: black;
+  color: white;
+  width: 90;
+  height: 32;
+  gap: 4px;
+  border-radius: 10px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  box-sizing: border-box;
 }

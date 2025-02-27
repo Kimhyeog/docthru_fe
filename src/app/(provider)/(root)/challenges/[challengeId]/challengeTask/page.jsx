@@ -14,6 +14,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
 import Link from "next/link";
+import xIcon from "@/assets/ic_out_circle.svg";
 
 function ChallengeTask() {
   const textareaRef = useRef(null);
@@ -21,12 +22,14 @@ function ChallengeTask() {
   const router = useRouter();
   const params = useParams();
   const challengeId = params.challengeId;
-
+  const [showLoad, setShowLoad] = useState(true);
   const { isLoggedIn } = useAuth();
+
+  const simplemdeRef = useRef(null);
 
   useEffect(() => {
     if (textareaRef.current) {
-      const simplemde = new SimpleMDE({
+      simplemdeRef.current = new SimpleMDE({
         element: textareaRef.current,
         toolbar: [
           "bold",
@@ -44,14 +47,14 @@ function ChallengeTask() {
         spellChecker: false,
       });
 
-      simplemde.value(content);
+      simplemdeRef.current.value(content);
 
-      simplemde.codemirror.on("change", () => {
-        setContent(simplemde.value());
+      simplemdeRef.current.codemirror.on("change", () => {
+        setContent(simplemdeRef.current.value());
       });
 
       return () => {
-        simplemde.toTextArea();
+        simplemdeRef.current.toTextArea();
       };
     }
   }, []);
@@ -101,6 +104,14 @@ function ChallengeTask() {
     giveUp();
   };
 
+  const handleLoad = () => {
+    if (savedData?.description && simplemdeRef.current) {
+      simplemdeRef.current.value(savedData.description);
+      setContent(savedData.description);
+    }
+    setShowLoad(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -135,6 +146,24 @@ function ChallengeTask() {
           style={{ display: "none" }} // SimpleMDE가 textarea를 관리하므로 숨김
         ></textarea>
       </div>
+      {savedData && showLoad && (
+        <div className={styles.savedWork}>
+          <div className={styles.savedInfo}>
+            <Image
+              src={xIcon}
+              alt="x icon"
+              width={24}
+              height={24}
+              onClick={() => {
+                setShowLoad(false);
+              }}
+              className={styles.xIcon}
+            />
+            <p>임시 저장된 작엄물이 있어요. 저장된 작업물을 불러오시겠어요??</p>
+          </div>
+          <Button type={"load"} text={"불러오기"} onClick={handleLoad} />
+        </div>
+      )}
       <Sidebar width={500}></Sidebar>
     </div>
   );
