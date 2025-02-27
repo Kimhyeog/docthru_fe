@@ -1,7 +1,6 @@
 import Image from "next/image";
 import api from "@/api";
 import Chip from "@/components/Chips/Chip";
-import OptionButton from "@/assets/ic_option.svg";
 import ChipCategory from "@/components/Chips/ChipCategory";
 import React from "react";
 import Container from "@/components/Container/Container";
@@ -10,6 +9,7 @@ import ParticipationList from "./_component/ParticipationList";
 import Kyeboard from "@/assets/ic_keyboard.svg";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 import BestWork from "./_component/BestWorks";
+import DropdownMenuForAdmin from "./_component/DropdownMenuForAdmin";
 
 async function ChallengeDetailPage({ params }) {
   const param = await params;
@@ -21,8 +21,8 @@ async function ChallengeDetailPage({ params }) {
   const user = await api.getUserData(userId);
   const works = await api.getWorks(challengeId);
   const { progress, participants, maxParticipants } = challenge;
-
   const topLikeWorks = await api.getTopLikeWorks(challengeId);
+  console.log(user);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -37,12 +37,8 @@ async function ChallengeDetailPage({ params }) {
               ) : null}
               <div className={styles.title}>{challenge.title} </div>
             </div>
-            <Image
-              src={OptionButton}
-              alt="option"
-              width={24}
-              height={24}
-            ></Image>
+
+            <DropdownMenuForAdmin />
           </div>
           {/* chips */}
           <div className={styles.chips}>
