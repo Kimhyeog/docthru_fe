@@ -277,6 +277,13 @@ const deleteParticipate = async (challengeId) => {
   return data;
 };
 
+const deleteChallengeByAdmin = async (challengeId) => {
+  const url = `/challenges/${challengeId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -304,6 +311,7 @@ const api = {
   getSavedWork,
   deleteParticipate,
   updateWork,
+  deleteChallengeByAdmin,
 };
 
 export default api;

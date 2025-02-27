@@ -2,9 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import kebab from "@/assets/ic_kebab.svg";
-import styles from "./DrodownMenuButton.module.css";
+import styles from "./DropdownMenuButton.module.css";
+import OptionButton from "@/assets/ic_option.svg";
 
-function DropdownMenuButton({ menus }) {
+function DropdownMenuButton({ menus, option = "general" }) {
   const [isDropdown, setIsDropdown] = useState(false);
 
   const handleButtonClick = () => {
@@ -13,13 +14,24 @@ function DropdownMenuButton({ menus }) {
 
   return (
     <div className={styles.relative}>
-      <Image
-        src={kebab.src}
-        width={24}
-        height={24}
-        alt="kebabicon"
-        onClick={handleButtonClick}
-      />
+      {option === "general" ? (
+        <Image
+          src={kebab.src}
+          width={24}
+          height={24}
+          alt="kebabicon"
+          onClick={handleButtonClick}
+        />
+      ) : (
+        <Image
+          src={OptionButton}
+          alt="option"
+          width={24}
+          height={24}
+          onClick={handleButtonClick}
+        ></Image>
+      )}
+
       {isDropdown && (
         <div className={styles.absolute}>
           {menus.map((menu, index) => (
