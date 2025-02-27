@@ -8,6 +8,7 @@ import Link from "next/link";
 import api from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import crown from "@/assets/ic_crown.svg";
+import Arrowright from "@/assets/ic_arrow_right.svg";
 
 function Participation({ work: initialWork, index }) {
   const workId = initialWork.id;
@@ -44,6 +45,7 @@ function Participation({ work: initialWork, index }) {
         </div>
         <Link href={`/works/${workId}`} className={styles.viewWork}>
           작업물 보기
+          <Image src={Arrowright} alt="더보기" width={20} height={20}></Image>
         </Link>
       </div>
     </div>

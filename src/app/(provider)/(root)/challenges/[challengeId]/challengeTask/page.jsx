@@ -37,6 +37,8 @@ function ChallengeTask() {
     if (textareaRef.current) {
       const simplemde = new SimpleMDE({
         element: textareaRef.current,
+
+        // 툴바 설정부분
         toolbar: [
           {
             name: "bold",
@@ -131,9 +133,11 @@ function ChallengeTask() {
             icon: coloring,
           },
         ],
+
+        //옵션 설정부분
         placeholder: "번역 내용을 적어주세요",
-        status: false,
-        spellChecker: false,
+        status: false, // 하단 상태바 없애기
+        spellChecker: false, // 멎춤법 검사기능 없애기
       });
 
       simplemde.value(content);
