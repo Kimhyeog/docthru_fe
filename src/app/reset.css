@@ -109,11 +109,11 @@ body {
 }
 ol,
 ul {
-  list-style: none;
+  /* list-style: none; */
 }
 blockquote,
 q {
-  quotes: none;
+  /* quotes: none; */
 }
 blockquote:before,
 blockquote:after,

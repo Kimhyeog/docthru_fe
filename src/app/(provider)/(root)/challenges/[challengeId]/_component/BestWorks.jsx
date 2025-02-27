@@ -29,7 +29,6 @@ function BestWorks({ topLikeWorks: initialWorks }) {
   return (
     <div className={styles.wrap}>
       <Swiper
-        // navigation={true}
         navigation={{ nextEl: ".next" }}
         modules={[Navigation]}
         className="mySwiper"
@@ -46,15 +45,13 @@ function BestWorks({ topLikeWorks: initialWorks }) {
           );
         })}
       </Swiper>
-      {currentIndex < works.length - 1 && (
-        <Image
-          src={nextButton}
-          alt="nextButton"
-          width={40}
-          height={40}
-          className="next"
-        />
-      )}
+      <Image
+        src={nextButton}
+        alt="nextButton"
+        width={40}
+        height={40}
+        className={`next ${currentIndex >= works.length - 1 && styles.hidden}`}
+      />
     </div>
   );
 }

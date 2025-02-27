@@ -76,3 +76,31 @@
   border-left: 1px solid white;
   border-right: 1px solid white;
 }
+
+.savedWork {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid #262626;
+  background-color: #fafafa;
+  white-space: none;
+  padding: 8px;
+  gap: 4px;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 200px;
+}
+
+.savedInfo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.savedInfo p {
+  margin: 0;
+}
+
+.xIcon {
+  cursor: pointer;
+}

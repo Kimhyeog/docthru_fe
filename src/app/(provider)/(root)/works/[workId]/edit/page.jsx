@@ -14,15 +14,21 @@ import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
 import Link from "next/link";
+import xIcon from "@/assets/ic_out_circle.svg";
+import { useModalStore } from "@/store/useModalStore";
+import CheckModal from "@/components/modals/CheckModal";
 
 function WorkEditPage() {
   const textareaRef = useRef(null);
+  const simplemdeRef = useRef(null);
   const [content, setContent] = useState("");
   const router = useRouter();
   const params = useParams();
   const workId = params.workId;
+  const [showLoad, setShowLoad] = useState(true);
 
   const { isLoggedIn } = useAuth();
+  const { checkModalOn, showModal, closeModal } = useModalStore();
 
   const { data: work } = useQuery({
     queryFn: () => api.getWork(workId),
@@ -39,7 +45,7 @@ function WorkEditPage() {
 
   useEffect(() => {
     if (textareaRef.current) {
-      const simplemde = new SimpleMDE({
+      simplemdeRef.current = new SimpleMDE({
         element: textareaRef.current,
         toolbar: [
           "bold",
@@ -58,14 +64,14 @@ function WorkEditPage() {
       });
 
       if (work?.description) {
-        simplemde.value(work.description);
+        simplemdeRef.current.value(work.description);
       }
-      simplemde.codemirror.on("change", () => {
-        setContent(simplemde.value());
+      simplemdeRef.current.codemirror.on("change", () => {
+        setContent(simplemdeRef.current.value());
       });
 
       return () => {
-        simplemde.toTextArea();
+        simplemdeRef.current.toTextArea();
       };
     }
   }, [work?.description]);
@@ -108,6 +114,18 @@ function WorkEditPage() {
     router.replace(`/works/${workId}`);
   };
 
+  const handleLoad = () => {
+    showModal();
+  };
+  const handleOnClick = () => {
+    if (savedData?.description && simplemdeRef.current) {
+      simplemdeRef.current.value(savedData.description);
+      setContent(savedData.description);
+    }
+    setShowLoad(false);
+    closeModal();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -142,7 +160,31 @@ function WorkEditPage() {
           style={{ display: "none" }} // SimpleMDE가 textarea를 관리하므로 숨김
         ></textarea>
       </div>
+      {savedData && showLoad && (
+        <div className={styles.savedWork}>
+          <div className={styles.savedInfo}>
+            <Image
+              src={xIcon}
+              alt="x icon"
+              width={24}
+              height={24}
+              onClick={() => {
+                setShowLoad(false);
+              }}
+              className={styles.xIcon}
+            />
+            <p>임시 저장된 작엄물이 있어요. 저장된 작업물을 불러오시겠어요??</p>
+          </div>
+          <Button type={"load"} text={"불러오기"} onClick={handleLoad} />
+        </div>
+      )}
       <Sidebar width={500}></Sidebar>
+      <CheckModal
+        text={"이전 작업물을 불러오시겠어요?"}
+        show={checkModalOn}
+        onHide={closeModal}
+        onClick={handleOnClick}
+      />
     </div>
   );
 }

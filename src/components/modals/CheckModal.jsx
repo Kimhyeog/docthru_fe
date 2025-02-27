@@ -6,7 +6,7 @@ import style from "./CheckModal.module.css";
 import { Modal } from "react-bootstrap";
 import Button from "@/components/Button/Button";
 
-export default function CheckModal({ show, onHide }) {
+export default function CheckModal({ show, onHide, text, onClick }) {
   return (
     <Modal
       show={show}
@@ -18,11 +18,11 @@ export default function CheckModal({ show, onHide }) {
     >
       <div className={style.content}>
         <FaCheckCircle size={"25"} />
-        <p>정말 취소하시겠습니까?</p>
+        <p>{text}</p>
       </div>
       <div className={style.btnSection}>
-        <Button text={"아니요"} onClick={onHide} />
-        <Button type={"black"} text={"네"} onClick={onHide} />
+        <Button type={"no"} text={"아니요"} onClick={onHide} />
+        <Button type={"yes"} text={"네"} onClick={onClick} />
       </div>
     </Modal>
   );

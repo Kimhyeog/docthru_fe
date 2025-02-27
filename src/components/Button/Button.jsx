@@ -17,6 +17,9 @@ const btnTypeArr = [
   { rightSmall: style.button_rightSmall },
   { bottom: style.button_bottom },
   { customBlack: style.custom_black },
+  { load: style.load },
+  { yes: style.yes },
+  { no: style.no },
 ];
 
 export default function Button({ type, text, onClick, icon, ...props }) {
