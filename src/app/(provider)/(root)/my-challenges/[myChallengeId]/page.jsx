@@ -72,6 +72,11 @@ async function DeletedOrRejectedPage({ params }) {
           <div className={styles.chips}>
             <Chip type={type}>{type}</Chip>
             <ChipCategory category={challenge.docType} />
+            {status === "WAITING" && (
+              <div className={styles.buttonSection}>
+                <button>취소하기</button>
+              </div>
+            )}
           </div>
           <div className={styles.challengeContent}>{challengeContent}</div>
           <div className={styles.footer}>
