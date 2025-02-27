@@ -15,9 +15,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
 import Link from "next/link";
 import xIcon from "@/assets/ic_out_circle.svg";
+import { useModalStore } from "@/store/useModalStore";
+import CheckModal from "@/components/modals/CheckModal";
 
 function ChallengeTask() {
   const textareaRef = useRef(null);
+  const simplemdeRef = useRef(null);
   const [content, setContent] = useState("");
   const router = useRouter();
   const params = useParams();
@@ -25,7 +28,7 @@ function ChallengeTask() {
   const [showLoad, setShowLoad] = useState(true);
   const { isLoggedIn } = useAuth();
 
-  const simplemdeRef = useRef(null);
+  const { checkModalOn, showModal, closeModal } = useModalStore();
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -105,11 +108,15 @@ function ChallengeTask() {
   };
 
   const handleLoad = () => {
+    showModal();
+  };
+  const handleOnClick = () => {
     if (savedData?.description && simplemdeRef.current) {
       simplemdeRef.current.value(savedData.description);
       setContent(savedData.description);
     }
     setShowLoad(false);
+    closeModal();
   };
 
   return (
@@ -165,6 +172,12 @@ function ChallengeTask() {
         </div>
       )}
       <Sidebar width={500}></Sidebar>
+      <CheckModal
+        text={"이전 작업물을 불러오시겠어요?"}
+        show={checkModalOn}
+        onHide={closeModal}
+        onClick={handleOnClick}
+      />
     </div>
   );
 }

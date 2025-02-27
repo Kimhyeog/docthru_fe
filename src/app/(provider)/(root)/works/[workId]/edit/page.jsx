@@ -15,9 +15,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
 import Link from "next/link";
 import xIcon from "@/assets/ic_out_circle.svg";
+import { useModalStore } from "@/store/useModalStore";
+import CheckModal from "@/components/modals/CheckModal";
 
 function WorkEditPage() {
   const textareaRef = useRef(null);
+  const simplemdeRef = useRef(null);
   const [content, setContent] = useState("");
   const router = useRouter();
   const params = useParams();
@@ -25,6 +28,7 @@ function WorkEditPage() {
   const [showLoad, setShowLoad] = useState(true);
 
   const { isLoggedIn } = useAuth();
+  const { checkModalOn, showModal, closeModal } = useModalStore();
 
   const { data: work } = useQuery({
     queryFn: () => api.getWork(workId),
@@ -38,8 +42,6 @@ function WorkEditPage() {
       setContent(work.description);
     }
   }, [work?.description]);
-
-  const simplemdeRef = useRef(null);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -113,11 +115,15 @@ function WorkEditPage() {
   };
 
   const handleLoad = () => {
+    showModal();
+  };
+  const handleOnClick = () => {
     if (savedData?.description && simplemdeRef.current) {
       simplemdeRef.current.value(savedData.description);
       setContent(savedData.description);
     }
     setShowLoad(false);
+    closeModal();
   };
 
   return (
@@ -173,6 +179,12 @@ function WorkEditPage() {
         </div>
       )}
       <Sidebar width={500}></Sidebar>
+      <CheckModal
+        text={"이전 작업물을 불러오시겠어요?"}
+        show={checkModalOn}
+        onHide={closeModal}
+        onClick={handleOnClick}
+      />
     </div>
   );
 }

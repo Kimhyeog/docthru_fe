@@ -178,13 +178,43 @@
 .load {
   background-color: black;
   color: white;
-  width: 90;
-  height: 32;
+  width: 90px;
+  height: 32px;
   gap: 4px;
   border-radius: 10px;
   padding-top: 2px;
   padding-right: 16px;
   padding-bottom: 3px;
   padding-left: 16px;
+  box-sizing: border-box;
+}
+
+.yes {
+  width: 90px;
+  height: 40px;
+  gap: 4px;
+  border-radius: 12px;
+  border-width: 1px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  background: #262626;
+  border: 1px solid #262626;
+  box-sizing: border-box;
+  color: white;
+}
+.no {
+  width: 90px;
+  height: 40px;
+  gap: 4px;
+  border-radius: 12px;
+  border-width: 1px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  background: #ffffff;
+  border: 1px solid #262626;
   box-sizing: border-box;
 }
