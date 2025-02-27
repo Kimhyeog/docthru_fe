@@ -107,6 +107,13 @@ const createWork = async (challengeId, description) => {
   return data;
 };
 
+const updateWork = async (workId, description) => {
+  let url = `/works/${workId}`;
+  const response = await client.put(url, { description });
+  const data = response.data;
+  return data;
+};
+
 const saveWork = async (challengeId, description) => {
   let url = `/works/${challengeId}/save`;
   const response = await client.post(url, { description });
@@ -296,6 +303,7 @@ const api = {
   saveWork,
   getSavedWork,
   deleteParticipate,
+  updateWork,
 };
 
 export default api;

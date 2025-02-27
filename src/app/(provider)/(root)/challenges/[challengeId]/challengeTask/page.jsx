@@ -13,6 +13,7 @@ import api from "@/api";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import Sidebar from "./sideBar";
+import Link from "next/link";
 import bold from "@/assets/ic_bold.svg";
 import italic from "@/assets/ic_italic.svg";
 import underline from "@/assets/ic_underline.svg";
@@ -195,7 +196,9 @@ function ChallengeTask() {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <Image src={logo} alt="logo" width={108.95} height={31}></Image>
+        <Link href={"./"}>
+          <Image src={logo} alt="logo" width={108.95} height={31}></Image>
+        </Link>
 
         <div className={styles.buttonContainer}>
           <Button
@@ -216,7 +219,7 @@ function ChallengeTask() {
           />
         </div>
       </div>
-      <div className={styles.challengeTitle}>{challenge.title}</div>
+      <div className={styles.challengeTitle}>{challenge?.title}</div>
       <div className={styles.horizontalLine}></div>
       <div className={styles.editorContainer}>
         <textarea
