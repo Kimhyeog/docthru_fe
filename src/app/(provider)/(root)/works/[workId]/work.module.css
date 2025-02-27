@@ -111,3 +111,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.chipCardStatus a {
+  text-decoration-line: none;
+}

@@ -14,6 +14,7 @@ import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "github-markdown-css/github-markdown.css"; //
+import Link from "next/link";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -36,7 +37,9 @@ async function WorkPage({ params }) {
             ) : participants === maxParticipants ? (
               <ChipCardStatus type="Recruitment" />
             ) : null}
-            <h2 className={style.title}>{challenge?.title}</h2>
+            <Link href={`/challenges/${challengeId}`}>
+              <h2 className={style.title}>{challenge?.title}</h2>
+            </Link>
           </div>
           <DropdownMenuforWork writerId={writerData.id} challenge={challenge} />
         </div>
