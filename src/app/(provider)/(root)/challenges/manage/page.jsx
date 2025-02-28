@@ -2,39 +2,61 @@
 import Search from "@/components/Search/Search";
 import style from "./challengesManage.module.css";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import api from "@/api/index";
+import WaitingChallengeItem from "../../my-challenges/components/waitingChallengeItem";
+
+const sortAttendTypeArr = {
+  "승인 대기": "WAITING",
+  "신청 거절": "REJECTED",
+  "신청 승인": "ACCEPTED",
+  "신청 시간 빠른순": "ApplyDeadlineDesc",
+  "신청 시간 느린순": "ApplyDeadlineAsc",
+  "마감 기한 빠른순": "DeadlineDesc",
+  "마감 기한 느린순": "DeadlineAsc",
+};
 
 export default function AdminManagePage() {
-  const [sortType, setSortType] = useState("ongoing");
-
-  // 검색창 State 변수
   const [searchInput, setSearchInput] = useState("");
-
-  // 신청한 챌린지 필터 Sort State 변수
   const [sortAttendType, setSortAttendType] = useState("신청 시간 빠른순");
-
   const [challenges, setChallenges] = useState([]);
-
-  let challenges_no = 1;
-
-  const [itemSize, setItemSize] = useState(5);
-
-  // 로그인 상태 관리 State()
-  const { isLoggedIn, isAuthInitialized } = useAuth(); // 로그인 상태 가져오기
-
-  // 페이지 값 State 변수
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [totalPages, setTotalPages] = useState(1); // ✅ totalPages 상태 추가
+  const [totalPages, setTotalPages] = useState(1);
+  let challenges_no = 1;
+  const { isLoggedIn, isAuthInitialized } = useAuth();
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
+
+  const fetchMyChallenges = useCallback(async () => {
+    if (!isAuthInitialized || !isLoggedIn) return;
+    try {
+      const response = await api.getApplicationsByAdmin(
+        sortAttendTypeArr[sortAttendType],
+        10,
+        searchInput || undefined,
+        currentPage
+      );
+      setChallenges(response.challenges || []);
+      setTotalPages(
+        response.totalCount ? Math.ceil(response.totalCount / 10) : 1
+      );
+    } catch (error) {
+      console.error("챌린지 조회 실패:", error);
+      setChallenges([]);
+      setTotalPages(1);
+    }
+  }, [isAuthInitialized, isLoggedIn, sortAttendType, searchInput, currentPage]);
+
+  useEffect(() => {
+    fetchMyChallenges();
+  }, [fetchMyChallenges]);
 
   return (
     <>
