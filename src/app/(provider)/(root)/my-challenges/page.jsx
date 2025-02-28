@@ -113,8 +113,6 @@ export default function Page() {
         data = await api.getMyChallenges(type, searchInput || undefined);
       }
 
-      console.log(`${type} 챌린지 데이터:`, data); // 데이터 확인용 출력
-
       // ✅ 응답 데이터가 비어 있을 경우 안전 처리
       const challengesList = Array.isArray(data.challenges)
         ? data.challenges

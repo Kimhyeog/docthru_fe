@@ -8,7 +8,9 @@ import OptionButton from "@/assets/ic_option.svg";
 function DropdownMenuButton({ menus, option = "general" }) {
   const [isDropdown, setIsDropdown] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsDropdown(!isDropdown);
   };
 
@@ -20,7 +22,7 @@ function DropdownMenuButton({ menus, option = "general" }) {
           width={24}
           height={24}
           alt="kebabicon"
-          onClick={handleButtonClick}
+          onClick={(e) => handleButtonClick(e)}
         />
       ) : (
         <Image
@@ -28,7 +30,7 @@ function DropdownMenuButton({ menus, option = "general" }) {
           alt="option"
           width={24}
           height={24}
-          onClick={handleButtonClick}
+          onClick={(e) => handleButtonClick(e)}
         ></Image>
       )}
 
@@ -37,8 +39,8 @@ function DropdownMenuButton({ menus, option = "general" }) {
           {menus.map((menu, index) => (
             <button
               key={menu.label}
-              onClick={() => {
-                menu.onClick();
+              onClick={(e) => {
+                menu.onClick(e);
                 setIsDropdown(false);
               }}
               className={`${styles.button} ${

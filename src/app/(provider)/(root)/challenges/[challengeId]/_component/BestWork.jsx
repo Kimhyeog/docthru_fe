@@ -22,7 +22,6 @@ function BestWork({ work, user }) {
     if (descriptionRef.current) {
       const { scrollHeight, clientHeight } = descriptionRef.current;
       setIsOverflowing(scrollHeight > clientHeight);
-      console.log(scrollHeight, clientHeight);
     }
   }, [work.description]);
 

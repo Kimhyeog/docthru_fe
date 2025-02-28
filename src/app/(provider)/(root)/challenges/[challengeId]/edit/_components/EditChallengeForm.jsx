@@ -47,7 +47,6 @@ function EditChallengeForm() {
       setMaxUsers(initialChallenge.maxParticipants);
       setContent(initialChallenge.content);
     }
-    console.log(initialChallenge);
   }, [initialChallenge]);
 
   const [isValid, setIsValid] = useState({

@@ -6,6 +6,7 @@ import ChipCategory from "../Chips/ChipCategory";
 import Chip from "../Chips/Chip";
 import dayjs from "dayjs";
 import ChipCardStatus from "../Chips/ChipCardStatus";
+import DropdownButtonForAdmin from "./DropdownButtonForAdmin";
 
 const Card = ({
   deadline,
@@ -14,23 +15,25 @@ const Card = ({
   title,
   participants,
   maxParticipants,
+  id,
 }) => {
-  const handleMoreOptionsClick = () => {
-    // 더보기 버튼 클릭 시
-  };
   const now = dayjs();
   return (
     <div className={styles.card}>
       <div className={styles.titleContainer}>
-        {now.isAfter(deadline) ? (
-          <ChipCardStatus />
-        ) : participants === maxParticipants ? (
-          <ChipCardStatus type="Recruitment" />
-        ) : null}
-
-        <h2 className={styles.title}>
-          {title ? title : "Next.js - App Router: Routing Fundamentals"}
-        </h2>
+        <div className={styles.titleWrap}>
+          <div className={styles.chipTitle}>
+            {now.isAfter(deadline) ? (
+              <ChipCardStatus />
+            ) : participants === maxParticipants ? (
+              <ChipCardStatus type="Recruitment" />
+            ) : null}
+            <h2 className={styles.title}>
+              {title ? title : "Next.js - App Router: Routing Fundamentals"}
+            </h2>
+          </div>
+          <DropdownButtonForAdmin challengeId={id} />
+        </div>
         <div className={styles.tags}>
           <Chip type={field} />
           <ChipCategory category={docType} />

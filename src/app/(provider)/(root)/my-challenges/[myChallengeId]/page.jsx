@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./DeletedOrRejected.module.css";
 import clockIcon from "@/assets/ic_clock.svg";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import CheckModal from "@/components/modals/CheckModal";
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
   const challengeId = params?.myChallengeId;
+  const router = useRouter();
 
   const [challenge, setChallenge] = useState(null);
   const [user, setUser] = useState(null);
@@ -31,9 +32,8 @@ export default function DeletedOrRejectedPage() {
     try {
       await api.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
       setMyDelete(true);
-      alert("삭제완료");
-
       setIsModalOpen(false); // 모달 닫기
+      router.refresh;
     } catch (error) {
       console.error("챌린지 삭제 중 오류 발생:", error);
     }
@@ -127,11 +127,7 @@ export default function DeletedOrRejectedPage() {
             <p className={styles.commentTitle}>
               {statusTitle[status]?.subTitle || "알 수 없는 상태입니다."}
             </p>
-            <div>
-              {myDelete === true
-                ? "해당 계정 사용자가 삭제한 챌린지입니다."
-                : reasonComment}
-            </div>
+            <div>{reasonComment}</div>
           </div>
         )}
       </div>
