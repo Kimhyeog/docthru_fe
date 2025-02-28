@@ -82,6 +82,13 @@ const createChallenge = async (dto) => {
   return data;
 };
 
+const deleteChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const getWorks = async (challengeId, cursor) => {
   let url = `/works/${challengeId}/many`;
   if (cursor) {
@@ -312,6 +319,7 @@ const api = {
   deleteParticipate,
   updateWork,
   deleteChallengeByAdmin,
+  deleteChallenge,
 };
 
 export default api;

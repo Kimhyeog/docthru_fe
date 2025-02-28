@@ -14,6 +14,7 @@ import Link from "next/link";
 import nextImg from "@/assets/images/nextJs.png";
 import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
+import api from "@/api/index";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -41,6 +42,8 @@ export default function DeletedOrRejectedPage() {
       try {
         const challengeData = await api.getChallenge(challengeId);
         setChallenge(challengeData);
+
+        console.log(challengeData);
 
         if (challengeData?.application?.userId) {
           const userData = await api.getUserData(
