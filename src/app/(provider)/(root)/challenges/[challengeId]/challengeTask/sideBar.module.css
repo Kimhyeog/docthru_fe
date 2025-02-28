@@ -4,7 +4,6 @@
 }
 .sidebar {
   background-color: #e3ecf1;
-  border-left: 4px solid #202020;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -23,8 +22,17 @@
   z-index: 99;
   transition: 0.8s ease;
   border: 2px solid #f5f5f5;
-  border-left: 24;
+  border-right: none;
+  background-color: white;
+  border-radius: 24px 0 0 24px;
   overflow: hidden;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text {
+  color: #737373;
+  font-size: 16px;
+  font-weight: 600;
 }
 .openBtn {
   width: 100%;
