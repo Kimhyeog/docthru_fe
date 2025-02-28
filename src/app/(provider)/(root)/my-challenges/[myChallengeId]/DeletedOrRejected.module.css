@@ -10,7 +10,7 @@
   padding: 20px 0px;
 }
 
-.Container > div {
+.Container>div {
   padding-bottom: 10px;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -96,6 +96,7 @@
 
 
 }
+
 .header .statusCommentContainer {
   width: 100%;
   background-color: #fafafa;
@@ -154,11 +155,10 @@
 
   flex-direction: column;
 
-  gap: 40px 0px;
+  gap: 10px 0px;
 
-  padding: 10px 0px;
+  padding: 0px;
 
-  min-height: 117px;
 }
 
 .statusCommentContainer .commentTitle {

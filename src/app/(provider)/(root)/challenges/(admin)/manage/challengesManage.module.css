@@ -1,0 +1,113 @@
+.container {
+  padding-top: 10px;
+
+  width: 996px;
+  height: 100vh;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px 0px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0px;
+}
+
+.header_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_title {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23.87px;
+  letter-spacing: 0%;
+}
+
+
+
+.header_main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* 필요한 경우 간격 조정 */
+  width: 100%;
+}
+
+/* searchWrapper 스타일 병합 */
+.searchWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main a {
+  text-decoration: none;
+  color: black;
+}
+
+/* .table_header 스타일 병합 */
+.table_header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 36px;
+  background-color: #262626;
+  border-radius: 8px;
+  color: white;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cell {
+  flex: 1;
+  padding: 11px 0px;
+  padding-left: 13px;
+  text-align: start;
+  font-size: 14px;
+}
+
+.table_header .cell_title {
+  text-align: center;
+  font-size: 14px;
+  flex: 2;
+}
+
+.footer {
+  padding-top: 20px;
+  margin: 0 auto;
+  width: 30%;
+
+  display: flex;
+  align-items: center;
+}
+
+.pageNumber {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
