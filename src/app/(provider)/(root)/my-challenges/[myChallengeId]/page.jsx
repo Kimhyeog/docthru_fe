@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import styles from "./DeletedOrRejected.module.css";
 import clockIcon from "@/assets/ic_clock.svg";
-import clockIcon from "@/assets/ic_clock.svg";
 import Image from "next/image";
 import api from "@/api";
 import Chip from "@/components/Chips/Chip";

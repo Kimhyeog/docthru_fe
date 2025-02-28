@@ -227,11 +227,13 @@ export default function Page() {
         </header>
         <main className={style.main}>
           {sortType === "ongoing" || sortType === "completed" ? (
-            challenges.map((challenge) => (
-              <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
-                <Card {...challenge} />
-              </Link>
-            ))
+            <div className={style.cardContainer}>
+              {challenges.map((challenge) => (
+                <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
+                  <Card {...challenge} />
+                </Link>
+              ))}
+            </div>
           ) : sortType === "application" ? (
             <>
               {/* 헤더 */}
