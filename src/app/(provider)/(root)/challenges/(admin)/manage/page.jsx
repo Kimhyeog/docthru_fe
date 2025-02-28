@@ -7,7 +7,7 @@ import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import api from "@/api/index";
-import WaitingChallengeItem from "../../my-challenges/components/waitingChallengeItem";
+import WaitingChallengeItem from "../../../my-challenges/components/waitingChallengeItem";
 
 const sortAttendTypeArr = {
   "승인 대기": "WAITING",
@@ -119,7 +119,7 @@ export default function AdminManagePage() {
               return (
                 <Link
                   key={challenge.id}
-                  href={`/my-challenges/${challenge.id}`}
+                  href={`/challenges/manage/${challenge.id}`}
                 >
                   {challengeItem}
                 </Link>
