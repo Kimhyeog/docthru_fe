@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
 
-function Dropdown({ label, options, onSelect }) {
+function Dropdown({ label, options, onSelect, firstOption }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]); // 기본값: 첫 번째 옵션
-
+  const [selectedOption, setSelectedOption] = useState(
+    firstOption || options[0]
+  ); // 기본값: 첫 번째 옵션
+  useEffect(() => {
+    if (firstOption) {
+      setSelectedOption(firstOption);
+    }
+  }, [firstOption]);
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);

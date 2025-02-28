@@ -1,5 +1,5 @@
 "use client";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import DeadlineInput from "@/components/Input/DeadlineInput";
 import TextInput from "@/components/Input/TextInput";
 import React, { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import { useParams, useRouter } from "next/navigation";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import api from "@/api";
 import { z } from "zod";
+import dayjs from "dayjs";
 
 function EditChallengeForm() {
   const router = useRouter();
@@ -29,6 +30,7 @@ function EditChallengeForm() {
 
   const params = useParams();
   const challengeId = params.challengeId;
+  const queryClinet = useQueryClient();
 
   const { data: initialChallenge } = useQuery({
     queryFn: () => api.getChallenge(challengeId),
@@ -41,10 +43,11 @@ function EditChallengeForm() {
       setLink(initialChallenge.docUrl);
       setCategory(initialChallenge.field);
       setDocType(initialChallenge.docType);
-      setDate(initialChallenge.deadline);
+      setDate(dayjs(initialChallenge.deadline).format("YYYY-MM-DD"));
       setMaxUsers(initialChallenge.maxParticipants);
       setContent(initialChallenge.content);
     }
+    console.log(initialChallenge);
   }, [initialChallenge]);
 
   const [isValid, setIsValid] = useState({
@@ -62,15 +65,18 @@ function EditChallengeForm() {
       link: link.trim() !== "",
       category: category !== "",
       docType: docType !== "",
-      //   maxUsers: maxUsers.trim() !== "",
+      maxUsers: /^[0-9]+$/.test(maxUsers),
       content: content.trim() !== "",
     });
   }, [title, link, category, docType, maxUsers, date, content]);
 
-  const { mutate: createChallenge } = useMutation({
-    mutationFn: (dto) => api.createChallenge(dto),
+  const { mutate: updateChallenge } = useMutation({
+    mutationFn: (dto) => api.updateChallenge(challengeId, dto),
     onSuccess: (data) => {
       setShowModal(true);
+      queryClinet.invalidateQueries({
+        queryKey: ["challenge", { challengeId }],
+      });
     },
     onError: (error) => {
       console.error("에러 발생:", error.message);
@@ -93,7 +99,7 @@ function EditChallengeForm() {
       maxParticipants: maxUsers ? Number(maxUsers) : 0,
       content: content.trim(),
     };
-    createChallenge(requestBody);
+    updateChallenge(requestBody);
   };
 
   const handleCloseModal = () => {
@@ -120,11 +126,19 @@ function EditChallengeForm() {
           return result.success ? "" : "올바른 링크를 입력하세요";
         }}
       />
-      <Dropdown label="분야" options={categoryOptions} onSelect={setCategory} />
+      <Dropdown
+        label="분야"
+        options={categoryOptions}
+        onSelect={setCategory}
+        firstOption={initialChallenge?.field}
+      />
       <Dropdown
         label="문서 타입"
         options={docTypeOptions}
         onSelect={setDocType}
+        firstOption={
+          initialChallenge?.docType === "BLOG" ? "블로그" : "공식문서"
+        }
       />
       <DeadlineInput label="날짜" value={date} onChange={setDate} />
       <TextInput
@@ -149,7 +163,7 @@ function EditChallengeForm() {
       />
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>
-        성공적으로 수정되었습니다
+        수정되었습니다
       </PopUpModal>
     </div>
   );
