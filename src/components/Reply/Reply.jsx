@@ -6,18 +6,28 @@ import dayjs from "dayjs";
 import { useAuth } from "@/contexts/AuthContext";
 import DropdownMenuForFeedback from "@/app/(provider)/(root)/works/[workId]/_components/DropdownMenuForFeedback";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/api";
 import { useParams } from "next/navigation";
 import Button from "../Button/Button";
 
-const Reply = ({ username, date, content, isMyFeedback, feedbackId }) => {
+const Reply = ({
+  username,
+  date,
+  content,
+  isMyFeedback,
+  feedbackId,
+  challenge: initialChallenge,
+  isAdmin,
+}) => {
   const queryClient = useQueryClient();
   const { isLoggedIn } = useAuth();
   const [edit, setEdit] = useState(false);
   const [updatedFeedback, setUpdateFeedback] = useState(content);
   const params = useParams();
   const workId = params.workId;
+  const challengeId = initialChallenge.id;
+
   const { mutate: updateFeedback } = useMutation({
     mutationFn: (updatedFeedback) =>
       api.updateFeedback(feedbackId, updatedFeedback),
@@ -26,6 +36,13 @@ const Reply = ({ username, date, content, isMyFeedback, feedbackId }) => {
         queryKey: ["feedbacks", { workId }],
       }),
   });
+
+  const { data: challenge } = useQuery({
+    queryFn: () => api.getChallenge(challengeId),
+    queryKey: ["challenge", { challengeId }],
+    initialData: initialChallenge,
+  });
+  const progress = challenge.progress;
 
   const handlebuttonclick = () => {
     updateFeedback(updatedFeedback);
@@ -55,12 +72,13 @@ const Reply = ({ username, date, content, isMyFeedback, feedbackId }) => {
             </span>
           </div>
           <div>
-            {isLoggedIn && isMyFeedback && (
-              <DropdownMenuForFeedback
-                feedbackId={feedbackId}
-                onEdit={() => setEdit(true)}
-              />
-            )}
+            {(isAdmin || (progress !== "COMPLETED" && isMyFeedback)) &&
+              isLoggedIn && (
+                <DropdownMenuForFeedback
+                  feedbackId={feedbackId}
+                  onEdit={() => setEdit(true)}
+                />
+              )}
           </div>
         </div>
       </div>

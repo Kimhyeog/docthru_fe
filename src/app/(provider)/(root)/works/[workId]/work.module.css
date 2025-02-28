@@ -1,3 +1,8 @@
+.layout {
+  background-color: white !important;
+  min-height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -99,4 +104,14 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 14.32px;
+}
+
+.chipCardStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chipCardStatus a {
+  text-decoration-line: none;
 }

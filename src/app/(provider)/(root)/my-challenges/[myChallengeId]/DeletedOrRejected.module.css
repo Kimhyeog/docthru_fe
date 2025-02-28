@@ -1,0 +1,266 @@
+.Container {
+  margin: 0 auto;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px 0px;
+
+  padding: 20px 0px;
+}
+
+.Container>div {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.header {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px 0px;
+}
+
+
+.header .statusTitle {
+  width: 100%;
+  height: 35px;
+
+  background-color: #737373;
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+
+
+  border-radius: 17.5px;
+
+
+
+}
+
+
+.header .statusTitle_WAITING {
+  width: 100%;
+  height: 35px;
+
+  background-color: #FFFDE7;
+  color: #F2BC00;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+
+
+  border-radius: 17.5px;
+
+
+
+}
+
+
+
+
+
+.header .statusCommentContainer {
+  width: 100%;
+  background-color: #FAFAFA;
+
+  border-radius: 16px;
+  border: 1px solid #E5E5E5;
+
+  display: flex;
+
+  align-items: center;
+
+  flex-direction: column;
+
+  gap: 40px 0px;
+
+  padding: 10px 0px;
+
+  min-height: 117px;
+
+}
+
+.statusCommentContainer .commentTitle {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+  text-align: center;
+
+}
+
+.statusCommentContainer div {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+
+
+.cardContainer {
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+
+  padding-left: 5px;
+
+  gap: 16px 0px;
+
+}
+
+.cardContainer .challengeTitle {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.64px;
+  letter-spacing: 0%;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.chips .chip_category {
+  height: 26px;
+  padding: 0px 10px;
+}
+
+.chips .buttonSection {
+  flex: 1;
+  display: flex;
+
+  justify-content: flex-end;
+
+}
+
+.buttonSection button {
+  cursor: pointer;
+
+  width: 139px;
+  height: 43px;
+
+  border: 1px solid #D4D4D4;
+  border-radius: 8px;
+  background-color: white;
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+
+
+  color: #737373;
+
+
+}
+
+
+.cardContainer .challengeContent {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20.8px;
+  letter-spacing: 0%;
+
+}
+
+.cardContainer .footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  color: #525252;
+  gap: 12px;
+}
+
+
+.cardContainer .footer .date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardContainer .footer .participants {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.contentContainer {
+  display: flex;
+
+  flex-direction: column;
+
+  padding-left: 5px;
+
+  gap: 20px 0px;
+}
+
+.linkTitle {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21.48px;
+  letter-spacing: 0%;
+}
+
+.imgContainer {
+  position: relative;
+
+}
+
+.urlImg {
+  width: 100%;
+  height: auto;
+}
+
+.button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  background-color: #F6F8FACC;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  text-decoration: none;
+}

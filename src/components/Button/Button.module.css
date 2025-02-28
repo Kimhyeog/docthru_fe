@@ -36,8 +36,9 @@
 
 /* 링크 열기 버튼 : btn-tranparent */
 .button_gray {
-  background-color: rgba(179, 183, 186, 0.698);
-  color: #404040;
+  width: 100%;
+  background-color: #e5e5e5;
+  color: #737373;
   border: none;
 }
 
@@ -96,10 +97,10 @@
   color: #a3a3a3;
 
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 16.71px;
-
-  border: 0.5px solid gray;
+  font-weight: bolder;
+  border: none;
 }
 
 .button_page_active {
@@ -112,12 +113,6 @@
 }
 
 .button_page:focus {
-  background-color: #262626;
-  color: #ffc117;
-  border: none;
-}
-
-.button_page_arrow:active {
   background-color: #262626;
   color: #ffc117;
   border: none;
@@ -178,4 +173,48 @@
 .custom_black {
   background-color: black;
   color: white;
+}
+
+.load {
+  background-color: black;
+  color: white;
+  width: 90px;
+  height: 32px;
+  gap: 4px;
+  border-radius: 10px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+
+.yes {
+  width: 90px;
+  height: 40px;
+  gap: 4px;
+  border-radius: 12px;
+  border-width: 1px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  background: #262626;
+  border: 1px solid #262626;
+  box-sizing: border-box;
+  color: white;
+}
+.no {
+  width: 90px;
+  height: 40px;
+  gap: 4px;
+  border-radius: 12px;
+  border-width: 1px;
+  padding-top: 2px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  padding-left: 16px;
+  background: #ffffff;
+  border: 1px solid #262626;
+  box-sizing: border-box;
 }

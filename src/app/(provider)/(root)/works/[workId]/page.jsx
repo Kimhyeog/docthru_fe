@@ -10,6 +10,11 @@ import Favorite from "./_components/Favorite";
 import Feedbacks from "./_components/Feedbacks";
 import CreateFeedback from "./_components/CreateFeedback";
 import DropdownMenuforWork from "./_components/DropdownMenuforWork";
+import ChipCardStatus from "@/components/Chips/ChipCardStatus";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import "github-markdown-css/github-markdown.css"; //
+import Link from "next/link";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -20,12 +25,23 @@ async function WorkPage({ params }) {
   const type = challenge?.field;
   const writerData = await api.getUserData(work.userId);
   const feedbacks = await api.getFeedbacks(workId);
+  const { progress, participants, maxParticipants } = challenge;
+
   return (
     <div className={style.container}>
       <div className={style.header}>
         <div className={style.titleContainer}>
-          <h2 className={style.title}>{challenge?.title}</h2>
-          <DropdownMenuforWork writerId={writerData.id} />
+          <div className={style.chipCardStatus}>
+            {progress === "COMPLETED" ? (
+              <ChipCardStatus />
+            ) : participants === maxParticipants ? (
+              <ChipCardStatus type="Recruitment" />
+            ) : null}
+            <Link href={`/challenges/${challengeId}`}>
+              <h2 className={style.title}>{challenge?.title}</h2>
+            </Link>
+          </div>
+          <DropdownMenuforWork writerId={writerData.id} challenge={challenge} />
         </div>
         <div className={style.meta}>
           <Chip type={type}>{type}</Chip>
@@ -44,10 +60,14 @@ async function WorkPage({ params }) {
         </div>
       </div>
       <div className={style.divider} />
-      <div className={style.description}>{work?.description}</div>
+      <div className={`${style.description} markdown-body`}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {work?.description}
+        </ReactMarkdown>
+      </div>
       <div className={style.divider} />
-      <CreateFeedback />
-      <Feedbacks feedbacks={feedbacks} />
+      <CreateFeedback challenge={challenge} />
+      <Feedbacks feedbacks={feedbacks} challenge={challenge} />
     </div>
   );
 }

@@ -1,16 +1,30 @@
 .container {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: black;
   align-items: center;
-
-  gap: 0px 10px;
-
+  padding: 10px;
+  border-bottom: 1px solid #D4D4D4;
 }
 
-.container div {
-  text-align: center;
+.cell {
+  flex: 1;
+  text-align: left;
+  font-size: 14px;
+  height: 10px;
+
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 
 .title {
-  flex: 1;
+  flex: 2;
+  text-align: center;
+  font-size: 14px;
+  height: 10px;
+  padding-left: 0px;
 }

@@ -13,7 +13,7 @@ const Search = ({ onSearch }) => {
 
   // 엔터 키 입력 시 검색 실행
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && searchTerm.trim() !== "") {
+    if (e.key === "Enter") {
       onSearch(searchTerm); // 검색 실행
     }
   };

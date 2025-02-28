@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import style from "../work.module.css";
 import { useAuth } from "@/contexts/AuthContext";
 
-function Feedbacks({ feedbacks: initialFeedbacks }) {
+function Feedbacks({ feedbacks: initialFeedbacks, challenge }) {
   const params = useParams();
   const workId = params.workId;
   const [pageSize, setPageSize] = useState(3);
@@ -43,6 +43,8 @@ function Feedbacks({ feedbacks: initialFeedbacks }) {
               date={feedback.createdAt}
               isMyFeedback={feedback.userId === userMe?.id}
               feedbackId={feedback.id}
+              challenge={challenge}
+              isAdmin={userMe?.role === "ADMIN"}
             />
           );
         })}

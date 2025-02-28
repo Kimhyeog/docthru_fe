@@ -3,22 +3,33 @@ import React, { useState } from "react";
 import style from "../work.module.css";
 import TextBox from "@/components/TextBox/TextBox";
 import Image from "next/image";
-import arrowIcon from "@/assets/arrow_bottom.svg";
+import inactiveArrowIcon from "@/assets/inactive_arrow_bottom.svg";
+import activeArrowIcon from "@/assets/active_arrow_bottom.svg";
 import { useAuth } from "@/contexts/AuthContext";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/api";
 import { useParams, useRouter } from "next/navigation";
 import { useModalStore } from "@/store/useModalStore";
 import LoginCheckModal from "@/components/modals/LoginCheckModal";
 
-function CreateFeedback() {
+function CreateFeedback({ challenge: initialChallenge }) {
   const queryClinet = useQueryClient();
   const { isLoggedIn } = useAuth();
   const router = useRouter();
   const [content, setContent] = useState();
   const params = useParams();
   const workId = params.workId;
+  const challengeId = initialChallenge.id;
   const { checkModalOn, showModal, closeModal } = useModalStore();
+
+  const { data: challenge } = useQuery({
+    queryFn: () => api.getChallenge(challengeId),
+    queryKey: ["challenge", { challengeId }],
+    initialData: initialChallenge,
+  });
+
+  const progress = challenge.progress;
+
   const { mutate: createFeedback } = useMutation({
     mutationFn: ({ workId, content }) => api.createFeedback(workId, content),
     onSuccess: () => queryClinet.invalidateQueries(["feedbacks", { workId }]),
@@ -48,13 +59,23 @@ function CreateFeedback() {
           setContent(e.target.value);
         }}
       ></TextBox>
-      <Image
-        src={arrowIcon}
-        alt="arrowIcon"
-        width={40}
-        height={40}
-        onClick={handleSubmit}
-      />
+      {progress !== "COMPLETED" && content ? (
+        <Image
+          src={activeArrowIcon}
+          alt="activeArrowIcon"
+          width={40}
+          height={40}
+          onClick={handleSubmit}
+        />
+      ) : (
+        <Image
+          src={inactiveArrowIcon}
+          alt="inactiveArrowIcon"
+          width={40}
+          height={40}
+        />
+      )}
+
       <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
     </form>
   );

@@ -10,10 +10,13 @@ import api from "@/api/index";
 import React from "react";
 import { FilterButton } from "@/components/Button/FilterButton";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { useModalStore } from "@/store/useModalStore";
+import LoginCheckModal from "@/components/modals/LoginCheckModal";
 
 export default function ChallengesPage() {
   const router = useRouter();
-
+  const { isLoggedIn } = useAuth();
   // 검색창에 대한 state값
 
   // 불러온 데이터 State 변수
@@ -26,6 +29,8 @@ export default function ChallengesPage() {
   const [selectedProgress, setSelectedProgress] = useState("");
   const [selectedField, setSelectedField] = useState("");
   const [inputWord, setKeyWord] = useState("");
+
+  const { checkModalOn, showModal, closeModal } = useModalStore();
 
   // API에서 데이터 가져오는 함수
   const fetchChallenges = async () => {
@@ -81,6 +86,11 @@ export default function ChallengesPage() {
   // totalPage 상태를 직접 사용
   const totalPages = Math.max(totalPage, 1);
 
+  const onHide = () => {
+    closeModal();
+    router.push("/login");
+  };
+
   // 페이지 변경 핸들러
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -93,6 +103,8 @@ export default function ChallengesPage() {
     setCurrentPage(1);
   };
 
+  console.log(`챌린지 filed :${selectedField} , ${isLoggedIn}`);
+
   return (
     <>
       <div className={style.container}>
@@ -102,15 +114,24 @@ export default function ChallengesPage() {
             <Button
               type="black"
               text="신규 챌린지 신청 +"
-              onClick={() => router.push("/create")}
+              onClick={() => {
+                if (isLoggedIn) {
+                  router.push("/create");
+                  return;
+                }
+                showModal("", false);
+              }}
             />
           </div>
           <div className={style.header_main}>
             <div className={style.searchWrapper}>
               <FilterButton
-                setFiledType={setSelectedField}
+                setSelectedField={setSelectedField}
                 setDocType={setSelectedDocType}
                 setProgress={setSelectedProgress}
+                selectedDocType={selectedDocType}
+                selectedProgress={selectedProgress}
+                selectedField={selectedField}
                 onClick={() => {}}
               />
               <Search onSearch={searchChallenges} />
@@ -139,7 +160,9 @@ export default function ChallengesPage() {
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={`page${currentPage === index + 1 ? "Active" : ""}`}
+                type={`page${
+                  currentPage === Number(index + 1) ? "Active" : ""
+                }`}
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
               />
@@ -154,6 +177,7 @@ export default function ChallengesPage() {
             disabled={currentPage === totalPages}
           />
         </footer>
+        <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
       </div>
     </>
   );
