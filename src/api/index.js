@@ -83,6 +83,13 @@ const createChallenge = async (dto) => {
   return data;
 };
 
+const deleteChallenge = async (challengeId) => {
+  const url = `/challenges/${challengeId}`;
+  const response = await client.delete(url);
+  const data = response.data;
+  return data;
+};
+
 const updateChallenge = async (challengeId, dto) => {
   const url = `/challenges/${challengeId}`;
   const response = await client.put(url, dto);
@@ -320,6 +327,7 @@ const api = {
   deleteParticipate,
   updateWork,
   deleteChallengeByAdmin,
+  deleteChallenge,
   updateChallenge,
 };
 
