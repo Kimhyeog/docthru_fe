@@ -10,6 +10,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import showMoreIcon from "@/assets/ic_show_more.svg";
 import showLessIcon from "@/assets/ic_show_less.svg";
+import medal from "@/assets/ic_medal.svg";
 
 function BestWork({ work, user }) {
   const [showText, setShowText] = useState(false);
@@ -31,7 +32,10 @@ function BestWork({ work, user }) {
         showText ? styles.fullText : styles.shortText
       }`}
     >
-      <div className={styles.header}>최다 추천 번역</div>
+      <div className={styles.header}>
+        <Image src={medal} alt="medal" width={16} height={16} />
+        <div>최다 추천 번역</div>
+      </div>
       <div className={styles.userContainer}>
         <div className={styles.userHeader}>
           <div className={styles.userInfo}>
