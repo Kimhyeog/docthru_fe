@@ -10,9 +10,9 @@
   padding: 20px 0px;
 }
 
-.Container>div {
+.Container > div {
   padding-bottom: 10px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .header {
@@ -22,7 +22,6 @@
 
   gap: 30px 0px;
 }
-
 
 .header .statusTitle {
   width: 100%;
@@ -38,27 +37,21 @@
 
   text-align: center;
 
-
   font-family: Pretendard;
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
   letter-spacing: 0%;
 
-
   border-radius: 17.5px;
-
-
-
 }
-
 
 .header .statusTitle_WAITING {
   width: 100%;
   height: 35px;
 
-  background-color: #FFFDE7;
-  color: #F2BC00;
+  background-color: #fffde7;
+  color: #f2bc00;
 
   display: flex;
 
@@ -67,33 +60,23 @@
 
   text-align: center;
 
-
   font-family: Pretendard;
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
   letter-spacing: 0%;
 
-
   border-radius: 17.5px;
-
-
-
 }
-
-
-
-
 
 .header .statusCommentContainer {
   width: 100%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 
   border-radius: 16px;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
 
   display: flex;
-
 
   align-items: center;
 
@@ -104,7 +87,6 @@
   padding: 10px 0px;
 
   min-height: 117px;
-
 }
 
 .statusCommentContainer .commentTitle {
@@ -114,7 +96,6 @@
   line-height: 16.71px;
   letter-spacing: 0%;
   text-align: center;
-
 }
 
 .statusCommentContainer div {
@@ -126,8 +107,6 @@
   text-align: center;
 }
 
-
-
 .cardContainer {
   width: 100%;
   display: flex;
@@ -137,7 +116,6 @@
   padding-left: 5px;
 
   gap: 16px 0px;
-
 }
 
 .cardContainer .challengeTitle {
@@ -154,7 +132,6 @@
   padding: 10px 0px;
 
   min-height: 117px;
-
 }
 
 .statusCommentContainer .commentTitle {
@@ -164,7 +141,6 @@
   line-height: 16.71px;
   letter-spacing: 0%;
   text-align: center;
-
 }
 
 .statusCommentContainer div {
@@ -176,8 +152,6 @@
   text-align: center;
 }
 
-
-
 .cardContainer {
   width: 100%;
   display: flex;
@@ -187,7 +161,6 @@
   padding-left: 5px;
 
   gap: 16px 0px;
-
 }
 
 .cardContainer .challengeTitle {
@@ -204,7 +177,6 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
-
 }
 
 .chips .chip_category {
@@ -217,7 +189,6 @@
   display: flex;
 
   justify-content: flex-end;
-
 }
 
 .buttonSection button {
@@ -226,7 +197,7 @@
   width: 139px;
   height: 43px;
 
-  border: 1px solid #D4D4D4;
+  border: 1px solid #d4d4d4;
   border-radius: 8px;
   background-color: white;
   font-family: Pretendard;
@@ -236,12 +207,8 @@
   letter-spacing: 0%;
   text-align: center;
 
-
   color: #737373;
-
-
 }
-
 
 .cardContainer .challengeContent {
   font-family: Pretendard;
@@ -249,7 +216,6 @@
   font-size: 16px;
   line-height: 20.8px;
   letter-spacing: 0%;
-
 }
 
 .cardContainer .footer {
@@ -260,7 +226,6 @@
   color: #525252;
   gap: 12px;
 }
-
 
 .cardContainer .footer .date {
   display: flex;
@@ -277,7 +242,6 @@
 .contentContainer {
   display: flex;
 
-
   flex-direction: column;
 
   padding-left: 5px;
@@ -291,8 +255,6 @@
 
 .linkTitle {
   font-family: Pretendard;
-.linkTitle {
-  font-family: Pretendard;
   font-weight: 600;
   font-size: 18px;
   line-height: 21.48px;
@@ -301,7 +263,6 @@
 
 .imgContainer {
   position: relative;
-
 }
 
 .urlImg {
@@ -314,7 +275,7 @@
   top: 5px;
   right: 5px;
   z-index: 10;
-  background-color: #F6F8FACC;
+  background-color: #f6f8facc;
   color: black;
   border: none;
   padding: 5px 10px;
@@ -329,7 +290,6 @@
 
 .imgContainer {
   position: relative;
-
 }
 
 .urlImg {
@@ -342,7 +302,7 @@
   top: 5px;
   right: 5px;
   z-index: 10;
-  background-color: #F6F8FACC;
+  background-color: #f6f8facc;
   color: black;
   border: none;
   padding: 5px 10px;
