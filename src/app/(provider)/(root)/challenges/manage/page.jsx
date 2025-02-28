@@ -58,6 +58,10 @@ export default function AdminManagePage() {
     fetchMyChallenges();
   }, [fetchMyChallenges]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchInput]);
+
   return (
     <>
       <div className={style.container}>
