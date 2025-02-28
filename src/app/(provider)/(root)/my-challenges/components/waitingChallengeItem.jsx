@@ -1,5 +1,7 @@
 import ChipStatus from "@/components/Chips/ChipStatus";
 import style from "./waitingChallengeItem.module.css"; // CSS 모듈 경로를 확인하고 제대로 import
+import setTypeEngToKor from "../Utility/setTypeToKor"; // 타입명 한글로 바꾸기
+import setUppercaseToCategory from "../Utility/setfieldToCase"; // 대문자명필드 지정한 카테고리명으로 바꾸기
 
 const statusText = {
   WAITING: "승인 대기",
@@ -23,8 +25,8 @@ export default function WaitingChallengeItem({
   return (
     <div className={style.container}>
       <div className={style.cell}>{no}</div>
-      <div className={style.cell}>{docType}</div>
-      <div className={style.cell}>{field}</div>
+      <div className={style.cell}>{setTypeEngToKor(docType)}</div>
+      <div className={style.cell}>{setUppercaseToCategory(field)}</div>
       <div className={style.title}>{title}</div>
       <div className={style.cell}>{maxParticipants}</div>
       <div className={style.cell}>
