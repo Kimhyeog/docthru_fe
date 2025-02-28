@@ -14,7 +14,6 @@ import Link from "next/link";
 import nextImg from "@/assets/images/nextJs.png";
 import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
-import api from "@/api/index";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -24,16 +23,45 @@ export default function DeletedOrRejectedPage() {
   const [user, setUser] = useState(null);
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [myDelete, setMyDelete] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleConfirm = () => {
-    setIsModalOpen(false); // 모달 닫기
+  const handleConfirm = async () => {
+    try {
+      await api.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
+      setMyDelete(true);
+      alert("삭제완료");
+
+      setIsModalOpen(false); // 모달 닫기
+    } catch (error) {
+      console.error("챌린지 삭제 중 오류 발생:", error);
+    }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false); // 모달 닫기
   };
+
+  // 상태 업데이트를 감지하는 useEffect 추가
+  useEffect(() => {
+    console.log("myDelete 상태 변경됨:", myDelete);
+  }, [myDelete]); // myDelete가 변경될 때마다 실행됨
+
+  // 삭제 완료 시 자동으로 챌린지 데이터 다시 불러오기
+  useEffect(() => {
+    if (myDelete) {
+      async function fetchUpdatedData() {
+        try {
+          const updatedChallengeData = await api.getChallenge(challengeId);
+          setChallenge(updatedChallengeData);
+        } catch (error) {
+          console.error("업데이트된 챌린지 데이터 불러오기 실패:", error);
+        }
+      }
+      fetchUpdatedData();
+    }
+  }, [myDelete]); // ✅ myDelete가 변경될 때만 실행
 
   useEffect(() => {
     if (!challengeId) return;
@@ -42,8 +70,6 @@ export default function DeletedOrRejectedPage() {
       try {
         const challengeData = await api.getChallenge(challengeId);
         setChallenge(challengeData);
-
-        console.log(challengeData);
 
         if (challengeData?.application?.userId) {
           const userData = await api.getUserData(
@@ -100,7 +126,11 @@ export default function DeletedOrRejectedPage() {
             <p className={styles.commentTitle}>
               {statusTitle[status]?.subTitle || "알 수 없는 상태입니다."}
             </p>
-            <div>{reasonComment}</div>
+            <div>
+              {reasonComment === null
+                ? "해당 계정 사용자가 삭제한 챌린지입니다."
+                : reasonComment}
+            </div>
           </div>
         )}
       </div>
