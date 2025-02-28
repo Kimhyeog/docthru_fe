@@ -3,12 +3,10 @@
   margin: 0 auto;
 
   width: 496px;
-
 }
 
 /* ✅ 모달 내부 컨텐츠 크기 조정 */
 .modal-content-custom {
-
   height: 423px;
   display: flex;
   flex-direction: column;
@@ -18,7 +16,7 @@
   gap: 10px;
 }
 
-.modal-content-custom>h2 {
+.modal-content-custom > h2 {
   width: 90%;
   font-family: Pretendard;
   font-weight: 700;
@@ -30,40 +28,30 @@
 
   padding: 10px 0px;
 
-
   border-bottom: 1px solid rgba(128, 128, 128, 0.686);
-
 }
 
-.modal-content-custom>.content {
+.modal-content-custom > .content {
   flex: 1;
 
   width: 90%;
-
 }
 
-.modal-content-custom>.content>p {
+.modal-content-custom > .content > p {
   font-family: Pretendard;
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
   letter-spacing: 0%;
-
 }
 
-.modal-content-custom>.content>textarea {
+.modal-content-custom > .content > textarea {
   width: 100%;
   height: 80%;
   padding: 10px 10px;
   resize: none;
 }
 
-
-.modal-content-custom>.footer {
+.modal-content-custom > .footer {
   width: 100%;
-}
-
-/* ✅ 모달에서 사용할 버튼 크기 */
-.modal-button {
-  width: 90%;
 }

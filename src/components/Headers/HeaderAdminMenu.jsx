@@ -8,7 +8,7 @@ function HeaderAdminMenu() {
       <Link href="/challenges/manage" className={styles.link}>
         챌린지 관리
       </Link>
-      <Link href="/challenges" className={styles.link}>
+      <Link href="/challenges/admin" className={styles.link}>
         챌린지 목록
       </Link>
     </>

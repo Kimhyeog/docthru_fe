@@ -6,10 +6,19 @@ import { Modal } from "react-bootstrap";
 import Button from "@/components/Button/Button";
 
 export default function RefusalOrDeleteModal({ type, show, onHide }) {
+  const handleClose = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (onHide) {
+      onHide(e);
+    }
+  };
   return (
     <Modal
       show={show}
-      onHide={onHide}
+      onHide={handleClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered
       dialogClassName={style["modal-custom"]} // ✅ 모달 가로 크기 조정
@@ -23,8 +32,11 @@ export default function RefusalOrDeleteModal({ type, show, onHide }) {
       <Button
         type={"black"}
         text={`전송`}
-        onClick={onHide}
-        className={style["modal-button"]} // ✅ 버튼 크기 적용
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onHide();
+        }}
       />
     </Modal>
   );

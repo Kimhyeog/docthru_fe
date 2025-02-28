@@ -84,7 +84,7 @@ const createChallenge = async (dto) => {
 };
 
 const deleteChallenge = async (challengeId) => {
-  const url = `/challenges/${challengeId}`;
+  const url = `/application/${challengeId}`;
   const response = await client.delete(url);
   const data = response.data;
   return data;
@@ -199,8 +199,6 @@ const getChallenges = async ({
   if (progress) params.progress = progress;
   if (field) params.field = field;
   params.page = page;
-
-  console.log("📌 API 요청 params:", params); // 추가된 로그
 
   try {
     const response = await client.get("/challenges", { params });

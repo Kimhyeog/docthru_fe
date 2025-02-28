@@ -182,14 +182,11 @@ function ChallengeTask() {
 
   const handleSave = () => {
     saveWork(content);
-    console.log("임시 저장:", content);
   };
   const handleSubmit = () => {
-    console.log("제출 하기:", content);
     createWork(content);
   };
   const handleGiveUp = () => {
-    console.log("포기 하기", content);
     giveUp();
   };
 
