@@ -18,6 +18,7 @@ const Reply = ({
   isMyFeedback,
   feedbackId,
   challenge: initialChallenge,
+  isAdmin,
 }) => {
   const queryClient = useQueryClient();
   const { isLoggedIn } = useAuth();
@@ -71,12 +72,13 @@ const Reply = ({
             </span>
           </div>
           <div>
-            {progress !== "COMPLETED" && isLoggedIn && isMyFeedback && (
-              <DropdownMenuForFeedback
-                feedbackId={feedbackId}
-                onEdit={() => setEdit(true)}
-              />
-            )}
+            {(isAdmin || (progress !== "COMPLETED" && isMyFeedback)) &&
+              isLoggedIn && (
+                <DropdownMenuForFeedback
+                  feedbackId={feedbackId}
+                  onEdit={() => setEdit(true)}
+                />
+              )}
           </div>
         </div>
       </div>

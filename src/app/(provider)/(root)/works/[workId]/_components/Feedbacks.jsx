@@ -44,6 +44,7 @@ function Feedbacks({ feedbacks: initialFeedbacks, challenge }) {
               isMyFeedback={feedback.userId === userMe?.id}
               feedbackId={feedback.id}
               challenge={challenge}
+              isAdmin={userMe?.role === "ADMIN"}
             />
           );
         })}
