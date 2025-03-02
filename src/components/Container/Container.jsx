@@ -21,7 +21,6 @@ const Container = ({ date, challenge: initialChallenge }) => {
     mutationFn: () => api.participateChallenge(challengeId),
     onSuccess: (data) => {
       const workId = data.workId;
-      console.log(data);
       if (!workId) {
         router.push(`/challenges/${challengeId}/challengeTask`); // 바로 가는가? ㄴㄴ work가 있으면 그페이지로 가야함
       } else {
@@ -67,6 +66,7 @@ const Container = ({ date, challenge: initialChallenge }) => {
       </div>
       <Button
         type="yellow"
+        width={"100%"}
         text={"원문 보기"}
         // onClick={() => {}}
       />
@@ -74,12 +74,14 @@ const Container = ({ date, challenge: initialChallenge }) => {
       {progress === "COMPLETED" ? (
         <Button
           type={"gray"}
+          width={"100%"}
           text={"작업 도전하기"}
           // onClick={() => {}} 참여 토큰 생성 하고 , 페이지 이동,
         />
       ) : (
         <Button
           type={"black"}
+          width={"100%"}
           text={"작업 도전하기"}
           onClick={() => {
             handleParticipateClick();

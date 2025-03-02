@@ -22,14 +22,26 @@ const btnTypeArr = [
   { no: style.no },
 ];
 
-export default function Button({ type, text, onClick, icon, ...props }) {
+export default function Button({
+  type,
+  text,
+  onClick,
+  icon,
+  width,
+  height,
+  ...props
+}) {
   // btnTypeArr에서 type에 해당하는 클래스 찾기
   const buttonClass = btnTypeArr.find((btn) => btn[type]);
 
   return (
     <button
       onClick={onClick}
-      className={`${style.button} ${buttonClass ? buttonClass[type] : ""} `}
+      className={`${style.button} ${buttonClass ? buttonClass[type] : ""}`}
+      style={{
+        width: width || "auto", // width가 있으면 적용, 없으면 자동 크기
+        height: height || "auto", // height가 있으면 적용, 없으면 자동 크기
+      }}
       {...props}
     >
       {text}

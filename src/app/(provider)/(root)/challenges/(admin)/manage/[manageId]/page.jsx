@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import styles from "./DeletedOrRejected.module.css";
+import styles from "./challengesManageId.module.css";
 import clockIcon from "@/assets/ic_clock.svg";
 import Image from "next/image";
 import api from "@/api";
@@ -14,49 +14,37 @@ import Link from "next/link";
 import nextImg from "@/assets/images/nextJs.png";
 import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
+import Button from "@/components/Button/Button";
+import RefusalOrDeleteModal from "@/components/modals/RefusalOrDeleteModal";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
-  const challengeId = params?.myChallengeId;
+  const challengeId = params?.manageId; // ✅ [manageId]와 일치하는지 확인
+
+  console.log("challengeId:", challengeId);
   const router = useRouter();
 
   const [challenge, setChallenge] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [works, setWorks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [myDelete, setMyDelete] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleConfirm = async () => {
+  const handleAcceptByAdmin = async () => {
     try {
-      await api.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
-      setMyDelete(true);
-      setIsModalOpen(false); // 모달 닫기
+      await api.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
+      window.location.reload();
+
       router.refresh;
     } catch (error) {
-      console.error("챌린지 삭제 중 오류 발생:", error);
+      console.error("챌린지 승인인 중 오류 발생:", error);
     }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false); // 모달 닫기
   };
-
-  // 삭제 완료 시 자동으로 챌린지 데이터 다시 불러오기
-  useEffect(() => {
-    if (myDelete) {
-      async function fetchUpdatedData() {
-        try {
-          const updatedChallengeData = await api.getChallenge(challengeId);
-          setChallenge(updatedChallengeData);
-        } catch (error) {
-          console.error("업데이트된 챌린지 데이터 불러오기 실패:", error);
-        }
-      }
-      fetchUpdatedData();
-    }
-  }, [myDelete]); // ✅ myDelete가 변경될 때만 실행
 
   useEffect(() => {
     if (!challengeId) return;
@@ -103,26 +91,30 @@ export default function DeletedOrRejectedPage() {
   const statusTitle = {
     DELETED: { title: "삭제된 챌린지입니다.", subTitle: "삭제 사유" },
     REJECTED: { title: "신청이 거절된 챌린지입니다.", subTitle: "거절 사유" },
-    WAITING: { title: "승인 대기 중입니다." },
+    ACCEPTED: { title: "신청이 승인된 챌린지입니다." },
   };
+
+  function getStatusClass(status) {
+    switch (status) {
+      case "ACCEPTED":
+        return styles.statusTitle_WAITING;
+      case "REJECTED":
+        return styles.statusTitle_REJECTED;
+      default:
+        return ""; // 기본 스타일 (DELETED 포함)
+    }
+  }
 
   return (
     <div className={styles.Container}>
       <div className={styles.header}>
-        <div
-          className={`${styles.statusTitle} ${
-            status === "WAITING"
-              ? styles.statusTitle_WAITING
-              : status === "DELETED"
-              ? styles.statusTitle
-              : status === "REJECTED"
-              ? styles.statusTitle_REJECTED
-              : ""
-          }`}
-        >
-          {statusTitle[status]?.title || "알 수 없는 상태입니다."}
-        </div>
         {status !== "WAITING" && (
+          <div className={`${styles.statusTitle} ${getStatusClass(status)}`}>
+            {statusTitle[status]?.title || "알 수 없는 상태입니다."}
+          </div>
+        )}
+
+        {status !== "WAITING" && status !== "ACCEPTED" && (
           <div className={styles.statusCommentContainer}>
             <p className={styles.commentTitle}>
               {statusTitle[status]?.subTitle || "알 수 없는 상태입니다."}
@@ -131,28 +123,12 @@ export default function DeletedOrRejectedPage() {
           </div>
         )}
       </div>
+
       <div className={styles.cardContainer}>
         <div className={styles.challengeTitle}>{title}</div>
         <div className={styles.chips}>
           <Chip type={challenge.field}>{challenge.field}</Chip>
           <ChipCategory category={challenge.docType} />
-          {status === "WAITING" && (
-            <div className={styles.buttonSection}>
-              <button
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                취소하기
-              </button>
-            </div>
-          )}
-          <CheckModal
-            show={isModalOpen}
-            onHide={handleCancel}
-            text={"정말 취소하시겠어요?"}
-            onClick={handleConfirm}
-          />
         </div>
         <div className={styles.challengeContent}>{content}</div>
         <div className={styles.footer}>
@@ -191,6 +167,38 @@ export default function DeletedOrRejectedPage() {
             링크 열기 <FaArrowRight />
           </Link>
         </div>
+      </div>
+      <div className={styles.adminBtns}>
+        {status === "WAITING" && (
+          <Button
+            type={"red"}
+            text={"거절하기"}
+            width={153}
+            height={48}
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+          />
+        )}
+        {status === "WAITING" && (
+          <Button
+            type={"black"}
+            text={"승인하기"}
+            width={153}
+            height={48}
+            onClick={() => {
+              handleAcceptByAdmin(challengeId);
+
+              alert("챌린지가 승인되었습니다.");
+            }}
+          />
+        )}
+        <RefusalOrDeleteModal
+          show={isModalOpen}
+          type={"거절"}
+          onHide={handleCancel}
+          challengeId={challengeId}
+        />
       </div>
     </div>
   );
