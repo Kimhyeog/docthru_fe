@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./RefusalOrDeleteModal.module.css";
 import { Modal } from "react-bootstrap";
 import Button from "@/components/Button/Button";
+import api from "@/api/index";
+import { useState } from "react";
 
 export default function RefusalOrDeleteModal({
   type,
@@ -11,38 +13,56 @@ export default function RefusalOrDeleteModal({
   onHide,
   challengeId,
 }) {
-  const handleClose = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  const [inputReason, setInputReason] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const rejectChallenge = async () => {
+    if (!inputReason.trim()) {
+      alert(`${type} 사유를 입력해주세요.`);
+      return;
     }
-    if (onHide) {
-      onHide(e);
+
+    try {
+      setIsLoading(true);
+      await api.rejectedChallengeByAdmin(challengeId, inputReason);
+      alert("챌린지가 거절되었습니다.");
+      onHide(); // API 요청 후 모달 닫기
+    } catch (error) {
+      console.error("챌린지 거절 실패:", error);
+      alert("챌린지 거절에 실패했습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Modal
       show={show}
-      onHide={handleClose}
+      onHide={onHide}
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      dialogClassName={style["modal-custom"]} // ✅ 모달 가로 크기 조정
-      contentClassName={style["modal-content-custom"]} // ✅ 내부 컨텐츠 크기 조정
+      dialogClassName={style["modal-custom"]}
+      contentClassName={style["modal-content-custom"]}
     >
       <h2>{`${type} 사유`}</h2>
       <div className={style.content}>
         <p>내용</p>
-        <textarea placeholder={`${type} 사유를 입력해주세요.`} />
+        <textarea
+          placeholder={`${type} 사유를 입력해주세요.`}
+          value={inputReason}
+          onChange={(e) => setInputReason(e.target.value)}
+        />
       </div>
       <Button
-        width={`90%`}
-        type={"black"}
-        text={`전송`}
+        width="90%"
+        type="black"
+        text={isLoading ? "처리 중..." : "전송"}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          onHide();
+          rejectChallenge();
         }}
+        disabled={isLoading}
       />
     </Modal>
   );
