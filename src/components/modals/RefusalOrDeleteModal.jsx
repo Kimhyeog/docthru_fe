@@ -26,6 +26,7 @@ export default function RefusalOrDeleteModal({
       setIsLoading(true);
       await api.rejectedChallengeByAdmin(challengeId, inputReason);
       alert("챌린지가 거절되었습니다.");
+      window.location.reload();
       onHide(); // API 요청 후 모달 닫기
     } catch (error) {
       console.error("챌린지 거절 실패:", error);
