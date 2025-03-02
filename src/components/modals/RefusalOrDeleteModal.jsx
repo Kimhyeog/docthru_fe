@@ -5,7 +5,12 @@ import style from "./RefusalOrDeleteModal.module.css";
 import { Modal } from "react-bootstrap";
 import Button from "@/components/Button/Button";
 
-export default function RefusalOrDeleteModal({ type, show, onHide }) {
+export default function RefusalOrDeleteModal({
+  type,
+  show,
+  onHide,
+  challengeId,
+}) {
   const handleClose = (e) => {
     if (e) {
       e.preventDefault();
@@ -30,6 +35,7 @@ export default function RefusalOrDeleteModal({ type, show, onHide }) {
         <textarea placeholder={`${type} 사유를 입력해주세요.`} />
       </div>
       <Button
+        width={`90%`}
         type={"black"}
         text={`전송`}
         onClick={(e) => {
