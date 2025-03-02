@@ -34,6 +34,8 @@ export default function DeletedOrRejectedPage() {
   const handleAcceptByAdmin = async () => {
     try {
       await api.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
+      window.location.reload();
+
       router.refresh;
     } catch (error) {
       console.error("챌린지 승인인 중 오류 발생:", error);
@@ -112,7 +114,7 @@ export default function DeletedOrRejectedPage() {
           </div>
         )}
 
-        {status !== "WAITING" && (
+        {status !== "WAITING" && status !== "ACCEPTED" && (
           <div className={styles.statusCommentContainer}>
             <p className={styles.commentTitle}>
               {statusTitle[status]?.subTitle || "알 수 없는 상태입니다."}
@@ -186,6 +188,7 @@ export default function DeletedOrRejectedPage() {
             height={48}
             onClick={() => {
               handleAcceptByAdmin(challengeId);
+
               alert("챌린지가 승인되었습니다.");
             }}
           />
