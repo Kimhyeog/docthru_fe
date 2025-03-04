@@ -22,6 +22,7 @@ async function ChallengeDetailPage({ params }) {
   const works = await api.getWorks(challengeId);
   const { progress, participants, maxParticipants } = challenge;
   const topLikeWorks = await api.getTopLikeWorks(challengeId);
+  console.log(user);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>

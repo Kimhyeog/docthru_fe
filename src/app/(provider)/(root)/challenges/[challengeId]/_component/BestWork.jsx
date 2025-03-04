@@ -97,6 +97,39 @@ function BestWork({ work, user }) {
           )}
         </div>
       )}
+      <div
+        className={`${styles.description} ${
+          isOverflowing && !showText && styles.collapsed
+        }`}
+        ref={descriptionRef}
+      >
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {work.description}
+        </ReactMarkdown>
+      </div>
+      {isOverflowing && (
+        <div
+          className={styles.button}
+          onClick={() => setShowText((prev) => !prev)}
+        >
+          {showText ? "접기" : "더보기"}
+          {showText ? (
+            <Image
+              src={showLessIcon}
+              alt="show less icon"
+              width={24}
+              height={24}
+            />
+          ) : (
+            <Image
+              src={showMoreIcon}
+              alt="show less icon"
+              width={24}
+              height={24}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }
