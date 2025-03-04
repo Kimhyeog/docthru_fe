@@ -13,9 +13,8 @@ import DropdownMenuforWork from "./_components/DropdownMenuforWork";
 import ChipCardStatus from "@/components/Chips/ChipCardStatus";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import "github-markdown-css/github-markdown.css"; //
+import "github-markdown-css/github-markdown.css";
 import Link from "next/link";
-import rehypeRaw from "rehype-raw";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -54,7 +53,7 @@ async function WorkPage({ params }) {
         <div className={style.users}>
           <Image src={keyboard} alt="keyboradIcon" width={24} height={24} />
           <p className={style.nickname}>{writerData.nickname}</p>
-          <Favorite work={work} />
+          <Favorite work={work} progress={progress} />
         </div>
         <div className={style.favoriteCount}>
           {dayjs(work.lastModifiedAt).format("YY/MM/DD")}
@@ -62,7 +61,7 @@ async function WorkPage({ params }) {
       </div>
       <div className={style.divider} />
       <div className={`${style.description} markdown-body`}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {work?.description}
         </ReactMarkdown>
       </div>
