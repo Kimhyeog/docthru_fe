@@ -13,6 +13,9 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useModalStore } from "@/store/useModalStore";
 import LoginCheckModal from "@/components/modals/LoginCheckModal";
+import pageRightActive from "@/assets/ic_page_right_active.svg";
+import pageLeft from "@/assets/ic_page_left.svg";
+import Image from "next/image";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -140,33 +143,45 @@ export default function ChallengesPage() {
         </main>
 
         <footer className={style.footer}>
-          {/* 이전 페이지 버튼 */}
           <Button
-            type="pageArrow"
-            text="<"
+            type={"none"}
+            icon={
+              <Image
+                src={pageLeft}
+                alt="page left icon"
+                width={40}
+                height={40}
+              />
+            }
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           />
-
           <div className={style.pageNumber}>
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
                 type={`page${
-                  currentPage === Number(index + 1) ? "Active" : ""
-                }`}
+                  currentPage === index + 1 ? "Active" : "Inactive"
+                }`} // ✅ 수정
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
+                width={40}
+                height={40}
               />
             ))}
           </div>
-
-          {/* 다음 페이지 버튼 */}
           <Button
-            type="pageArrow"
-            text=">"
+            type={"none"}
+            icon={
+              <Image
+                src={pageRightActive}
+                alt="page right icon"
+                width={40}
+                height={40}
+              />
+            }
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage >= totalPages} // ✅ 수정
           />
         </footer>
         <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>

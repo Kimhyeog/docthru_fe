@@ -61,19 +61,16 @@
 }
 
 .footer {
-  padding: 20px 0 34px 0;
+  padding-top: 20px;
   margin: 0 auto;
-  width: 30%;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
 .pageNumber {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  gap: 20px;
+  gap: 6px;
 }
