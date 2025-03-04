@@ -2,7 +2,7 @@
   padding-top: 10px;
 
   width: 996px;
-  height: 100vh;
+
   margin: 0 auto;
 
   display: flex;
@@ -61,7 +61,7 @@
 }
 
 .footer {
-  padding-top: 20px;
+  padding: 20px 0 34px 0;
   margin: 0 auto;
   width: 30%;
 
