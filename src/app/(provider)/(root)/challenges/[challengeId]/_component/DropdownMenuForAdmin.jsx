@@ -2,6 +2,7 @@
 import api from "@/api";
 import DropdownMenuButton from "@/components/Dropdown/DropdownMenuButton";
 import CheckModal from "@/components/modals/CheckModal";
+import RefusalOrDeleteModal from "@/components/modals/RefusalOrDeleteModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -47,15 +48,18 @@ function DropdownMenuForAdmin() {
           option="admin"
         />
       )}
-      <CheckModal
-        text={"정말로 삭제하시겠습니까?"}
+      <RefusalOrDeleteModal
+        type={"삭제"}
         show={checkModalOn}
-        onHide={() => {
+        onHide={(e) => {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           setCheckModalOn(false);
         }}
-        onClick={() => {
-          deleteChallenge();
-        }}
+        challengeId={challengeId}
+        isAdmin={true}
       />
     </div>
   );

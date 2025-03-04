@@ -46,6 +46,7 @@ export default function ChallengesPage() {
           : selectedField || undefined,
         page: pageToSend,
       });
+      console.log(response);
 
       setChallenges(response.challenges);
       setTotalPage(Math.max(1, response.totalPages)); // 🔥 페이지 수 업데이트

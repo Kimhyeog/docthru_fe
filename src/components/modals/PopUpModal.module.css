@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.modal-content-custom>p {
+.modal-content-custom > p {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -27,8 +27,7 @@
   text-align: center;
 }
 
-.modal-content-custom>div {
-
+.modal-content-custom > div {
   display: flex;
 
   justify-content: flex-end;
@@ -36,8 +35,9 @@
 
 /* ✅ 모달에서 사용할 버튼 크기 */
 .modal-button {
-  width: 120px;
-  height: 48px;
   margin-bottom: 20px;
   margin-right: 20px;
+  border-radius: 12px;
+  background-color: #262626;
+  color: white;
 }

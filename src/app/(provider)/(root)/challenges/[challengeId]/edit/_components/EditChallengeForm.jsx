@@ -159,6 +159,7 @@ function EditChallengeForm() {
         text="수정하기"
         onClick={handleSubmit}
         disabled={!Object.values(isValid).every(Boolean)}
+        width={"100%"}
       />
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>

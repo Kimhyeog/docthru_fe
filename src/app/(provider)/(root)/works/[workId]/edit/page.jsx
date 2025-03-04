@@ -139,16 +139,23 @@ function WorkEditPage() {
             onClick={handleGiveUp}
             text={"포기"}
             icon={<LuDoorOpen />}
+            width={81}
+            height={40}
+            type={"outline_icon"}
           />
           <Button
             className={styles.saveDraftButton}
             onClick={handleSave}
             text={"임시저장"}
+            width={90}
+            height={40}
           />
           <Button
             className={styles.submitButton}
             onClick={handleSubmit}
             text={"수정하기"}
+            width={90}
+            height={40}
           />
         </div>
       </div>
@@ -175,10 +182,16 @@ function WorkEditPage() {
             />
             <p>임시 저장된 작엄물이 있어요. 저장된 작업물을 불러오시겠어요??</p>
           </div>
-          <Button type={"load"} text={"불러오기"} onClick={handleLoad} />
+          <Button
+            type={"load"}
+            text={"불러오기"}
+            onClick={handleLoad}
+            width={90}
+            height={32}
+          />
         </div>
       )}
-      <Sidebar width={500}></Sidebar>
+      <Sidebar width={500} url={challenge.docUrl}></Sidebar>
       <CheckModal
         text={"이전 작업물을 불러오시겠어요?"}
         show={checkModalOn}

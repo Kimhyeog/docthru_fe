@@ -435,6 +435,13 @@ const acceptChallengeByAdmin = async (challengeId) => {
   }
 };
 
+const getMyWork = async (challengeId) => {
+  const url = `/works/${challengeId}/myWork`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -468,6 +475,7 @@ const api = {
   getApplicationsByAdmin,
   rejectedChallengeByAdmin,
   acceptChallengeByAdmin,
+  getMyWork,
 };
 
 export default api;

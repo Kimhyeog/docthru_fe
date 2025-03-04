@@ -15,6 +15,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "github-markdown-css/github-markdown.css"; //
 import Link from "next/link";
+import rehypeRaw from "rehype-raw";
 
 async function WorkPage({ params }) {
   const param = await params;
@@ -61,7 +62,7 @@ async function WorkPage({ params }) {
       </div>
       <div className={style.divider} />
       <div className={`${style.description} markdown-body`}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
           {work?.description}
         </ReactMarkdown>
       </div>

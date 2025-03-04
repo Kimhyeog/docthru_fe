@@ -125,7 +125,12 @@ export default function FilterModal({
       </div>
 
       <div className={style.btnSection}>
-        <Button text={"초기화"} onClick={handleResetOnClick} />
+        <Button
+          text={"초기화"}
+          onClick={handleResetOnClick}
+          width={134}
+          height={40}
+        />
         <Button
           type={"black"}
           text={"적용하기"}
@@ -135,6 +140,8 @@ export default function FilterModal({
             setSelectedField(selectedFields.join(",")); // 문자열 형태로 변환하여 전달
             onClose();
           }}
+          width={169}
+          height={40}
         />
       </div>
     </div>
