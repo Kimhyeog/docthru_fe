@@ -9,6 +9,8 @@
   flex-direction: column;
 
   gap: 10px 0px;
+
+  position: relative;
 }
 
 .header {
@@ -69,10 +71,12 @@
   font-weight: 600;
   color: #262626;
 }
+
 .header_btns .inactive {
   color: #737373;
   font-weight: 600;
 }
+
 .header_main {
   display: flex;
   align-items: center;
@@ -100,6 +104,7 @@
   text-decoration: none;
   color: black;
 }
+
 /* .table_header 스타일 병합 */
 .table_header {
   display: flex;
@@ -141,8 +146,26 @@
   align-items: center;
   gap: 6px;
 }
+
 .cardContainer {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+
+}
+
+.noChallenges {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #737373;
 }

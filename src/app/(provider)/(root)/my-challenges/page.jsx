@@ -12,6 +12,7 @@ import api from "@/api/index";
 import React from "react";
 import WaitingChallengeItem from "./components/waitingChallengeItem";
 import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
+import PopUpModal from "@/components/modals/PopUpModal";
 import pageRightActive from "@/assets/ic_page_right_active.svg";
 import pageLeft from "@/assets/ic_page_left.svg";
 import Image from "next/image";
@@ -58,6 +59,9 @@ export default function Page() {
 
   const [totalPages, setTotalPages] = useState(1); // ✅ totalPages 상태 추가
 
+  // 로그인 하라는 모달 창에 대한 State 변수
+  const [modalOpen, setModalOpen] = useState(false);
+
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -67,8 +71,7 @@ export default function Page() {
   // 🔒 페이지 접근 제한 로직
   useEffect(() => {
     if (isAuthInitialized && !isLoggedIn) {
-      alert("로그인이 필요한 페이지입니다.");
-      router.replace("/login");
+      setModalOpen(true);
     }
   }, [isAuthInitialized, isLoggedIn, router]);
 
@@ -226,111 +229,129 @@ export default function Page() {
             </div>
           </div>
         </header>
-        <main className={style.main}>
-          {sortType === "ongoing" || sortType === "completed" ? (
-            <div className={style.cardContainer}>
-              {challenges.map((challenge) => (
-                <Link href={`/challenges/${challenge.id}`} key={challenge.id}>
-                  <Card {...challenge} />
-                </Link>
-              ))}
-            </div>
-          ) : sortType === "application" ? (
-            <>
-              {/* 헤더 */}
-              <div className={style.table_header}>
-                <div className={style.cell}>No.</div>
-                <div className={style.cell}>분야</div>
-                <div className={style.cell}>카테고리</div>
-                <div className={style.cell_title}>챌린지 제목</div>
-                <div className={style.cell}>모집 인원</div>
-                <div className={style.cell}>마감 기한</div>
-                <div className={style.cell}>상태</div>
-              </div>
-              {/* 데이터 목록 */}
-              {challenges.map((challenge) => {
-                // challenge.application이 존재하는지 확인
-                const applicationStatus = challenge.application
-                  ? challenge.application.status
-                  : null;
-
-                const challengeNo =
-                  challenges_no < challenges.length
-                    ? (currentPage - 1) * 10 + challenges_no++
-                    : (currentPage - 1) * 10 + challenges_no;
-
-                const challengeItem = (
-                  <WaitingChallengeItem
-                    key={challenge.id}
-                    {...challenge}
-                    no={challengeNo}
-                    application={challenge.application}
-                  />
-                );
-
-                if (
-                  applicationStatus === "DELETED" ||
-                  applicationStatus === "REJECTED" ||
-                  applicationStatus === "WAITING"
-                ) {
-                  return (
+        {challenges.length === 0 ? (
+          <p className={style.noChallenges}>아직 챌린지가 없습니다.</p>
+        ) : (
+          <>
+            <main className={style.main}>
+              {sortType === "ongoing" || sortType === "completed" ? (
+                <div className={style.cardContainer}>
+                  {challenges.map((challenge) => (
                     <Link
+                      href={`/challenges/${challenge.id}`}
                       key={challenge.id}
-                      href={`/my-challenges/${challenge.id}`}
                     >
-                      {challengeItem}
+                      <Card {...challenge} />
                     </Link>
-                  );
-                }
+                  ))}
+                </div>
+              ) : sortType === "application" ? (
+                <>
+                  {/* 헤더 */}
+                  <div className={style.table_header}>
+                    <div className={style.cell}>No.</div>
+                    <div className={style.cell}>분야</div>
+                    <div className={style.cell}>카테고리</div>
+                    <div className={style.cell_title}>챌린지 제목</div>
+                    <div className={style.cell}>모집 인원</div>
+                    <div className={style.cell}>마감 기한</div>
+                    <div className={style.cell}>상태</div>
+                  </div>
+                  {/* 데이터 목록 */}
+                  {challenges.map((challenge) => {
+                    // challenge.application이 존재하는지 확인
+                    const applicationStatus = challenge.application
+                      ? challenge.application.status
+                      : null;
 
-                return challengeItem;
-              })}
-            </>
-          ) : null}
-        </main>
-        <footer className={style.footer}>
-          <Button
-            type={"none"}
-            icon={
-              <Image
-                src={pageLeft}
-                alt="page left icon"
-                width={40}
-                height={40}
-              />
-            }
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          />
-          <div className={style.pageNumber}>
-            {[...Array(totalPages)].map((_, index) => (
+                    const challengeNo =
+                      challenges_no < challenges.length
+                        ? (currentPage - 1) * 10 + challenges_no++
+                        : (currentPage - 1) * 10 + challenges_no;
+
+                    const challengeItem = (
+                      <WaitingChallengeItem
+                        key={challenge.id}
+                        {...challenge}
+                        no={challengeNo}
+                        application={challenge.application}
+                      />
+                    );
+
+                    if (
+                      applicationStatus === "DELETED" ||
+                      applicationStatus === "REJECTED" ||
+                      applicationStatus === "WAITING"
+                    ) {
+                      return (
+                        <Link
+                          key={challenge.id}
+                          href={`/my-challenges/${challenge.id}`}
+                        >
+                          {challengeItem}
+                        </Link>
+                      );
+                    }
+
+                    return challengeItem;
+                  })}
+                </>
+              ) : null}
+            </main>
+            <footer className={style.footer}>
               <Button
-                key={index + 1}
-                type={`page${
-                  currentPage === index + 1 ? "Active" : "Inactive"
-                }`} // ✅ 수정
-                text={String(index + 1)}
-                onClick={() => handlePageChange(index + 1)}
-                width={40}
-                height={40}
+                type={"none"}
+                icon={
+                  <Image
+                    src={pageLeft}
+                    alt="page left icon"
+                    width={40}
+                    height={40}
+                  />
+                }
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
               />
-            ))}
-          </div>
-          <Button
-            type={"none"}
-            icon={
-              <Image
-                src={pageRightActive}
-                alt="page right icon"
-                width={40}
-                height={40}
+              <div className={style.pageNumber}>
+                {[...Array(totalPages)].map((_, index) => (
+                  <Button
+                    key={index + 1}
+                    type={`page${
+                      currentPage === index + 1 ? "Active" : "Inactive"
+                    }`} // ✅ 수정
+                    text={String(index + 1)}
+                    onClick={() => handlePageChange(index + 1)}
+                    width={40}
+                    height={40}
+                  />
+                ))}
+              </div>
+              <Button
+                type={"none"}
+                icon={
+                  <Image
+                    src={pageRightActive}
+                    alt="page right icon"
+                    width={40}
+                    height={40}
+                  />
+                }
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages} // ✅ 수정
               />
-            }
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage >= totalPages} // ✅ 수정
-          />
-        </footer>
+            </footer>
+          </>
+        )}
       </div>
+      <PopUpModal
+        show={modalOpen}
+        onHide={() => {
+          setModalOpen(false);
+          router.replace("/login");
+        }}
+      >
+        {"로그인이 필요한 페이지입니다."}
+      </PopUpModal>
     </>
   );
 }

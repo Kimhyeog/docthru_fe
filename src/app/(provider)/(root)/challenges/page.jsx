@@ -20,14 +20,11 @@ import Image from "next/image";
 export default function ChallengesPage() {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
-  // 검색창에 대한 state값
 
-  // 불러온 데이터 State 변수
   const [challenges, setChallenges] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
-  // 필터링 관련 상태
   const [selectedDocType, setSelectedDocType] = useState("");
   const [selectedProgress, setSelectedProgress] = useState("");
   const [selectedField, setSelectedField] = useState("");
@@ -35,24 +32,23 @@ export default function ChallengesPage() {
 
   const { checkModalOn, showModal, closeModal } = useModalStore();
 
-  // API에서 데이터 가져오는 함수
   const fetchChallenges = async () => {
     try {
       const pageToSend = currentPage < 1 ? 1 : currentPage;
 
       const response = await api.getChallenges({
-        keyword: inputWord || undefined, // 🔥 keyWord -> keyword로 수정 (타이핑 오류)
+        keyword: inputWord || undefined,
         docType: selectedDocType || undefined,
         progress: selectedProgress || undefined,
         field: Array.isArray(selectedField)
-          ? selectedField.join(",") // 배열을 콤마로 구분된 문자열로 변환
+          ? selectedField.join(",")
           : selectedField || undefined,
         page: pageToSend,
       });
       console.log(response);
 
       setChallenges(response.challenges);
-      setTotalPage(Math.max(1, response.totalPages)); // 🔥 페이지 수 업데이트
+      setTotalPage(Math.max(1, response.totalPages));
     } catch (error) {
       console.error("Error fetching challenges:", error);
       if (error.response) {
@@ -62,8 +58,7 @@ export default function ChallengesPage() {
       }
     }
   };
-  // 페이지 변경 시 데이터 다시 가져오기
-  // **이거 맞는지 확인
+
   useEffect(() => {
     fetchChallenges();
   }, [
@@ -73,14 +68,13 @@ export default function ChallengesPage() {
     selectedField,
     inputWord,
   ]);
-  // totalPages가 변경될 때 currentPage 조정
+
   useEffect(() => {
     if (currentPage > totalPage) {
       setCurrentPage(totalPage);
     }
   }, [totalPage]);
 
-  // totalPage 상태를 직접 사용
   const totalPages = Math.max(totalPage, 1);
 
   const onHide = () => {
@@ -88,7 +82,6 @@ export default function ChallengesPage() {
     router.push("/login");
   };
 
-  // 페이지 변경 핸들러
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -96,96 +89,101 @@ export default function ChallengesPage() {
   };
 
   const searchChallenges = (inputText) => {
-    setKeyWord(inputText); // 검색어 상태 업데이트
+    setKeyWord(inputText);
     setCurrentPage(1);
   };
 
   return (
-    <>
-      <div className={style.container}>
-        <header>
-          <div className={style.header_head}>
-            <h2 className={style.header_title}>챌린지 목록</h2>
-            <Button
-              type="black"
-              text="신규 챌린지 신청 +"
-              onClick={() => {
-                if (isLoggedIn) {
-                  router.push("/create");
-                  return;
-                }
-                showModal("", false);
-              }}
+    <div className={style.container}>
+      <header>
+        <div className={style.header_head}>
+          <h2 className={style.header_title}>챌린지 목록</h2>
+          <Button
+            type="black"
+            text="신규 챌린지 신청 +"
+            onClick={() => {
+              if (isLoggedIn) {
+                router.push("/create");
+                return;
+              }
+              showModal("", false);
+            }}
+          />
+        </div>
+        <div className={style.header_main}>
+          <div className={style.searchWrapper}>
+            <FilterButton
+              setSelectedField={setSelectedField}
+              setDocType={setSelectedDocType}
+              setProgress={setSelectedProgress}
+              selectedDocType={selectedDocType}
+              selectedProgress={selectedProgress}
+              selectedField={selectedField}
+              onClick={() => {}}
             />
+            <Search onSearch={searchChallenges} />
           </div>
-          <div className={style.header_main}>
-            <div className={style.searchWrapper}>
-              <FilterButton
-                setSelectedField={setSelectedField}
-                setDocType={setSelectedDocType}
-                setProgress={setSelectedProgress}
-                selectedDocType={selectedDocType}
-                selectedProgress={selectedProgress}
-                selectedField={selectedField}
-                onClick={() => {}}
-              />
-              <Search onSearch={searchChallenges} />
-            </div>
-          </div>
-        </header>
+        </div>
+      </header>
 
-        <main className={style.main}>
-          {challenges.map((challenge) => (
-            <Link key={challenge.id} href={`/challenges/${challenge.id}`}>
-              <Card key={challenge.id} {...challenge} />
-            </Link>
-          ))}
-        </main>
-
-        <footer className={style.footer}>
-          <Button
-            type={"none"}
-            icon={
-              <Image
-                src={pageLeft}
-                alt="page left icon"
-                width={40}
-                height={40}
-              />
-            }
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          />
-          <div className={style.pageNumber}>
-            {[...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index + 1}
-                type={`page${
-                  currentPage === index + 1 ? "Active" : "Inactive"
-                }`} // ✅ 수정
-                text={String(index + 1)}
-                onClick={() => handlePageChange(index + 1)}
-                width={40}
-                height={40}
-              />
+      {challenges.length === 0 ? (
+        <p className={style.noChallenges}>아직 챌린지가 없습니다.</p>
+      ) : (
+        <>
+          <main className={style.main}>
+            {challenges.map((challenge) => (
+              <Link key={challenge.id} href={`/challenges/${challenge.id}`}>
+                <Card key={challenge.id} {...challenge} />
+              </Link>
             ))}
-          </div>
-          <Button
-            type={"none"}
-            icon={
-              <Image
-                src={pageRightActive}
-                alt="page right icon"
-                width={40}
-                height={40}
-              />
-            }
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage >= totalPages} // ✅ 수정
-          />
-        </footer>
-        <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
-      </div>
-    </>
+          </main>
+
+          <footer className={style.footer}>
+            <Button
+              type={"none"}
+              icon={
+                <Image
+                  src={pageLeft}
+                  alt="page left icon"
+                  width={40}
+                  height={40}
+                />
+              }
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            />
+            <div className={style.pageNumber}>
+              {[...Array(totalPages)].map((_, index) => (
+                <Button
+                  key={index + 1}
+                  type={`page${
+                    currentPage === index + 1 ? "Active" : "Inactive"
+                  }`} // ✅ 수정
+                  text={String(index + 1)}
+                  onClick={() => handlePageChange(index + 1)}
+                  width={40}
+                  height={40}
+                />
+              ))}
+            </div>
+            <Button
+              type={"none"}
+              icon={
+                <Image
+                  src={pageRightActive}
+                  alt="page right icon"
+                  width={40}
+                  height={40}
+                />
+              }
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage >= totalPages} // ✅ 수정
+            />
+          </footer>
+        </>
+      )}
+
+      <LoginCheckModal show={checkModalOn} onHide={onHide} />
+    </div>
   );
 }
