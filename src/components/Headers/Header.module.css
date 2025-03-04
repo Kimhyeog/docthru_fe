@@ -115,3 +115,7 @@
 .header p {
   margin: 0;
 }
+
+.active {
+  font-weight: bold;
+}

@@ -8,6 +8,9 @@ import Link from "next/link";
 import Button from "@/components/Button/Button";
 import api from "@/api/index";
 import WaitingChallengeItem from "../../../my-challenges/components/waitingChallengeItem";
+import pageRightActive from "@/assets/ic_page_right_active.svg";
+import pageLeft from "@/assets/ic_page_left.svg";
+import Image from "next/image";
 
 const sortAttendTypeArr = {
   "승인 대기": "WAITING",
@@ -131,8 +134,15 @@ export default function AdminManagePage() {
         </main>
         <footer className={style.footer}>
           <Button
-            type={"pageArrow"}
-            text={"<"}
+            type={"none"}
+            icon={
+              <Image
+                src={pageLeft}
+                alt="page left icon"
+                width={40}
+                height={40}
+              />
+            }
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           />
@@ -140,15 +150,26 @@ export default function AdminManagePage() {
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index + 1}
-                type={`page${currentPage === index + 1 ? "Active" : ""}`} // ✅ 수정
+                type={`page${
+                  currentPage === index + 1 ? "Active" : "Inactive"
+                }`} // ✅ 수정
                 text={String(index + 1)}
                 onClick={() => handlePageChange(index + 1)}
+                width={40}
+                height={40}
               />
             ))}
           </div>
           <Button
-            type={"pageArrow"}
-            text={">"}
+            type={"none"}
+            icon={
+              <Image
+                src={pageRightActive}
+                alt="page right icon"
+                width={40}
+                height={40}
+              />
+            }
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage >= totalPages} // ✅ 수정
           />

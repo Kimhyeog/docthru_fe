@@ -130,6 +130,8 @@
   background-color: #262626;
   color: #ffc117;
   border: none;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .button_page:focus {
@@ -237,4 +239,17 @@
   background: #ffffff;
   border: 1px solid #262626;
   box-sizing: border-box;
+}
+
+.button_page_inactive {
+  border: none;
+  font-size: 14px;
+  color: #a3a3a3;
+  font-weight: 500;
+}
+
+.none {
+  padding: 0;
+  margin: 0;
+  border: none;
 }

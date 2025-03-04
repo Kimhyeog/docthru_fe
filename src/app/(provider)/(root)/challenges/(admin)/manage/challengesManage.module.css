@@ -31,8 +31,6 @@
   letter-spacing: 0%;
 }
 
-
-
 .header_main {
   display: flex;
   align-items: center;
@@ -91,19 +89,16 @@
 .footer {
   padding-top: 20px;
   margin: 0 auto;
-  width: 30%;
-
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .pageNumber {
-  flex: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 6px;
 }
 
 .cardContainer {

@@ -21,6 +21,8 @@ const btnTypeArr = [
   { yes: style.yes },
   { no: style.no },
   { button_my_work: style.button_my_work },
+  { pageInactive: style.button_page_inactive },
+  { none: style.none },
 ];
 
 export default function Button({

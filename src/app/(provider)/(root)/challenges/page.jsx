@@ -13,6 +13,9 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useModalStore } from "@/store/useModalStore";
 import LoginCheckModal from "@/components/modals/LoginCheckModal";
+import pageRightActive from "@/assets/ic_page_right_active.svg";
+import pageLeft from "@/assets/ic_page_left.svg";
+import Image from "next/image";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -91,84 +94,96 @@ export default function ChallengesPage() {
   };
 
   return (
-    <>
-      <div className={style.container}>
-        <header>
-          <div className={style.header_head}>
-            <h2 className={style.header_title}>챌린지 목록</h2>
-            <Button
-              type="black"
-              text="신규 챌린지 신청 +"
-              onClick={() => {
-                if (isLoggedIn) {
-                  router.push("/create");
-                  return;
-                }
-                showModal("", false);
-              }}
+    <div className={style.container}>
+      <header>
+        <div className={style.header_head}>
+          <h2 className={style.header_title}>챌린지 목록</h2>
+          <Button
+            type="black"
+            text="신규 챌린지 신청 +"
+            onClick={() => {
+              if (isLoggedIn) {
+                router.push("/create");
+                return;
+              }
+              showModal("", false);
+            }}
+          />
+        </div>
+        <div className={style.header_main}>
+          <div className={style.searchWrapper}>
+            <FilterButton
+              setSelectedField={setSelectedField}
+              setDocType={setSelectedDocType}
+              setProgress={setSelectedProgress}
+              selectedDocType={selectedDocType}
+              selectedProgress={selectedProgress}
+              selectedField={selectedField}
+              onClick={() => {}}
             />
+            <Search onSearch={searchChallenges} />
           </div>
-          <div className={style.header_main}>
-            <div className={style.searchWrapper}>
-              <FilterButton
-                setSelectedField={setSelectedField}
-                setDocType={setSelectedDocType}
-                setProgress={setSelectedProgress}
-                selectedDocType={selectedDocType}
-                selectedProgress={selectedProgress}
-                selectedField={selectedField}
-                onClick={() => {}}
-              />
-              <Search onSearch={searchChallenges} />
-            </div>
-          </div>
-        </header>
+        </div>
+      </header>
 
-        {challenges.length === 0 ? (
-          <p className={style.noChallenges}>아직 챌린지가 없습니다.</p>
-        ) : (
-          <>
-            <main className={style.main}>
-              {challenges.map((challenge) => (
-                <Link key={challenge.id} href={`/challenges/${challenge.id}`}>
-                  <Card key={challenge.id} {...challenge} />
-                </Link>
+      {challenges.length === 0 ? (
+        <p className={style.noChallenges}>아직 챌린지가 없습니다.</p>
+      ) : (
+        <>
+          <main className={style.main}>
+            {challenges.map((challenge) => (
+              <Link key={challenge.id} href={`/challenges/${challenge.id}`}>
+                <Card key={challenge.id} {...challenge} />
+              </Link>
+            ))}
+          </main>
+
+          <footer className={style.footer}>
+            <Button
+              type={"none"}
+              icon={
+                <Image
+                  src={pageLeft}
+                  alt="page left icon"
+                  width={40}
+                  height={40}
+                />
+              }
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            />
+            <div className={style.pageNumber}>
+              {[...Array(totalPages)].map((_, index) => (
+                <Button
+                  key={index + 1}
+                  type={`page${
+                    currentPage === index + 1 ? "Active" : "Inactive"
+                  }`} // ✅ 수정
+                  text={String(index + 1)}
+                  onClick={() => handlePageChange(index + 1)}
+                  width={40}
+                  height={40}
+                />
               ))}
-            </main>
+            </div>
+            <Button
+              type={"none"}
+              icon={
+                <Image
+                  src={pageRightActive}
+                  alt="page right icon"
+                  width={40}
+                  height={40}
+                />
+              }
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage >= totalPages} // ✅ 수정
+            />
+          </footer>
+        </>
+      )}
 
-            <footer className={style.footer}>
-              <Button
-                type="pageArrow"
-                text="<"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              />
-
-              <div className={style.pageNumber}>
-                {[...Array(totalPages)].map((_, index) => (
-                  <Button
-                    key={index + 1}
-                    type={`page${
-                      currentPage === Number(index + 1) ? "Active" : ""
-                    }`}
-                    text={String(index + 1)}
-                    onClick={() => handlePageChange(index + 1)}
-                  />
-                ))}
-              </div>
-
-              <Button
-                type="pageArrow"
-                text=">"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              />
-            </footer>
-          </>
-        )}
-
-        <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
-      </div>
-    </>
+      <LoginCheckModal show={checkModalOn} onHide={onHide} />
+    </div>
   );
 }
