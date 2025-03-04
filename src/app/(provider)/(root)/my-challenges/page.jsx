@@ -12,7 +12,6 @@ import api from "@/api/index";
 import React from "react";
 import WaitingChallengeItem from "./components/waitingChallengeItem";
 import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
-import { LoginCheck } from "./components/LoginCheck";
 import PopUpModal from "@/components/modals/PopUpModal";
 
 const statusText = {
