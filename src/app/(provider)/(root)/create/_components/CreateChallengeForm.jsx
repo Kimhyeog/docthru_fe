@@ -126,6 +126,7 @@ function CreateChallengeForm() {
         text="신청하기"
         onClick={handleSubmit}
         disabled={!Object.values(isValid).every(Boolean)}
+        width={"100%"}
       />
 
       <PopUpModal show={showModal} onHide={handleCloseModal}>

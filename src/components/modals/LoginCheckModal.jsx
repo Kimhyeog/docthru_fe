@@ -24,7 +24,13 @@ export default function LoginCheckModal({ show, onHide }) {
         </div>
       </div>
       <div className={style.btnSection}>
-        <Button type="black" text={"로그인하러 가기"} onClick={onHide} />
+        <Button
+          type="black"
+          text={"로그인하러 가기"}
+          onClick={onHide}
+          width={153}
+          height={40}
+        />
       </div>
     </Modal>
   );

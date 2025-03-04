@@ -68,7 +68,9 @@ const Container = ({ date, challenge: initialChallenge }) => {
         type="yellow"
         width={"100%"}
         text={"원문 보기"}
-        // onClick={() => {}}
+        onClick={() => {
+          window.open(challenge.docUrl, "_blank");
+        }}
       />
       {/* 이 버튼 조건문 달아서 색상 다르게  */}
       {progress === "COMPLETED" ? (

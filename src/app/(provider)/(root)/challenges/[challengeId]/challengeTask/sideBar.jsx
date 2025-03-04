@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./sideBar.module.css";
 import Image from "next/image";
 import List from "@/assets/ic_list.svg";
 
-const Sidebar = ({ width = 280, children }) => {
+const Sidebar = ({ width = 280, children, url }) => {
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(-width);
   const side = useRef();
@@ -49,7 +49,7 @@ const Sidebar = ({ width = 280, children }) => {
           {/* {children} */}
           {isOpen && (
             <iframe
-              src="https://www.naver.com"
+              src={url}
               width="100%"
               height="100%"
               // style={{ border: "none" }}

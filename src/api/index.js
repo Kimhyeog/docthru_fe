@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
-// const baseURL = "http://localhost:5000";
-const baseURL = "https://docthru-be-5u42.onrender.com";
+const baseURL = "http://localhost:5000";
+// const baseURL = "https://docthru-be-5u42.onrender.com";
 export const client = axios.create({
   baseURL,
 });
@@ -217,8 +217,9 @@ const getChallenges = async ({
 
 // 공통 함수로 통합 param 받아야함 type 3가지 그중 2가는 형주님
 const getMyChallenges = async (type, keyword = "") => {
-  const url = `/users/me/challenges/${type}${keyword ? `?keyword=${keyword}` : ""
-    }`;
+  const url = `/users/me/challenges/${type}${
+    keyword ? `?keyword=${keyword}` : ""
+  }`;
   const response = await client.get(url); // ?keyword=value 형식으로 URL에 전달
   const data = response.data;
   return data;
@@ -435,6 +436,13 @@ const acceptChallengeByAdmin = async (challengeId) => {
   }
 };
 
+const getMyWork = async (challengeId) => {
+  const url = `/works/${challengeId}/myWork`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -462,6 +470,13 @@ const api = {
   getSavedWork,
   deleteParticipate,
   updateWork,
+  deleteChallengeByAdmin,
+  deleteChallenge,
+  updateChallenge,
+  getApplicationsByAdmin,
+  rejectedChallengeByAdmin,
+  acceptChallengeByAdmin,
+  getMyWork,
 };
 
 export default api;
