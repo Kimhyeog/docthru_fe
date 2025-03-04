@@ -48,6 +48,7 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
+
 const getUserData = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);

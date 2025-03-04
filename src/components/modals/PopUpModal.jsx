@@ -17,12 +17,7 @@ export default function PopUpModal({ show, onHide, children }) {
     >
       <p>{children}</p>
       <div>
-        <Button
-          type={"black"}
-          text={"확인"}
-          onClick={onHide}
-          className={style["modal-button"]} // ✅ 버튼 크기 적용
-        />
+        <Button type={"black"} text={"확인"} onClick={onHide} />
       </div>
     </Modal>
   );
