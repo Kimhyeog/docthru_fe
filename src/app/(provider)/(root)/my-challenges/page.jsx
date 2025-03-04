@@ -12,6 +12,8 @@ import api from "@/api/index";
 import React from "react";
 import WaitingChallengeItem from "./components/waitingChallengeItem";
 import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
+import { LoginCheck } from "./components/LoginCheck";
+import PopUpModal from "@/components/modals/PopUpModal";
 
 const statusText = {
   "승인 대기": "WAITING",
@@ -55,6 +57,9 @@ export default function Page() {
 
   const [totalPages, setTotalPages] = useState(1); // ✅ totalPages 상태 추가
 
+  // 로그인 하라는 모달 창에 대한 State 변수
+  const [modalOpen, setModalOpen] = useState(false);
+
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -64,8 +69,7 @@ export default function Page() {
   // 🔒 페이지 접근 제한 로직
   useEffect(() => {
     if (isAuthInitialized && !isLoggedIn) {
-      alert("로그인이 필요한 페이지입니다.");
-      router.replace("/login");
+      setModalOpen(true);
     }
   }, [isAuthInitialized, isLoggedIn, router]);
 
@@ -310,6 +314,15 @@ export default function Page() {
           />
         </footer>
       </div>
+      <PopUpModal
+        show={modalOpen}
+        onHide={() => {
+          setModalOpen(false);
+          router.replace("/login");
+        }}
+      >
+        {"로그인이 필요한 페이지입니다."}
+      </PopUpModal>
     </>
   );
 }
