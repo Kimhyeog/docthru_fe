@@ -9,6 +9,8 @@
   flex-direction: column;
 
   gap: 24px;
+
+  position: relative;
 }
 
 .header_head {
@@ -76,4 +78,19 @@
   align-items: center;
 
   gap: 20px;
+}
+
+.noChallenges {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #737373;
 }
