@@ -4,9 +4,13 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { basicFont } from "@/assets/fonts";
 import style from "./RootLayout.module.css";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 function RootLayout({ children }) {
   const pathname = usePathname();
+  const { isLoggedIn } = useAuth();
   const isHeaderHidden =
     (pathname.includes("/works/") && pathname.endsWith("/edit")) ||
     (pathname.includes("/challenges/") && pathname.endsWith("/challengeTask"));
@@ -17,6 +21,12 @@ function RootLayout({ children }) {
       ? "#FAFAFA"
       : "white";
 
+  const { data: notification } = useQuery({
+    queryFn: api.getNotification,
+    queryKey: ["notification"],
+    enabled: isLoggedIn,
+  });
+
   return (
     <div
       style={{
@@ -25,7 +35,7 @@ function RootLayout({ children }) {
       }}
       className={style.layout}
     >
-      {!isHeaderHidden && <Header />}
+      {!isHeaderHidden && <Header notification={notification} />}
 
       {children}
     </div>

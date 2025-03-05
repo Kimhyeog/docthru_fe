@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function iframeLink() {
+export default function IframeLink() {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const url = "https://nestjs.com/";
 

@@ -44,6 +44,12 @@
   vertical-align: bottom;
 }
 
+.dialogContainer {
+  position: absolute;
+  transform: translateX(-90%) translateY(7%);
+  z-index: 100;
+}
+
 .menuContainer {
   position: relative;
 }
@@ -86,6 +92,7 @@
   font-weight: 500;
   color: #737373;
 }
+
 .divider {
   margin: 10px 0;
   border-bottom: 1px solid #eee;
@@ -97,6 +104,7 @@
   cursor: pointer;
   font-weight: 500;
 }
+
 .menuLogOut {
   font-size: 14px;
   padding: 8px 0;

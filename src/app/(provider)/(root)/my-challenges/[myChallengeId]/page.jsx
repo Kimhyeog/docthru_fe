@@ -14,6 +14,7 @@ import Link from "next/link";
 import nextImg from "@/assets/images/nextJs.png";
 import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
+import IframeLink from "../_components/IframeLink";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -190,6 +191,7 @@ export default function DeletedOrRejectedPage() {
           >
             링크 열기 <FaArrowRight />
           </Link>
+          <IframeLink />
         </div>
       </div>
     </div>
