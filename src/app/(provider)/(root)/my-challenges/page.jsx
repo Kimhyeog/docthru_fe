@@ -10,12 +10,12 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext"; // AuthContext import
 import api from "@/api/index";
 import React from "react";
-import WaitingChallengeItem from "./components/waitingChallengeItem";
 import { StatusFilterButton } from "@/components/Button/StatusFilterButton";
 import PopUpModal from "@/components/modals/PopUpModal";
 import pageRightActive from "@/assets/ic_page_right_active.svg";
 import pageLeft from "@/assets/ic_page_left.svg";
 import Image from "next/image";
+import WaitingChallengeItem from "./_components/waitingChallengeItem";
 
 const statusText = {
   "승인 대기": "WAITING",

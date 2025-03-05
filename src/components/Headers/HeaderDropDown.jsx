@@ -46,7 +46,6 @@ function HeaderDropDown({ userData, logOut }) {
           className={styles.menuLogOut}
           onClick={() => {
             logOut();
-            router.push("/challenges");
           }}
         >
           로그아웃
