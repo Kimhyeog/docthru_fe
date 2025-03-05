@@ -46,10 +46,8 @@
 
 .dialogContainer {
   position: absolute;
-  top: 50px;
-  /* 종 위치 조절 */
-  right: 17%;
-  z-index: 10;
+  transform: translateX(-90%) translateY(7%);
+  z-index: 100;
 }
 
 .menuContainer {

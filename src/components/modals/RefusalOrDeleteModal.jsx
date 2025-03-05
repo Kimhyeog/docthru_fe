@@ -73,7 +73,6 @@ export default function RefusalOrDeleteModal({
           e.preventDefault();
           e.stopPropagation();
           if (isAdmin) {
-            console.log("gg");
             deleteChallenge();
           } else {
             rejectChallenge();

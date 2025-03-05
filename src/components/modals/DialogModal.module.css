@@ -3,18 +3,15 @@
 
   flex-direction: column;
 
-
   border-radius: 8px;
-  border: 2px solid #E5E5E5;
-  background-color: #FFFFFF;
+  border: 2px solid #e5e5e5;
+  background-color: #ffffff;
 
   width: 343px;
-  height: 465px;
-
+  max-height: 465px;
 }
 
 .header {
-
   padding: 15px 16px;
 
   font-family: Pretendard;
@@ -24,7 +21,6 @@
   letter-spacing: 0%;
 
   color: #262626;
-
 }
 
 .dialogBox {

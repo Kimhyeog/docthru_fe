@@ -11,7 +11,7 @@ import Button from "../Button/Button";
 import HeaderDropDown from "./HeaderDropDown";
 import DialogModal from "../modals/DialogModal";
 
-function HeaderLogInMenu({ userData }) {
+function HeaderLogInMenu({ userData, notification }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isLoggedIn, logOut, isAuthInitialized } = useAuth();
@@ -23,26 +23,25 @@ function HeaderLogInMenu({ userData }) {
       {isLoggedIn ? (
         <div className={styles.icons}>
           {userData.role !== "ADMIN" && (
-            <>
-              <Image
-                onClick={() => setIsDialogOpen(true)}
-                src={Bell}
-                alt="bell"
-                width={24}
-                height={24}
-              />
-              {/* ✅ DialogModal 추가 */}
+            <div>
+              <div>
+                <Image
+                  onClick={() => setIsDialogOpen((prev) => !prev)}
+                  src={Bell}
+                  alt="bell"
+                  width={24}
+                  height={24}
+                />
+              </div>
+
               {isDialogOpen && (
-                <div
-                  className={styles.dialogContainer}
-                  onClick={() => setIsDialogOpen(false)}
-                >
-                  <DialogModal />
+                <div className={styles.dialogContainer}>
+                  <DialogModal notification={notification} />
                 </div>
               )}
-            </>
+            </div>
           )}
-          <div className={styles.none}>
+          <div>
             <div onClick={() => setIsOpen((prev) => !prev)}>
               {userData.role === "ADMIN" ? (
                 <Image src={Admin} alt="Admin" width={32} height={32} />

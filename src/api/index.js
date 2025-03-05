@@ -443,6 +443,13 @@ const getMyWork = async (challengeId) => {
   return data;
 };
 
+const getNotification = async () => {
+  const url = "/notification";
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -477,6 +484,7 @@ const api = {
   rejectedChallengeByAdmin,
   acceptChallengeByAdmin,
   getMyWork,
+  getNotification,
 };
 
 export default api;

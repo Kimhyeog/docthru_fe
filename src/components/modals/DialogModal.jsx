@@ -5,8 +5,8 @@ import { DialogItem } from "../DialogItem/DialogItem";
 const mockData = [
   {
     id: 1,
-    content: `‘신청한 챌린지 이름'/’챌린지 이름'에 도전한 작업물에/’챌린지 이름’의 작업물에 작성한 피드백이 수정/삭제되었어요`,
-    date: new Date().toLocaleDateString(),
+    message: `‘신청한 챌린지 이름'/’챌린지 이름'에 도전한 작업물에/’챌린지 이름’의 작업물에 작성한 피드백이 수정/삭제되었어요`,
+    createdAt: new Date().toLocaleDateString(),
   },
   {
     id: 2,
@@ -46,13 +46,17 @@ const mockData = [
   },
 ];
 
-const DialogModal = () => {
+const DialogModal = ({ notification }) => {
   return (
     <div className={style.container}>
       <header className={style.header}>알림</header>
       <div className={style.dialogBox}>
-        {mockData.map((item) => (
-          <DialogItem key={item.id} content={item.content} date={item.date} />
+        {notification?.map((item) => (
+          <DialogItem
+            key={item.id}
+            content={item.message}
+            date={item.createdAt}
+          />
         ))}
       </div>
     </div>
