@@ -25,15 +25,19 @@ const DialogModal = () => {
     <div className={style.container}>
       <header className={style.header}>알림</header>
       <div className={style.dialogBox}>
-        {notification?.map((item, index) => (
-          <DialogItem
-            last={index === notification.length - 1} // 마지막 요소 판별
-            key={item.id}
-            content={item.message}
-            date={item.createdAt}
-            onClick={() => deleteNotification(item.id)}
-          />
-        ))}
+        {notification && notification.length > 0 ? (
+          notification.map((item, index) => (
+            <DialogItem
+              last={index === notification.length - 1} // 마지막 요소 판별
+              key={item.id}
+              content={item.message}
+              date={item.createdAt}
+              onClick={() => deleteNotification(item.id)}
+            />
+          ))
+        ) : (
+          <div>알림이 없습니다</div>
+        )}
       </div>
     </div>
   );
