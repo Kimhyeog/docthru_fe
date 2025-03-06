@@ -10,9 +10,6 @@ import Chip from "@/components/Chips/Chip";
 import ChipCategory from "@/components/Chips/ChipCategory";
 import dayjs from "dayjs";
 import peopleIcon from "@/assets/ic_people.svg";
-import Link from "next/link";
-import nextImg from "@/assets/images/nextJs.png";
-import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
 import IframeLink from "../_components/IframeLink";
 
@@ -179,22 +176,7 @@ export default function DeletedOrRejectedPage() {
       </div>
       <div className={styles.contentContainer}>
         <p className={styles.linkTitle}>원문 링크</p>
-        <div className={styles.imgContainer}>
-          <Image
-            className={styles.urlImg}
-            src={nextImg}
-            alt="Next.js 로고"
-            objectFit="cover"
-          />
-          <Link
-            target="_blank"
-            href={challenge.docUrl}
-            className={styles.button}
-          >
-            링크 열기 <FaArrowRight />
-          </Link>
-          <IframeLink />
-        </div>
+        <IframeLink url={challenge?.docUrl} />
       </div>
     </div>
   );

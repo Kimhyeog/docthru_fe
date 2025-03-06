@@ -97,17 +97,13 @@ export default function AdminManagePage() {
               application={challenge.application}
             />
           );
-          return applicationStatus === "DELETED" ||
-            applicationStatus === "REJECTED" ||
-            applicationStatus === "WAITING" ? (
+          return (
             <Link
               key={challenge.id}
               href={`/challenges/manage/${challenge.id}`}
             >
               {challengeItem}
             </Link>
-          ) : (
-            challengeItem
           );
         })}
       </main>

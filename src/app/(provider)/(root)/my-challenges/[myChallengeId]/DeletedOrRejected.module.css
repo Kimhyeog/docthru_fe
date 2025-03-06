@@ -335,3 +335,6 @@
 
   text-decoration: none;
 }
+.contentContainer {
+  width: 100%;
+}

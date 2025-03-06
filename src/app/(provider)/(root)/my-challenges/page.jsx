@@ -277,12 +277,7 @@ export default function Page() {
                         application={challenge.application}
                       />
                     );
-
-                    if (
-                      applicationStatus === "DELETED" ||
-                      applicationStatus === "REJECTED" ||
-                      applicationStatus === "WAITING"
-                    ) {
+                    {
                       return (
                         <Link
                           key={challenge.id}
@@ -292,8 +287,6 @@ export default function Page() {
                         </Link>
                       );
                     }
-
-                    return challengeItem;
                   })}
                 </>
               ) : null}

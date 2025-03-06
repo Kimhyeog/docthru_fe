@@ -16,6 +16,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
 import Button from "@/components/Button/Button";
 import RefusalOrDeleteModal from "@/components/modals/RefusalOrDeleteModal";
+import IframeLink from "@/app/(provider)/(root)/my-challenges/_components/IframeLink";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -153,19 +154,7 @@ export default function DeletedOrRejectedPage() {
       <div className={styles.contentContainer}>
         <p className={styles.linkTitle}>원문 링크</p>
         <div className={styles.imgContainer}>
-          <Image
-            className={styles.urlImg}
-            src={nextImg}
-            alt="Next.js 로고"
-            objectFit="cover"
-          />
-          <Link
-            target="_blank"
-            href={challenge.docUrl}
-            className={styles.button}
-          >
-            링크 열기 <FaArrowRight />
-          </Link>
+          <IframeLink url={challenge?.docUrl} />
         </div>
       </div>
       <div className={styles.adminBtns}>

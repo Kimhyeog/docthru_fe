@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-export default function IframeLink() {
+export default function IframeLink({ url }) {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
-  const url = "https://nestjs.com/";
+  // const url = "https://nestjs.com/";
 
   const handleMouseEnter = () => {
     setIsButtonVisible(true);
@@ -20,11 +20,11 @@ export default function IframeLink() {
 
   return (
     <div
-      style={{ position: "relative", display: "inline-block" }}
+      style={{ position: "relative", display: "inline-block", width: "100%" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <iframe src={url} width="890" height="424" title="원문 링크" />
+      <iframe src={url} width="100%" height="424" title="원문 링크" />
       {isButtonVisible && (
         <button
           onClick={handleButtonClick}
