@@ -4,8 +4,6 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { basicFont } from "@/assets/fonts";
 import style from "./RootLayout.module.css";
-import { useQuery } from "@tanstack/react-query";
-import api from "@/api";
 import { useAuth } from "@/contexts/AuthContext";
 
 function RootLayout({ children }) {
@@ -21,12 +19,6 @@ function RootLayout({ children }) {
       ? "#FAFAFA"
       : "white";
 
-  const { data: notification } = useQuery({
-    queryFn: api.getNotification,
-    queryKey: ["notification"],
-    enabled: isLoggedIn,
-  });
-
   return (
     <div
       style={{
@@ -35,7 +27,7 @@ function RootLayout({ children }) {
       }}
       className={style.layout}
     >
-      {!isHeaderHidden && <Header notification={notification} />}
+      {!isHeaderHidden && <Header />}
 
       {children}
     </div>

@@ -16,6 +16,7 @@ import LoginCheckModal from "@/components/modals/LoginCheckModal";
 import pageRightActive from "@/assets/ic_page_right_active.svg";
 import pageLeft from "@/assets/ic_page_left.svg";
 import Image from "next/image";
+import LoadingSpinner from "@/components/loader/LoadingSpinner";
 
 export default function ChallengesPage() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function ChallengesPage() {
     try {
       const pageToSend = currentPage < 1 ? 1 : currentPage;
 
-      const response = await api.getChallenges({
+      const response = await api.challenge.getChallenges({
         keyword: inputWord || undefined,
         docType: selectedDocType || undefined,
         progress: selectedProgress || undefined,
@@ -91,6 +92,11 @@ export default function ChallengesPage() {
     setKeyWord(inputText);
     setCurrentPage(1);
   };
+
+  // 페이지 변경시 스크롤 상단이동
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
     <div className={style.container}>

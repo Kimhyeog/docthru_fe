@@ -18,7 +18,7 @@ const Container = ({ date, challenge: initialChallenge }) => {
   const router = useRouter();
   const { checkModalOn, showModal, closeModal } = useModalStore();
   const { mutate: participateChallenge } = useMutation({
-    mutationFn: () => api.participateChallenge(challengeId),
+    mutationFn: () => api.challenge.participateChallenge(challengeId),
     onSuccess: (data) => {
       const workId = data.workId;
       if (!workId) {
@@ -37,7 +37,7 @@ const Container = ({ date, challenge: initialChallenge }) => {
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     initialData: initialChallenge,
   });
@@ -64,32 +64,34 @@ const Container = ({ date, challenge: initialChallenge }) => {
           {`${challenge.participants}/${challenge.maxParticipants}`}
         </div>
       </div>
-      <Button
-        type="yellow"
-        width={"100%"}
-        text={"원문 보기"}
-        onClick={() => {
-          window.open(challenge.docUrl, "_blank");
-        }}
-      />
-      {/* 이 버튼 조건문 달아서 색상 다르게  */}
-      {progress === "COMPLETED" ? (
+      <div className={styles.buttons}>
         <Button
-          type={"gray"}
+          type="yellow"
           width={"100%"}
-          text={"작업 도전하기"}
-          // onClick={() => {}} 참여 토큰 생성 하고 , 페이지 이동,
-        />
-      ) : (
-        <Button
-          type={"black"}
-          width={"100%"}
-          text={"작업 도전하기"}
+          text={"원문 보기"}
           onClick={() => {
-            handleParticipateClick();
+            window.open(challenge.docUrl, "_blank");
           }}
         />
-      )}
+        {/* 이 버튼 조건문 달아서 색상 다르게  */}
+        {progress === "COMPLETED" ? (
+          <Button
+            type={"gray"}
+            width={"100%"}
+            text={"작업 도전하기"}
+            // onClick={() => {}} 참여 토큰 생성 하고 , 페이지 이동,
+          />
+        ) : (
+          <Button
+            type={"black"}
+            width={"100%"}
+            text={"작업 도전하기"}
+            onClick={() => {
+              handleParticipateClick();
+            }}
+          />
+        )}
+      </div>
       <LoginCheckModal show={checkModalOn} onHide={onHide}></LoginCheckModal>
     </div>
   );

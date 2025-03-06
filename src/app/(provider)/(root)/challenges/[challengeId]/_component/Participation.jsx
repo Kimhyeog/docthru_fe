@@ -14,7 +14,7 @@ function Participation({ work: initialWork, index }) {
   const workId = initialWork.id;
   const user = initialWork.user;
   const { data: work } = useQuery({
-    queryFn: () => api.getWork(workId),
+    queryFn: () => api.work.getWork(workId),
     queryKey: ["work", { workId }],
     initialData: initialWork,
   });

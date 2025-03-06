@@ -15,7 +15,7 @@ function DropdownMenuForFeedback({ feedbackId, onEdit }) {
   const [showModal, setShowModal] = useState(false);
 
   const { mutate: deleteFeedback } = useMutation({
-    mutationFn: (feedbackId) => api.deleteFeedback(feedbackId),
+    mutationFn: (feedbackId) => api.feedback.deleteFeedback(feedbackId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["feedbacks", { workId }],

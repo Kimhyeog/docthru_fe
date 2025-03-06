@@ -14,14 +14,14 @@ import DropdownMenuForAdmin from "./_component/DropdownMenuForAdmin";
 async function ChallengeDetailPage({ params }) {
   const param = await params;
   const challengeId = param.challengeId;
-  const challenge = await api.getChallenge(challengeId);
+  const challenge = await api.challenge.getChallenge(challengeId);
   const type = challenge?.field;
 
   const userId = challenge?.application.userId;
-  const user = await api.getUserData(userId);
-  const works = await api.getWorks(challengeId);
+  const user = await api.user.getUserData(userId);
+  const works = await api.work.getWorks(challengeId);
   const { progress, participants, maxParticipants } = challenge;
-  const topLikeWorks = await api.getTopLikeWorks(challengeId);
+  const topLikeWorks = await api.work.getTopLikeWorks(challengeId);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -71,7 +71,7 @@ async function ChallengeDetailPage({ params }) {
         <div className={styles.horizontalLine}></div>
       </div>
       {/* 참여 현황*/}
-      <div className={styles.horizontalLine}></div>
+
       <div className={styles.contentContainer}>
         {progress === "COMPLETED" && topLikeWorks && (
           <BestWork topLikeWorks={topLikeWorks} />

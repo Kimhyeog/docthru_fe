@@ -29,13 +29,13 @@ function LogInForm() {
   }, [userData]);
 
   const { mutate: logInApi } = useMutation({
-    mutationFn: (userData) => api.logIn(userData),
+    mutationFn: (userData) => api.auth.logIn(userData),
     onSuccess: () => {
       logIn();
       router.back();
     },
     onError: (error) => {
-      showModal(error.response?.data || "회원가입 실패", false);
+      showModal(error.response?.data || "로그인 실패", false);
     },
   });
 

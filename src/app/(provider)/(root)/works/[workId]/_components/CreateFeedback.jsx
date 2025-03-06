@@ -23,7 +23,7 @@ function CreateFeedback({ challenge: initialChallenge }) {
   const { checkModalOn, showModal, closeModal } = useModalStore();
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     initialData: initialChallenge,
   });
@@ -31,7 +31,8 @@ function CreateFeedback({ challenge: initialChallenge }) {
   const progress = challenge.progress;
 
   const { mutate: createFeedback } = useMutation({
-    mutationFn: ({ workId, content }) => api.createFeedback(workId, content),
+    mutationFn: ({ workId, content }) =>
+      api.feedback.createFeedback(workId, content),
     onSuccess: () => queryClinet.invalidateQueries(["feedbacks", { workId }]),
   });
 

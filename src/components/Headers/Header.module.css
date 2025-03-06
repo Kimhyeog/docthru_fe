@@ -46,7 +46,7 @@
 
 .dialogContainer {
   position: absolute;
-  transform: translateX(-90%) translateY(7%);
+  transform: translateX(-90%) translateY(3%);
   z-index: 100;
 }
 

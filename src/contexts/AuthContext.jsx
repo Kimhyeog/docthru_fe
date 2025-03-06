@@ -27,7 +27,7 @@ function AuthProvider({ children }) {
         const prevRefreshToken = localStorage.getItem("refreshToken");
         if (!prevRefreshToken) return;
 
-        await api.refreshToken(prevRefreshToken);
+        await api.auth.refreshToken(prevRefreshToken);
         setIsLoggedIn(true);
       } catch {
         localStorage.removeItem("refreshToken");

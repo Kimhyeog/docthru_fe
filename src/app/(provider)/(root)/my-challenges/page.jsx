@@ -109,14 +109,14 @@ export default function Page() {
     try {
       let data;
       if (type === "application") {
-        data = await api.getApplications(
+        data = await api.user.getApplications(
           sortAttendTypeArr[sortAttendType],
           itemSize, // ✅ pageSize
           searchInput || undefined,
           currentPage // ✅ 현재 페이지 적용
         );
       } else {
-        data = await api.getMyChallenges(type, searchInput || undefined);
+        data = await api.user.getMyChallenges(type, searchInput || undefined);
       }
 
       // ✅ 응답 데이터가 비어 있을 경우 안전 처리
@@ -277,12 +277,7 @@ export default function Page() {
                         application={challenge.application}
                       />
                     );
-
-                    if (
-                      applicationStatus === "DELETED" ||
-                      applicationStatus === "REJECTED" ||
-                      applicationStatus === "WAITING"
-                    ) {
+                    {
                       return (
                         <Link
                           key={challenge.id}
@@ -292,8 +287,6 @@ export default function Page() {
                         </Link>
                       );
                     }
-
-                    return challengeItem;
                   })}
                 </>
               ) : null}

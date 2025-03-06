@@ -15,7 +15,7 @@ export default function PopUpModal({ show, onHide, children }) {
       dialogClassName={style["modal-custom"]} // ✅ 모달 가로 크기 조정
       contentClassName={style["modal-content-custom"]} // ✅ 내부 컨텐츠 크기 조정
     >
-      <p>{children}</p>
+      <div>{children}</div>
       <div>
         <Button
           className={style["modal-button"]}

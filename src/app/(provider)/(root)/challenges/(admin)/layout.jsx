@@ -25,8 +25,7 @@ function AdminLayout({ children }) {
 
     async function fetchUserRole() {
       try {
-        const userData = await api.getUserMe(); // ✅ API 요청
-
+        const userData = await api.user.getUserMe(); // ✅ API 요청
         if (userData.role !== "ADMIN") {
           setModalOpen(true); // ✅ 모달 열기
 
