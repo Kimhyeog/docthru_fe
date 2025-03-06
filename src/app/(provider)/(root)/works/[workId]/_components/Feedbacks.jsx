@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import style from "../work.module.css";
 import { useAuth } from "@/contexts/AuthContext";
-
+import LoadingSpinner from "@/components/loader/LoadingSpinner";
 function Feedbacks({ feedbacks: initialFeedbacks, challenge }) {
   const params = useParams();
   const workId = params.workId;
@@ -29,7 +29,7 @@ function Feedbacks({ feedbacks: initialFeedbacks, challenge }) {
   const loadMore = () => {
     setPageSize((prev) => prev + 3);
   };
-  // if (isLoading) return <p>로딩중...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className={style.feedbackContainer}>

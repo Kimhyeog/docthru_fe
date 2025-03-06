@@ -1,5 +1,6 @@
 .container {
   padding-top: 10px;
+  height: 1512px;
   width: 996px;
   margin: 0 auto;
   display: flex;
@@ -54,6 +55,7 @@
 
 .footer {
   padding-top: 20px;
+  padding-bottom: 34px;
   margin: 0 auto;
   display: flex;
   align-items: center;
