@@ -72,7 +72,7 @@ async function ChallengeDetailPage({ params }) {
         <div className={styles.horizontalLine}></div>
       </div>
       {/* 참여 현황*/}
-      <div className={styles.horizontalLine}></div>
+
       <div className={styles.contentContainer}>
         {progress === "COMPLETED" && topLikeWorks && (
           <BestWork topLikeWorks={topLikeWorks} />

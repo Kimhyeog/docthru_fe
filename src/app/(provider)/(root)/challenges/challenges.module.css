@@ -1,6 +1,6 @@
 .container {
   padding-top: 10px;
-
+  height: 1512px;
   width: 996px;
 
   margin: 0 auto;
@@ -64,6 +64,7 @@
 
 .footer {
   padding-top: 20px;
+  padding-bottom: 34px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -78,10 +79,8 @@
 }
 
 .noChallenges {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 996px;
+  margin: 300px auto auto;
 
   font-family: Pretendard;
   font-weight: 400;
