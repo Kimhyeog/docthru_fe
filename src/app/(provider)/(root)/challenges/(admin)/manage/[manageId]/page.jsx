@@ -16,6 +16,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
 import Button from "@/components/Button/Button";
 import RefusalOrDeleteModal from "@/components/modals/RefusalOrDeleteModal";
+import AcceptModal from "@/components/modals/AcceptModal";
 import IframeLink from "@/app/(provider)/(root)/my-challenges/_components/IframeLink";
 
 export default function DeletedOrRejectedPage() {
@@ -31,6 +32,8 @@ export default function DeletedOrRejectedPage() {
   const [works, setWorks] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAccept, setIsAccept] = useState(false);
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
 
   const handleAcceptByAdmin = async () => {
     try {
@@ -74,8 +77,14 @@ export default function DeletedOrRejectedPage() {
     fetchData();
   }, [challengeId]);
 
-  if (loading) return <div>로딩 중...</div>;
-  if (!challenge) return <div>챌린지를 찾을 수 없습니다.</div>;
+  useEffect(() => {
+    if (isAccept) {
+      handleAcceptByAdmin();
+    }
+  }, [isAccept]);
+
+  if (loading) return <div></div>;
+  if (!challenge) return <div></div>;
 
   const {
     progress,
@@ -176,12 +185,15 @@ export default function DeletedOrRejectedPage() {
             width={153}
             height={48}
             onClick={() => {
-              handleAcceptByAdmin(challengeId);
-
-              alert("챌린지가 승인되었습니다.");
+              setIsAcceptModalOpen(true);
             }}
           />
         )}
+        <AcceptModal
+          show={isAcceptModalOpen}
+          onHide={() => setIsAcceptModalOpen(false)}
+          onAccept={() => handleAcceptByAdmin()} // ✅ 승인 함수 전달
+        />
         <RefusalOrDeleteModal
           show={isModalOpen}
           type={"거절"}
