@@ -18,10 +18,10 @@ export default function RefusalOrDeleteModal({
 }) {
   const [inputReason, setInputReason] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [modalComment, setModalComment] = useState("거절 사유를 입력하세요.");
 
   const { mutate: deleteChallenge } = useMutation({
-    mutationFn: () =>
-      api.admin.deleteChallengeByAdmin(challengeId, inputReason),
+    mutationFn: () => api.deleteChallengeByAdmin(challengeId, inputReason),
     onSuccess: () => {
       alert("챌린지가 삭제되었습니다.");
       window.location.reload();
@@ -33,14 +33,16 @@ export default function RefusalOrDeleteModal({
 
   const rejectChallenge = async () => {
     if (!inputReason.trim()) {
-      alert(`${type} 사유를 입력해주세요.`);
+      setIsModalOpen(true);
+      setModalComment("거절 사유를 입력하세요.");
       return;
     }
 
     try {
       setIsLoading(true);
-      await api.admin.rejectedChallengeByAdmin(challengeId, inputReason);
+      await api.rejectedChallengeByAdmin(challengeId, inputReason);
       setIsModalOpen(true);
+      setModalComment("거절이 완료되었습니다.");
     } catch (error) {
       console.error("챌린지 거절 실패:", error);
       alert("챌린지 거절에 실패했습니다.");
@@ -88,12 +90,15 @@ export default function RefusalOrDeleteModal({
         <PopUpModal
           show={isModalOpen}
           onHide={() => {
-            window.location.reload();
-            onHide(); // API 요청 후 모달 닫기
+            if (modalComment !== "거절 사유를 입력하세요.") {
+              window.location.reload();
+              onHide(); // API 요청 후 모달 닫기
+            }
+
             setIsModalOpen(false);
           }}
         >
-          거절이 완료되었습니다
+          {modalComment}
         </PopUpModal>
       )}
     </Modal>
