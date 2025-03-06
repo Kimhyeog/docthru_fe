@@ -1,12 +1,16 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Keyboard from "@/assets/ic_keyboard.svg";
 import Image from "next/image";
 import styles from "./Header.module.css";
 import Admin from "@/assets/ic_admin.svg";
 import { useRouter } from "next/navigation";
+import PopUpModal from "../modals/PopUpModal";
+import { FaCheckCircle } from "react-icons/fa";
 
 function HeaderDropDown({ userData, logOut }) {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className={styles.userProfile}>
@@ -45,12 +49,26 @@ function HeaderDropDown({ userData, logOut }) {
         <div
           className={styles.menuLogOut}
           onClick={() => {
-            logOut();
+            setIsModalOpen(true);
           }}
         >
           로그아웃
         </div>
       </div>
+      <PopUpModal
+        show={isModalOpen}
+        text={"로그아웃 되었습니다."}
+        onHide={() => {
+          logOut();
+        }}
+      >
+        {
+          <div className={styles.logOutModalContents}>
+            <FaCheckCircle size={"25"} />
+            <p>로그아웃 되었습니다.</p>
+          </div>
+        }
+      </PopUpModal>
     </div>
   );
 }

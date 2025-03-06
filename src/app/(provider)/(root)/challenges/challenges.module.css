@@ -1,15 +1,10 @@
 .container {
   padding-top: 10px;
-
   width: 996px;
-
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
-
   gap: 24px;
-
   position: relative;
 }
 
@@ -24,7 +19,6 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 23.87px;
-  letter-spacing: 0%;
   color: #262626;
 }
 
@@ -37,24 +31,20 @@
   margin: 0 auto;
   align-items: center;
   gap: 10px;
-  /* 필요한 경우 간격 조정 */
   width: 100%;
 }
 
 .searchWrapper {
   flex: 1;
-
   display: flex;
-
   align-items: center;
-
   gap: 12px;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: 24px 0px;
+  gap: 24px;
 }
 
 .main a {
@@ -82,12 +72,83 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   font-family: Pretendard;
   font-weight: 400;
   font-size: 16px;
   line-height: 19.09px;
-  letter-spacing: 0%;
   text-align: center;
   color: #737373;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 추가 */
+
+/* 화면 크기가 768px 이하일 때 (태블릿) */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    /* 작은 화면에서는 90%로 너비 축소 */
+    padding: 0 15px;
+    /* 양옆 여백 추가 */
+  }
+
+  .header_title {
+    font-size: 18px;
+    /* 작은 화면에서 폰트 크기 축소 */
+  }
+
+  .header_main {
+    flex-direction: column;
+    align-items: flex-start;
+    /* 헤더에서 항목들이 세로로 정렬되도록 */
+    gap: 8px;
+    /* 간격 조정 */
+  }
+
+  .searchWrapper {
+    gap: 8px;
+    /* 검색창 간격 좁히기 */
+  }
+
+  .footer {
+    flex-direction: column;
+    /* 푸터 항목 세로로 정렬 */
+    align-items: flex-start;
+    /* 왼쪽 정렬 */
+  }
+}
+
+/* 화면 크기가 480px 이하일 때 (모바일) */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    /* 모바일에서 화면 꽉 차도록 */
+    padding: 0 10px;
+    /* 여백을 좀 더 줄임 */
+  }
+
+  .header_title {
+    font-size: 16px;
+    /* 폰트 크기 더 축소 */
+  }
+
+  .header_main {
+    gap: 6px;
+    /* 간격 더 좁히기 */
+  }
+
+  .searchWrapper {
+    gap: 6px;
+    /* 간격 좁히기 */
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .noChallenges {
+    font-size: 14px;
+    /* 텍스트 크기 작게 */
+  }
 }

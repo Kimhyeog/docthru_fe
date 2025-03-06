@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.modal-content-custom > p {
+.modal-content-custom>p {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -27,9 +27,9 @@
   text-align: center;
 }
 
-.modal-content-custom > div {
+.modal-content-custom>div {
   display: flex;
-
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -41,4 +41,14 @@
   border-radius: 12px;
   background-color: #262626;
   color: white;
+}
+
+.logOutModalContents {
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0px;
+
+  justify-content: center;
+  align-items: center;
+
 }
