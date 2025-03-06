@@ -12,6 +12,20 @@
   margin-bottom: 10px;
 }
 
+/* 모바일 버전 (최대 375px) */
+@media (max-width: 375px) {
+  .container {
+    width: 95%; /* 화면 너비에 맞게 조정 */
+    margin: 16px;
+  }
+  .buttons {
+    width: 151px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+  }
+}
 .info {
   display: flex;
   justify-content: center;
@@ -31,4 +45,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.buttons {
+  width: 219px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
 }

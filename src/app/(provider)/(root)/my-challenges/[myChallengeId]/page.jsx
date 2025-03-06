@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import peopleIcon from "@/assets/ic_people.svg";
 import CheckModal from "@/components/modals/CheckModal";
 import IframeLink from "../_components/IframeLink";
+import LoadingSpinner from "@/components/loader/LoadingSpinner";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -85,7 +86,7 @@ export default function DeletedOrRejectedPage() {
     fetchData();
   }, [challengeId]);
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <LoadingSpinner />;
   if (!challenge) return <div>챌린지를 찾을 수 없습니다.</div>;
 
   const {
@@ -104,6 +105,7 @@ export default function DeletedOrRejectedPage() {
     DELETED: { title: "삭제된 챌린지입니다.", subTitle: "삭제 사유" },
     REJECTED: { title: "신청이 거절된 챌린지입니다.", subTitle: "거절 사유" },
     WAITING: { title: "승인 대기 중입니다." },
+    ACCEPTED: { title: "신청이 승인된 챌린지입니다." },
   };
 
   return (
@@ -117,12 +119,14 @@ export default function DeletedOrRejectedPage() {
               ? styles.statusTitle
               : status === "REJECTED"
               ? styles.statusTitle_REJECTED
+              : status === "ACCEPTED"
+              ? styles.statusTitle_ACCEPTED
               : ""
           }`}
         >
           {statusTitle[status]?.title || "알 수 없는 상태입니다."}
         </div>
-        {status !== "WAITING" && (
+        {status !== "WAITING" && status !== "ACCEPTED" && (
           <div className={styles.statusCommentContainer}>
             <p className={styles.commentTitle}>
               {statusTitle[status]?.subTitle || "알 수 없는 상태입니다."}
