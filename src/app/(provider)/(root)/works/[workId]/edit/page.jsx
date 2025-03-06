@@ -31,7 +31,7 @@ function WorkEditPage() {
   const { checkModalOn, showModal, closeModal } = useModalStore();
 
   const { data: work } = useQuery({
-    queryFn: () => api.getWork(workId),
+    queryFn: () => api.work.getWork(workId),
     queryKey: ["work", { workId }],
   });
 
@@ -77,20 +77,20 @@ function WorkEditPage() {
   }, [work?.description]);
 
   const { data: savedData } = useQuery({
-    queryFn: () => api.getSavedWork(challengeId),
+    queryFn: () => api.work.getSavedWork(challengeId),
     queryKey: ["savedWork", { challengeId }],
     enabled: isLoggedIn,
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     enabled: !!challengeId,
   });
 
   //업데이트로 바꾸기기
   const { mutate: updatework } = useMutation({
-    mutationFn: (description) => api.updateWork(workId, description),
+    mutationFn: (description) => api.work.updateWork(workId, description),
     onSuccess: () => {
       router.replace(`/works/${work.id}`);
     },
@@ -98,7 +98,7 @@ function WorkEditPage() {
 
   // 이거는 그냥 나둬도 될듯?
   const { mutate: saveWork } = useMutation({
-    mutationFn: (description) => api.saveWork(challengeId, description),
+    mutationFn: (description) => api.work.saveWork(challengeId, description),
     onSuccess: () => {
       router.replace(`/works/${work.id}`);
     },

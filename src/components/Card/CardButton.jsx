@@ -7,14 +7,17 @@ import Button from "../Button/Button";
 import rigthArrow from "@/assets/ic_arrow_right_in_mywork.svg";
 import document from "@/assets/ic_document.svg";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
 
 function CardButton({ challengeId, isCompleted }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { isloggedIn } = useAuth();
 
   const { data: myWork } = useQuery({
-    queryFn: () => api.getMyWork(challengeId),
+    queryFn: () => api.user.getMyWork(challengeId),
     queryKey: ["myWork", { challengeId }],
+    enabled: isloggedIn,
   });
 
   if (!pathname.startsWith("/my-challenges")) return null;

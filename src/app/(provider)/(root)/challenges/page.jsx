@@ -36,7 +36,7 @@ export default function ChallengesPage() {
     try {
       const pageToSend = currentPage < 1 ? 1 : currentPage;
 
-      const response = await api.getChallenges({
+      const response = await api.challenge.getChallenges({
         keyword: inputWord || undefined,
         docType: selectedDocType || undefined,
         progress: selectedProgress || undefined,

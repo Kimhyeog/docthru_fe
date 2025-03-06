@@ -17,17 +17,17 @@ function Favorite({ work, progress }) {
   const workId = work.id;
   const { checkModalOn, showModal, closeModal } = useModalStore();
   const { data: queryWork } = useQuery({
-    queryFn: () => api.getWork(workId),
+    queryFn: () => api.work.getWork(workId),
     queryKey: ["work", { workId }],
     initialData: work,
   });
   const { mutate: createLike } = useMutation({
-    mutationFn: () => api.createLike(workId),
+    mutationFn: () => api.work.createLike(workId),
     onSuccess: () => queryClinet.invalidateQueries(["work", { workId }]),
   });
 
   const { mutate: deleteLike } = useMutation({
-    mutationFn: () => api.deleteLike(workId),
+    mutationFn: () => api.work.deleteLike(workId),
     onSuccess: () => queryClinet.invalidateQueries(["work", { workId }]),
   });
 

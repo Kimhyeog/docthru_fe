@@ -33,7 +33,7 @@ export default function DeletedOrRejectedPage() {
 
   const handleAcceptByAdmin = async () => {
     try {
-      await api.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
+      await api.admin.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
       window.location.reload();
 
       router.refresh;
@@ -51,17 +51,17 @@ export default function DeletedOrRejectedPage() {
 
     async function fetchData() {
       try {
-        const challengeData = await api.getChallenge(challengeId);
+        const challengeData = await api.challenge.getChallenge(challengeId);
         setChallenge(challengeData);
 
         if (challengeData?.application?.userId) {
-          const userData = await api.getUserData(
+          const userData = await api.user.getUserData(
             challengeData.application.userId
           );
           setUser(userData);
         }
 
-        const worksData = await api.getWorks(challengeId);
+        const worksData = await api.work.getWorks(challengeId);
         setWorks(worksData.works);
       } catch (error) {
         console.error("Error fetching data:", error);

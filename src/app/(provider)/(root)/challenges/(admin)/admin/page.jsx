@@ -36,7 +36,7 @@ export default function ChallengesAdminPage() {
     try {
       const pageToSend = currentPage < 1 ? 1 : currentPage;
 
-      const response = await api.getChallenges({
+      const response = await api.challenge.getChallenges({
         keyword: inputWord || undefined, // 🔥 keyWord -> keyword로 수정 (타이핑 오류)
         docType: selectedDocType || undefined,
         progress: selectedProgress || undefined,

@@ -19,7 +19,8 @@ export default function RefusalOrDeleteModal({
   const [isLoading, setIsLoading] = useState(false);
 
   const { mutate: deleteChallenge } = useMutation({
-    mutationFn: () => api.deleteChallengeByAdmin(challengeId, inputReason),
+    mutationFn: () =>
+      api.admin.deleteChallengeByAdmin(challengeId, inputReason),
     onSuccess: () => {
       alert("챌린지가 삭제되었습니다.");
       window.location.reload();
@@ -35,7 +36,7 @@ export default function RefusalOrDeleteModal({
 
     try {
       setIsLoading(true);
-      await api.rejectedChallengeByAdmin(challengeId, inputReason);
+      await api.admin.rejectedChallengeByAdmin(challengeId, inputReason);
       alert("챌린지가 거절되었습니다.");
       window.location.reload();
       onHide(); // API 요청 후 모달 닫기

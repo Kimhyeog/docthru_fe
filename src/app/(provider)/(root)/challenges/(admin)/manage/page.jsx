@@ -37,7 +37,7 @@ export default function AdminManagePage() {
   const fetchMyChallenges = useCallback(async () => {
     if (!isAuthInitialized || !isLoggedIn) return;
     try {
-      const response = await api.getApplicationsByAdmin(
+      const response = await api.admin.getApplicationsByAdmin(
         sortAttendTypeArr[sortAttendType],
         10,
         searchInput,

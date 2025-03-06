@@ -65,32 +65,32 @@ function ChallengeTask() {
   }, []);
 
   const { data: savedData } = useQuery({
-    queryFn: () => api.getSavedWork(challengeId),
+    queryFn: () => api.work.getSavedWork(challengeId),
     queryKey: ["savedWork", { challengeId }],
     enabled: isLoggedIn,
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
   });
 
   const { mutate: createWork } = useMutation({
-    mutationFn: (description) => api.createWork(challengeId, description),
+    mutationFn: (description) => api.work.createWork(challengeId, description),
     onSuccess: (data) => {
       router.replace(`/works/${data.id}`);
     },
   });
 
   const { mutate: saveWork } = useMutation({
-    mutationFn: (description) => api.saveWork(challengeId, description),
+    mutationFn: (description) => api.work.saveWork(challengeId, description),
     onSuccess: () => {
       router.replace(`/challenges/${challengeId}`);
     },
   });
 
   const { mutate: giveUp } = useMutation({
-    mutationFn: () => api.deleteParticipate(challengeId),
+    mutationFn: () => api.challenge.deleteParticipate(challengeId),
     onSuccess: () => {
       router.replace(`/challenges/${challengeId}`);
     },

@@ -14,13 +14,13 @@ function Feedbacks({ feedbacks: initialFeedbacks, challenge }) {
   const { isLoggedIn } = useAuth();
 
   const { data: userMe } = useQuery({
-    queryFn: api.getUserMe,
+    queryFn: api.user.getUserMe,
     queryKey: ["userData"],
     enabled: isLoggedIn,
   });
 
   const { data: feedbacksData, isLoading } = useQuery({
-    queryFn: () => api.getFeedbacks(workId),
+    queryFn: () => api.feedback.getFeedbacks(workId),
     queryKey: ["feedbacks", { workId }],
     initialData: initialFeedbacks,
   });

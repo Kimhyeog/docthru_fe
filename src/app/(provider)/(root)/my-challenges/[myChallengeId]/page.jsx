@@ -31,7 +31,7 @@ export default function DeletedOrRejectedPage() {
 
   const handleConfirm = async () => {
     try {
-      await api.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
+      await api.challenge.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
       setMyDelete(true);
       setIsModalOpen(false); // 모달 닫기
       router.refresh;
@@ -49,7 +49,9 @@ export default function DeletedOrRejectedPage() {
     if (myDelete) {
       async function fetchUpdatedData() {
         try {
-          const updatedChallengeData = await api.getChallenge(challengeId);
+          const updatedChallengeData = await api.challenge.getChallenge(
+            challengeId
+          );
           setChallenge(updatedChallengeData);
         } catch (error) {
           console.error("업데이트된 챌린지 데이터 불러오기 실패:", error);
@@ -64,17 +66,17 @@ export default function DeletedOrRejectedPage() {
 
     async function fetchData() {
       try {
-        const challengeData = await api.getChallenge(challengeId);
+        const challengeData = await api.challenge.getChallenge(challengeId);
         setChallenge(challengeData);
 
         if (challengeData?.application?.userId) {
-          const userData = await api.getUserData(
+          const userData = await api.user.getUserData(
             challengeData.application.userId
           );
           setUser(userData);
         }
 
-        const worksData = await api.getWorks(challengeId);
+        const worksData = await api.work.getWorks(challengeId);
         setWorks(worksData.works);
       } catch (error) {
         console.error("Error fetching data:", error);

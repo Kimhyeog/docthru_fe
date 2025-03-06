@@ -48,7 +48,7 @@ function CreateChallengeForm() {
   }, [title, link, category, docType, maxUsers, date, content]);
 
   const { mutate: createChallenge } = useMutation({
-    mutationFn: (dto) => api.createChallenge(dto),
+    mutationFn: (dto) => api.challenge.createChallenge(dto),
     onSuccess: (data) => {
       setShowModal(true);
     },
@@ -106,7 +106,7 @@ function CreateChallengeForm() {
         options={docTypeOptions}
         onSelect={setDocType}
       />
-      <DeadlineInput label="날짜" value={date} onChange={setDate} />
+      <DeadlineInput label="챌린지 마감일자" value={date} onChange={setDate} />
       <TextInput
         label="최대 인원"
         placeholder="인원을 입력해 주세요"

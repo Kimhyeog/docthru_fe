@@ -25,7 +25,7 @@ function AdminLayout({ children }) {
 
     async function fetchUserRole() {
       try {
-        const userData = await api.getUserMe(); // ✅ API 요청
+        const userData = await api.user.getUserMe(); // ✅ API 요청
         console.log("🔹 유저 데이터:", userData); // ✅ 콘솔 출력 추가
 
         if (userData.role !== "ADMIN") {

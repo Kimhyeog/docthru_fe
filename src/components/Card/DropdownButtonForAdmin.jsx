@@ -14,7 +14,7 @@ function DropdownButtonForAdmin({ challengeId }) {
   const router = useRouter();
 
   const { data: userMe } = useQuery({
-    queryFn: api.getUserMe,
+    queryFn: api.user.getUserMe,
     queryKey: ["userData"],
     enabled: isLoggedIn,
     initialData: {},
@@ -53,7 +53,7 @@ function DropdownButtonForAdmin({ challengeId }) {
             e.stopPropagation();
           }
           setCheckModalOn(false);
-          router.replace("./challenges/admin");
+          router.replace("/challenges/admin");
         }}
         challengeId={challengeId}
         isAdmin={true}
