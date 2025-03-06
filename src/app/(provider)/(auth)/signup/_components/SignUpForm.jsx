@@ -33,7 +33,7 @@ function SignUpForm() {
   }, [userData]);
 
   const { mutate: signUp } = useMutation({
-    mutationFn: (userData) => api.signUp(userData),
+    mutationFn: (userData) => api.auth.signUp(userData),
     onSuccess: () => {
       showModal("가입이 완료되었습니다", true);
     },

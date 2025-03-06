@@ -18,7 +18,7 @@ const Container = ({ date, challenge: initialChallenge }) => {
   const router = useRouter();
   const { checkModalOn, showModal, closeModal } = useModalStore();
   const { mutate: participateChallenge } = useMutation({
-    mutationFn: () => api.participateChallenge(challengeId),
+    mutationFn: () => api.challenge.participateChallenge(challengeId),
     onSuccess: (data) => {
       const workId = data.workId;
       if (!workId) {
@@ -37,7 +37,7 @@ const Container = ({ date, challenge: initialChallenge }) => {
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     initialData: initialChallenge,
   });

@@ -10,9 +10,6 @@ import Chip from "@/components/Chips/Chip";
 import ChipCategory from "@/components/Chips/ChipCategory";
 import dayjs from "dayjs";
 import peopleIcon from "@/assets/ic_people.svg";
-import Link from "next/link";
-import nextImg from "@/assets/images/nextJs.png";
-import { FaArrowRight } from "react-icons/fa6";
 import CheckModal from "@/components/modals/CheckModal";
 import IframeLink from "../_components/IframeLink";
 
@@ -31,7 +28,7 @@ export default function DeletedOrRejectedPage() {
 
   const handleConfirm = async () => {
     try {
-      await api.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
+      await api.challenge.deleteChallenge(challengeId); // 챌린지 삭제 API 호출
       setMyDelete(true);
       setIsModalOpen(false); // 모달 닫기
       router.refresh;
@@ -49,7 +46,9 @@ export default function DeletedOrRejectedPage() {
     if (myDelete) {
       async function fetchUpdatedData() {
         try {
-          const updatedChallengeData = await api.getChallenge(challengeId);
+          const updatedChallengeData = await api.challenge.getChallenge(
+            challengeId
+          );
           setChallenge(updatedChallengeData);
         } catch (error) {
           console.error("업데이트된 챌린지 데이터 불러오기 실패:", error);
@@ -64,17 +63,17 @@ export default function DeletedOrRejectedPage() {
 
     async function fetchData() {
       try {
-        const challengeData = await api.getChallenge(challengeId);
+        const challengeData = await api.challenge.getChallenge(challengeId);
         setChallenge(challengeData);
 
         if (challengeData?.application?.userId) {
-          const userData = await api.getUserData(
+          const userData = await api.user.getUserData(
             challengeData.application.userId
           );
           setUser(userData);
         }
 
-        const worksData = await api.getWorks(challengeId);
+        const worksData = await api.work.getWorks(challengeId);
         setWorks(worksData.works);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -177,22 +176,7 @@ export default function DeletedOrRejectedPage() {
       </div>
       <div className={styles.contentContainer}>
         <p className={styles.linkTitle}>원문 링크</p>
-        <div className={styles.imgContainer}>
-          <Image
-            className={styles.urlImg}
-            src={nextImg}
-            alt="Next.js 로고"
-            objectFit="cover"
-          />
-          <Link
-            target="_blank"
-            href={challenge.docUrl}
-            className={styles.button}
-          >
-            링크 열기 <FaArrowRight />
-          </Link>
-          <IframeLink />
-        </div>
+        <IframeLink url={challenge?.docUrl} />
       </div>
     </div>
   );

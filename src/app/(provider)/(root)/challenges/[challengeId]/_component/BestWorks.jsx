@@ -19,7 +19,7 @@ function BestWorks({ topLikeWorks: initialWorks }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data: topLikedWorks } = useQuery({
-    queryFn: () => api.getTopLikeWorks(challengeId),
+    queryFn: () => api.work.getTopLikeWorks(challengeId),
     queryKey: ["topLikedWorks", { challengeId }],
     initialData: initialWorks,
     enabled: !!initialWorks,

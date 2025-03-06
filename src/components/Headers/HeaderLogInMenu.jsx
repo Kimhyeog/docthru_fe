@@ -11,7 +11,7 @@ import Button from "../Button/Button";
 import HeaderDropDown from "./HeaderDropDown";
 import DialogModal from "../modals/DialogModal";
 
-function HeaderLogInMenu({ userData, notification }) {
+function HeaderLogInMenu({ userData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isLoggedIn, logOut, isAuthInitialized } = useAuth();
@@ -36,7 +36,7 @@ function HeaderLogInMenu({ userData, notification }) {
 
               {isDialogOpen && (
                 <div className={styles.dialogContainer}>
-                  <DialogModal notification={notification} />
+                  <DialogModal />
                 </div>
               )}
             </div>

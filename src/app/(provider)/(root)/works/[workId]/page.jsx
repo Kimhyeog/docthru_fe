@@ -19,12 +19,12 @@ import Link from "next/link";
 async function WorkPage({ params }) {
   const param = await params;
   const workId = param.workId;
-  const work = await api.getWork(workId);
+  const work = await api.work.getWork(workId);
   const challengeId = work.challengeId;
-  const challenge = await api.getChallenge(challengeId);
+  const challenge = await api.challenge.getChallenge(challengeId);
   const type = challenge?.field;
-  const writerData = await api.getUserData(work.userId);
-  const feedbacks = await api.getFeedbacks(workId);
+  const writerData = await api.user.getUserData(work.userId);
+  const feedbacks = await api.feedback.getFeedbacks(workId);
   const { progress, participants, maxParticipants } = challenge;
 
   return (

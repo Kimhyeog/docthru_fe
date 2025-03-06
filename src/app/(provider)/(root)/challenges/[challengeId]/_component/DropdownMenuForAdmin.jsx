@@ -16,14 +16,14 @@ function DropdownMenuForAdmin() {
   const router = useRouter();
 
   const { data: userMe } = useQuery({
-    queryFn: api.getUserMe,
+    queryFn: api.user.getUserMe,
     queryKey: ["userData"],
     enabled: isLoggedIn,
     initialData: {},
   });
 
   const { mutate: deleteChallenge } = useMutation({
-    mutationFn: () => api.deleteChallengeByAdmin(challengeId),
+    mutationFn: () => api.admin.deleteChallengeByAdmin(challengeId),
     onSuccess: () => {
       router.replace("/challenges");
     },

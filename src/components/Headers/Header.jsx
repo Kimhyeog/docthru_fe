@@ -9,11 +9,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/api";
 
-const Header = ({ notification }) => {
+const Header = () => {
   const { isLoggedIn } = useAuth();
 
   const { data: userData } = useQuery({
-    queryFn: api.getUserMe,
+    queryFn: api.user.getUserMe,
     queryKey: ["userData"],
     initialData: {},
     enabled: isLoggedIn,
@@ -35,7 +35,7 @@ const Header = ({ notification }) => {
           {isLoggedIn && userData.role === "ADMIN" && <HeaderAdminMenu />}
         </nav>
       </div>
-      <HeaderLogInMenu userData={userData} notification={notification} />
+      <HeaderLogInMenu userData={userData} />
     </header>
   );
 };

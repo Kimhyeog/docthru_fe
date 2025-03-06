@@ -30,7 +30,7 @@ const Reply = ({
 
   const { mutate: updateFeedback } = useMutation({
     mutationFn: (updatedFeedback) =>
-      api.updateFeedback(feedbackId, updatedFeedback),
+      api.feedback.updateFeedback(feedbackId, updatedFeedback),
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ["feedbacks", { workId }],
@@ -38,7 +38,7 @@ const Reply = ({
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     initialData: initialChallenge,
   });

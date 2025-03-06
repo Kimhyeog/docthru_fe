@@ -33,7 +33,7 @@ function EditChallengeForm() {
   const queryClinet = useQueryClient();
 
   const { data: initialChallenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
   });
 
@@ -70,7 +70,7 @@ function EditChallengeForm() {
   }, [title, link, category, docType, maxUsers, date, content]);
 
   const { mutate: updateChallenge } = useMutation({
-    mutationFn: (dto) => api.updateChallenge(challengeId, dto),
+    mutationFn: (dto) => api.challenge.updateChallenge(challengeId, dto),
     onSuccess: (data) => {
       setShowModal(true);
       queryClinet.invalidateQueries({
@@ -139,7 +139,7 @@ function EditChallengeForm() {
           initialChallenge?.docType === "BLOG" ? "블로그" : "공식문서"
         }
       />
-      <DeadlineInput label="날짜" value={date} onChange={setDate} />
+      <DeadlineInput label="챌린지 마감일자" value={date} onChange={setDate} />
       <TextInput
         label="최대 인원"
         placeholder="인원을 입력해 주세요"

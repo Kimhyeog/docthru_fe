@@ -17,6 +17,7 @@ import CheckModal from "@/components/modals/CheckModal";
 import Button from "@/components/Button/Button";
 import RefusalOrDeleteModal from "@/components/modals/RefusalOrDeleteModal";
 import AcceptModal from "@/components/modals/AcceptModal";
+import IframeLink from "@/app/(provider)/(root)/my-challenges/_components/IframeLink";
 
 export default function DeletedOrRejectedPage() {
   const params = useParams(); // ✅ useParams로 params 가져오기
@@ -36,7 +37,7 @@ export default function DeletedOrRejectedPage() {
 
   const handleAcceptByAdmin = async () => {
     try {
-      await api.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
+      await api.admin.acceptChallengeByAdmin(challengeId); // 챌린지 삭제 API 호출
       window.location.reload();
 
       router.refresh;
@@ -54,17 +55,17 @@ export default function DeletedOrRejectedPage() {
 
     async function fetchData() {
       try {
-        const challengeData = await api.getChallenge(challengeId);
+        const challengeData = await api.challenge.getChallenge(challengeId);
         setChallenge(challengeData);
 
         if (challengeData?.application?.userId) {
-          const userData = await api.getUserData(
+          const userData = await api.user.getUserData(
             challengeData.application.userId
           );
           setUser(userData);
         }
 
-        const worksData = await api.getWorks(challengeId);
+        const worksData = await api.work.getWorks(challengeId);
         setWorks(worksData.works);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -162,19 +163,7 @@ export default function DeletedOrRejectedPage() {
       <div className={styles.contentContainer}>
         <p className={styles.linkTitle}>원문 링크</p>
         <div className={styles.imgContainer}>
-          <Image
-            className={styles.urlImg}
-            src={nextImg}
-            alt="Next.js 로고"
-            objectFit="cover"
-          />
-          <Link
-            target="_blank"
-            href={challenge.docUrl}
-            className={styles.button}
-          >
-            링크 열기 <FaArrowRight />
-          </Link>
+          <IframeLink url={challenge?.docUrl} />
         </div>
       </div>
       <div className={styles.adminBtns}>

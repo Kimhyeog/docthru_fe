@@ -37,7 +37,7 @@ export default function AdminManagePage() {
   const fetchMyChallenges = useCallback(async () => {
     if (!isAuthInitialized || !isLoggedIn) return;
     try {
-      const response = await api.getApplicationsByAdmin(
+      const response = await api.admin.getApplicationsByAdmin(
         sortAttendTypeArr[sortAttendType],
         10,
         searchInput,
@@ -97,17 +97,13 @@ export default function AdminManagePage() {
               application={challenge.application}
             />
           );
-          return applicationStatus === "DELETED" ||
-            applicationStatus === "REJECTED" ||
-            applicationStatus === "WAITING" ? (
+          return (
             <Link
               key={challenge.id}
               href={`/challenges/manage/${challenge.id}`}
             >
               {challengeItem}
             </Link>
-          ) : (
-            challengeItem
           );
         })}
       </main>

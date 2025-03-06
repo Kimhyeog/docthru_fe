@@ -18,7 +18,7 @@ const ParticipationList = ({
   const challengeId = params.challengeId;
   const [currentPage, setCurrentPage] = useState(1);
   const { data: worksData } = useQuery({
-    queryFn: () => api.getWorks(challengeId),
+    queryFn: () => api.work.getWorks(challengeId),
     queryKey: ["works", { challengeId }],
     initialData: initialWorks,
   });

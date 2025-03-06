@@ -16,21 +16,21 @@ function DropdownMenuforWork({ writerId, challenge: initialChallenge }) {
   const [showModal, setShowModal] = useState(false);
 
   const { data: userMe } = useQuery({
-    queryFn: api.getUserMe,
+    queryFn: api.user.getUserMe,
     queryKey: ["userData"],
     enabled: isLoggedIn,
     initialData: {},
   });
 
   const { mutate: deleteWork } = useMutation({
-    mutationFn: () => api.deleteWork(workId),
+    mutationFn: () => api.work.deleteWork(workId),
     onSuccess: () => {
       router.push("/challenges");
     },
   });
 
   const { data: challenge } = useQuery({
-    queryFn: () => api.getChallenge(challengeId),
+    queryFn: () => api.challenge.getChallenge(challengeId),
     queryKey: ["challenge", { challengeId }],
     initialData: initialChallenge,
   });
