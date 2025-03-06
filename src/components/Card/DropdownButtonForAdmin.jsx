@@ -11,7 +11,6 @@ import RefusalOrDeleteModal from "../modals/RefusalOrDeleteModal";
 function DropdownButtonForAdmin({ challengeId }) {
   const { isLoggedIn } = useAuth();
   const [checkModalOn, setCheckModalOn] = useState(false);
-  const params = useParams();
   const router = useRouter();
 
   const { data: userMe } = useQuery({
@@ -19,13 +18,6 @@ function DropdownButtonForAdmin({ challengeId }) {
     queryKey: ["userData"],
     enabled: isLoggedIn,
     initialData: {},
-  });
-
-  const { mutate: deleteChallenge } = useMutation({
-    mutationFn: () => api.deleteChallengeByAdmin(challengeId),
-    onSuccess: () => {
-      router.replace("/challenges");
-    },
   });
 
   return (
@@ -61,7 +53,10 @@ function DropdownButtonForAdmin({ challengeId }) {
             e.stopPropagation();
           }
           setCheckModalOn(false);
+          router.replace("./challenges/admin");
         }}
+        challengeId={challengeId}
+        isAdmin={true}
       />
     </div>
   );

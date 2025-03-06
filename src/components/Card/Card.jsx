@@ -7,6 +7,7 @@ import Chip from "../Chips/Chip";
 import dayjs from "dayjs";
 import ChipCardStatus from "../Chips/ChipCardStatus";
 import DropdownButtonForAdmin from "./DropdownButtonForAdmin";
+import CardButton from "./CardButton";
 
 const Card = ({
   deadline,
@@ -58,6 +59,9 @@ const Card = ({
               ? ` ${participants}/${maxParticipants} 참여중`
               : "15/15 참여 완료"}
           </span>
+        </div>
+        <div className={styles.CardButton}>
+          <CardButton challengeId={id} isCompleted={now.isAfter(deadline)} />
         </div>
       </div>
     </div>

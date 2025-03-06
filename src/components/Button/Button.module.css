@@ -8,12 +8,10 @@
   padding: 10px;
   border-radius: 12px;
   border: 1px solid black;
-
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
   font-style: pretendard;
-
   white-space: nowrap;
   cursor: pointer;
 }
@@ -75,6 +73,28 @@
   height: 33px;
 }
 
+.button_my_work {
+  top: 7px;
+  left: 16px;
+  gap: 6px;
+
+  background-color: #ffffff;
+  color: #262626;
+
+  border-radius: 30.5px;
+
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.71px;
+  letter-spacing: 0%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
 /* page btn */
 
 .button_page {
@@ -110,6 +130,8 @@
   background-color: #262626;
   color: #ffc117;
   border: none;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .button_page:focus {
@@ -217,4 +239,17 @@
   background: #ffffff;
   border: 1px solid #262626;
   box-sizing: border-box;
+}
+
+.button_page_inactive {
+  border: none;
+  font-size: 14px;
+  color: #a3a3a3;
+  font-weight: 500;
+}
+
+.none {
+  padding: 0;
+  margin: 0;
+  border: none;
 }

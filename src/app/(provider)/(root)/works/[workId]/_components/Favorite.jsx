@@ -10,7 +10,7 @@ import { useModalStore } from "@/store/useModalStore";
 import LoginCheckModal from "@/components/modals/LoginCheckModal";
 import { useRouter } from "next/navigation";
 
-function Favorite({ work }) {
+function Favorite({ work, progress }) {
   const { isLoggedIn } = useAuth();
   const queryClinet = useQueryClient();
   const router = useRouter();
@@ -45,7 +45,7 @@ function Favorite({ work }) {
               showModal("", false);
               return;
             }
-            deleteLike(workId);
+            if (progress === "PROGRESS") deleteLike(workId);
           }}
         >
           <Image src={heartIcon} alt="heartIcon" width={16} height={16} />
@@ -57,7 +57,7 @@ function Favorite({ work }) {
               showModal("", false);
               return;
             }
-            createLike(workId);
+            if (progress === "PROGRESS") createLike(workId);
           }}
         >
           <Image

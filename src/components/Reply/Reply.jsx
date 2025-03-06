@@ -90,13 +90,14 @@ const Reply = ({
             onChange={(e) => setUpdateFeedback(e.target.value)}
           />
           <div className={styles.buttons}>
-            <Button text={"취소"} onClick={handleCancelButton}>
+            <Button text={"취소"} onClick={handleCancelButton} width={60}>
               취소
             </Button>
             <Button
               type={"customBlack"}
               text={"수정"}
               onClick={handlebuttonclick}
+              width={60}
             >
               수정
             </Button>

@@ -94,3 +94,6 @@
   flex-direction: column;
   gap: 16px;
 }
+.CardButton {
+  margin-left: auto;
+}

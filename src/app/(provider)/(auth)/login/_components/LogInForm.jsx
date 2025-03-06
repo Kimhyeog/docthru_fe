@@ -68,7 +68,7 @@ function LogInForm() {
           validate={(val) => validate("password", val)}
         ></PasswordInput>
       </div>
-      <Button text="로그인" type="black" disabled={!isValid} />
+      <Button text="로그인" type="black" disabled={!isValid} width={"100%"} />
       <p className={style.authPrompt}>
         회원이 아니신가요?{" "}
         <Link href="./signup" className={style.link}>

@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import kebab from "@/assets/ic_kebab.svg";
-import styles from "./DropdownMenuButton.module.css";
 import OptionButton from "@/assets/ic_option.svg";
+import styles from "./DropdownMenuButton.module.css";
 
 function DropdownMenuButton({ menus, option = "general" }) {
   const [isDropdown, setIsDropdown] = useState(false);

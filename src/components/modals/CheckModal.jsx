@@ -21,8 +21,20 @@ export default function CheckModal({ show, onHide, text, onClick }) {
         <p>{text}</p>
       </div>
       <div className={style.btnSection}>
-        <Button type={"no"} text={"아니요"} onClick={onHide} />
-        <Button type={"yes"} text={"네"} onClick={onClick} />
+        <Button
+          type={"no"}
+          text={"아니요"}
+          onClick={onHide}
+          width={90}
+          height={40}
+        />
+        <Button
+          type={"yes"}
+          text={"네"}
+          onClick={onClick}
+          width={90}
+          height={40}
+        />
       </div>
     </Modal>
   );

@@ -93,7 +93,7 @@ function SignUpForm() {
           }
         ></ConfirmPasswordInput>
       </div>
-      <Button text="로그인" type="black" disabled={!isValid} />
+      <Button text="회원가입" type="black" disabled={!isValid} width={"100%"} />
       <p className={style.authPrompt}>
         회원이신가요?{" "}
         <Link href="./login" className={style.link}>

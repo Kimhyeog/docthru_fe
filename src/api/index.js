@@ -48,6 +48,7 @@ const getUserMe = async () => {
   const data = response.data;
   return data;
 };
+
 const getUserData = async (userId) => {
   const url = `/users/${userId}`;
   const response = await client.get(url);
@@ -435,6 +436,20 @@ const acceptChallengeByAdmin = async (challengeId) => {
   }
 };
 
+const getMyWork = async (challengeId) => {
+  const url = `/works/${challengeId}/myWork`;
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
+const getNotification = async () => {
+  const url = "/notification";
+  const response = await client.get(url);
+  const data = response.data;
+  return data;
+};
+
 const api = {
   signUp,
   logIn,
@@ -468,6 +483,8 @@ const api = {
   getApplicationsByAdmin,
   rejectedChallengeByAdmin,
   acceptChallengeByAdmin,
+  getMyWork,
+  getNotification,
 };
 
 export default api;
