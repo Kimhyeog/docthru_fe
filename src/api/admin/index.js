@@ -50,7 +50,6 @@ const getApplicationsByAdmin = async (
 
     if (error.response?.status === 401) {
       localStorage.removeItem("refreshToken");
-      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
       window.location.href = "/login";
     }
 
@@ -94,7 +93,6 @@ const rejectedChallengeByAdmin = async (challengeId, invalidationComment) => {
 
     if (error.response?.status === 401) {
       localStorage.removeItem("refreshToken");
-      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
       window.location.href = "/login";
     }
 
@@ -137,7 +135,6 @@ const acceptChallengeByAdmin = async (challengeId) => {
 
     if (error.response?.status === 401) {
       localStorage.removeItem("refreshToken");
-      alert("인증이 만료되었습니다. 다시 로그인해주세요.");
       window.location.href = "/login";
     }
 

@@ -107,7 +107,9 @@
   display: flex;
   gap: 4px;
 }
-
+.button.expanded {
+  transform: translateX(-50%) translateY(5px);
+}
 .hidden {
   opacity: 0;
 }

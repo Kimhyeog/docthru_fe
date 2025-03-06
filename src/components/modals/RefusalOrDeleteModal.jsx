@@ -24,7 +24,6 @@ export default function RefusalOrDeleteModal({
     mutationFn: () =>
       api.admin.deleteChallengeByAdmin(challengeId, inputReason),
     onSuccess: () => {
-      alert("챌린지가 삭제되었습니다.");
       window.location.reload();
       onHide(); // API 요청 후 모달 닫기
     },
@@ -46,7 +45,6 @@ export default function RefusalOrDeleteModal({
       setModalComment("거절이 완료되었습니다.");
     } catch (error) {
       console.error("챌린지 거절 실패:", error);
-      alert("챌린지 거절에 실패했습니다.");
     } finally {
       setIsLoading(false);
     }
