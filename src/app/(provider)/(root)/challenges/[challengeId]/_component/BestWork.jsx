@@ -76,7 +76,7 @@ function BestWork({ work, user }) {
       </div>
       {isOverflowing && (
         <div
-          className={styles.button}
+          className={`${styles.button}  ${showText ? styles.expanded : ""}`}
           onClick={() => setShowText((prev) => !prev)}
         >
           {showText ? "접기" : "더보기"}
