@@ -9,6 +9,13 @@
   border-bottom: 2px solid #E5E5E5;
 }
 
+/* 마지막 아이템 스타일 */
+.last {
+  border-bottom: none;
+  /* 마지막 아이템은 border 없애기 */
+}
+
+
 .content {
 
 

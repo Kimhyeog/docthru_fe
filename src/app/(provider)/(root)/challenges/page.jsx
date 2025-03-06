@@ -45,7 +45,6 @@ export default function ChallengesPage() {
           : selectedField || undefined,
         page: pageToSend,
       });
-      console.log(response);
 
       setChallenges(response.challenges);
       setTotalPage(Math.max(1, response.totalPages));
