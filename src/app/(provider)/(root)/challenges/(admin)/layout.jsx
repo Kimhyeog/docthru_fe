@@ -35,7 +35,6 @@ function AdminLayout({ children }) {
         }
       } catch (error) {
         console.error("유저 정보 가져오기 실패:", error);
-        alert("유저 정보를 불러오는 데 실패했습니다.");
         router.replace("/login"); // API 요청 실패 시 로그인 페이지로 이동
       }
     }
