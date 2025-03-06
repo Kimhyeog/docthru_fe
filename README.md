@@ -48,11 +48,40 @@
 - 협업툴 : <img  src="https://img.shields.io/badge/Git-f05032?- style=flat-square&logo=git&logoColor=ffffff"/> <img  src="https://img.shields.io/badge/GitHub-181717?- style=flat-square&logo=github&logoColor=ffffff"/> <img  src="https://img.shields.io/badge/Discord-5865F2?- style=flat-square&logo=discord&logoColor=ffffff"/> <img  src="https://img.shields.io/badge/Notion-ffffff?- style=flat-square&logo=notion&logoColor=000000"/>
 
 ## 📣기록 및 배포
-<a  href="https://romantic-christmas-23d.notion.site/19104001b93780deb54acfd747f65277?v=19104001b937811996b3000c84338e88&pvs=4"><img  src="https://img.shields.io/badge/DocThru 노션-ffffff?style=flat-square&logo=notion&logoColor=000000"/><a  href="https://romantic-christmas-23d.notion.site/19104001b93780deb54acfd747f65277?v=19104001b937811996b3000c84338e88&pvs=4"><img  src="https://img.shields.io/badge/DocThru 바로가기-white?style=flat-square&logo=googlechrome&logoColor=000000"/>
+<a  href="https://romantic-christmas-23d.notion.site/19104001b93780deb54acfd747f65277?v=19104001b937811996b3000c84338e88&pvs=4"><img  src="https://img.shields.io/badge/DocThru 노션-ffffff?style=flat-square&logo=notion&logoColor=000000"/><a  href="https://docthru-fe-three.vercel.app/challenges"><img  src="https://img.shields.io/badge/DocThru 바로가기-white?style=flat-square&logo=googlechrome&logoColor=000000"/>
 
 ## 🧩주요 기능
+- Zod를 사용한 유효성 검사 </br>
+![image](https://github.com/user-attachments/assets/b70f33be-121c-43ae-a479-537bcf02ac2f)
 
+- 필터 및 서치</br>
+![image](https://github.com/user-attachments/assets/2bdd0263-d4a3-40b4-8002-899ab7712f2e)
 
+- 페이지네이션 및 스와이퍼</br>
+  ![image](https://github.com/user-attachments/assets/e08de2c4-b80b-4cf1-923a-05221d140dbc)
+
+- 텍스트에어리어 에디터 ,사이드바 임베드, 임시저장/임시저장 불러오기
+  ![image](https://github.com/user-attachments/assets/b32e7c5a-7e23-447b-bb10-952192c3e4cf)
+  ![image](https://github.com/user-attachments/assets/97ff5483-a1a4-4786-a4dc-4503d9c87935)
+  ![image](https://github.com/user-attachments/assets/97f47fda-b7fe-4b66-9c4f-e84d920b4220)
+
+- 수정/삭제 </br>
+![image](https://github.com/user-attachments/assets/6b4c9a87-7999-4ac8-bf84-05238ea53345)
+
+- 데드라인, 모집인원에 따른 챌린지 상태관리</br>
+![image](https://github.com/user-attachments/assets/75b86ed5-b58c-4267-b71b-6cf7097f9783)
+![image](https://github.com/user-attachments/assets/c56b26d2-8fbc-4f11-a28f-e6126b4de9a1)
+
+- 챌린지 신청내역 확인/취소, 원문링크 임베드</br>
+![image](https://github.com/user-attachments/assets/efbd47c0-d3c6-4710-bdf6-fab05f946b2e)
+
+- 어드민 신청내역 관리 (대기, 승인, 거절, 삭제)</br>
+![image](https://github.com/user-attachments/assets/f0bebaa0-2813-4891-8ef9-736c5926c3f1)
+
+- 알림</br>
+![image](https://github.com/user-attachments/assets/199dc2cc-f6a3-49ab-9f83-f6c0d3151a0b)
+
+</br></br>
 ## 🎡마치며..
 다사다난했던 시간들이 지나가고 드디어 마무리하게되어 감회가 새롭습니다.
 </br>
