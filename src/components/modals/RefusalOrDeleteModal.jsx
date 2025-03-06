@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button";
 import api from "@/api/index";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import PopUpModal from "./PopUpModal";
 
 export default function RefusalOrDeleteModal({
   type,
@@ -27,6 +28,8 @@ export default function RefusalOrDeleteModal({
     },
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const rejectChallenge = async () => {
     if (!inputReason.trim()) {
       alert(`${type} 사유를 입력해주세요.`);
@@ -36,9 +39,7 @@ export default function RefusalOrDeleteModal({
     try {
       setIsLoading(true);
       await api.rejectedChallengeByAdmin(challengeId, inputReason);
-      alert("챌린지가 거절되었습니다.");
-      window.location.reload();
-      onHide(); // API 요청 후 모달 닫기
+      setIsModalOpen(true);
     } catch (error) {
       console.error("챌린지 거절 실패:", error);
       alert("챌린지 거절에 실패했습니다.");
@@ -80,6 +81,20 @@ export default function RefusalOrDeleteModal({
         }}
         disabled={isLoading}
       />
+
+      {/* ✅ 상태 변경 후 여기서 PopUpModal 렌더링 */}
+      {isModalOpen && (
+        <PopUpModal
+          show={isModalOpen}
+          onHide={() => {
+            window.location.reload();
+            onHide(); // API 요청 후 모달 닫기
+            setIsModalOpen(false);
+          }}
+        >
+          거절이 완료되었습니다
+        </PopUpModal>
+      )}
     </Modal>
   );
 }
